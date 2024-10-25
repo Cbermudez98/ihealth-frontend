@@ -20,8 +20,8 @@ Ensure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd <project-directory>
+git clone https://github.com/Cbermudez98/ihealth-frontend.git
+cd ihealth-frontend
 ```
 
 ### Installation
