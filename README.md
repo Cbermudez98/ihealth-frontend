@@ -1,27 +1,59 @@
-# IhealthFrontend
+# Project Name: IHealth Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
+This project is the frontend application for the IHealth healthcare platform, built with Angular 17 and styled using PrimeNG and PrimeFlex. It is designed to provide a user-friendly interface for healthcare-related operations, ensuring responsive design and an accessible user experience.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Angular 17** for frontend framework
+- **PrimeNG** for robust UI components
+- **PrimeFlex** for responsive layout and styling utilities
+- Modular architecture following Angular best practices
 
-## Code scaffolding
+## Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [Angular CLI](https://angular.io/cli) (run `npm install -g @angular/cli@17` if not already installed)
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Clone the Repository
 
-## Running unit tests
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installation
 
-## Running end-to-end tests
+Once in the project directory, install all dependencies:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+```
 
-## Further help
+This command installs all required dependencies, including PrimeNG and PrimeFlex.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Configuration
+
+If there are any environment-specific settings, configure them in the `src/environments` folder. For example, update the `environment.ts` or `environment.prod.ts` files with the appropriate API URLs.
+
+### Running the Application
+
+To run the application locally in development mode, use:
+
+```bash
+ng serve
+```
+
+The application should now be accessible at `http://localhost:4200/`.
+
+### Building for Production
+
+To build the project for production:
+
+```bash
+ng build
+```
+
+The build artifacts will be stored in the `dist/` directory.
