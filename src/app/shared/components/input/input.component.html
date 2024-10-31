@@ -1,12 +1,19 @@
 <div class="m-6">
-  <p-floatLabel>
+  <p-floatLabel style="font-weight: 400; color: black; font-size: 15px">
     <input
-      pInputText
       [type]="type"
       [placeholder]="placeholder"
       [id]="label"
       [value]="control.value"
       (keyup)="setValue($event)"
+      class="w-full border-2 border-black rounded-2"
+      style="
+        border-radius: 20px;
+        padding: 17px;
+        padding-left: 20px;
+        border: black solid;
+        font-size: 15px;
+      "
     />
     <label [for]="label">{{ label }}</label>
   </p-floatLabel>
