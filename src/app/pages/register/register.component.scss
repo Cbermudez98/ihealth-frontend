@@ -1,0 +1,58 @@
+* {
+    font-family: "DM Sans", sans-serif;
+  }
+
+  
+  div app-input {
+    display: flex;
+    justify-content: center;
+  }
+  
+  div app-button {
+    display: flex;
+    justify-content: center;
+  }
+
+  .field.col app-checkbox{
+    margin-left: 1rem;
+    display: grid;
+    justify-content: start;
+  }
+
+  .field.col a{
+    margin-right: 1rem;
+    display: grid;
+    justify-content: end;
+  }
+
+  .Signup{
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  .forgot-a {
+    color: #005aa9;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+  }
+  
+  .Signup label {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .Signup a {
+    color: #005aa9;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  

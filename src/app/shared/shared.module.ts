@@ -12,13 +12,30 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { PasswordModule } from 'primeng/password';
 
-
-const COMPONENTS = [LoginComponent,RegisterComponent, InputComponent, ButtonComponent, CheckboxComponent];
-const IMPORTS = [CommonModule, FloatLabelModule, InputTextModule, ButtonModule, CheckboxModule]
+const COMPONENTS = [
+  LoginComponent,
+  RegisterComponent,
+  InputComponent,
+  ButtonComponent,
+  CheckboxComponent,
+];
+const IMPORTS = [
+  CommonModule,
+  FloatLabelModule,
+  InputTextModule,
+  ButtonModule,
+  CheckboxModule,
+  IconFieldModule,
+  InputIconModule,
+  PasswordModule  
+];
 
 @NgModule({
-  declarations: [...COMPONENTS,],
+  declarations: [...COMPONENTS],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
 })
