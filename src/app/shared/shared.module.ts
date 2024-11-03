@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { LoginComponent } from '../pages/login/login.component';
 import { RegisterComponent } from '../pages/register/register.component';
@@ -31,7 +32,8 @@ const IMPORTS = [
   CheckboxModule,
   IconFieldModule,
   InputIconModule,
-  PasswordModule  
+  PasswordModule,
+  FormsModule  
 ];
 
 @NgModule({

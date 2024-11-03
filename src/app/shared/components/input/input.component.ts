@@ -13,7 +13,7 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() type: InputType = 'text';
   @Input() control: FormControl = new FormControl();
-
+ 
   public setValue(event: any): void {
     this.control.setValue(event.target.value);
   }
