@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 
+import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
-
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,9 +18,11 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
+import { SidebarModule } from 'primeng/sidebar';
 
 
 const COMPONENTS = [
+  DashboardComponent,
   LoginComponent,
   RegisterComponent,
   InputComponent,
@@ -38,7 +40,8 @@ const IMPORTS = [
   PasswordModule,
   FormsModule, 
   ReactiveFormsModule,
-  DialogModule
+  DialogModule,
+  SidebarModule
 ];
 
 @NgModule({
