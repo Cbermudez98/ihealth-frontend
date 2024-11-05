@@ -8,10 +8,38 @@
       <div class="SignIn">Sing In</div>
 
       <form [formGroup]="loginForm">
+        <p class="error">{{ loginError }}</p>
+
         <div class="field">
-          <span class="error">Hola Mundo</span>
-          <input type="text" formControlName="email">
-          <input type="password" formControlName="Password">
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="text-danger"
+          >
+            <span *ngIf="email.errors?.['required']" class="error"
+              >El email es requerido</span
+            >
+
+            <span *ngIf="email.errors?.['email']" class="error"
+              >El email tiene un formato invalido</span
+            >
+          </div>
+
+          <div
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="text-danger"
+          >
+            <span *ngIf="password.errors?.['required']" class="error"
+              >El password es requerido</span
+            >
+          </div>
+
+          <input
+            style="margin-right: 5px"
+            type="text"
+            formControlName="email"
+          />
+          <input type="password" formControlName="Password" />
+
           <app-input
             name="email"
             label="Email"
@@ -22,8 +50,16 @@
         </div>
 
         <div class="field">
-          <span class="error">Hola Mundo</span>
+          <div
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="text-danger"
+          >
+            <span *ngIf="password.errors?.['required']" class="error"
+              >El password es requerido</span
+            >
+          </div>
           <app-input
+            class="innn"
             name="password"
             label="Password"
             type="password"
@@ -38,12 +74,13 @@
           <app-checkbox label="Save Account"></app-checkbox>
         </div>
         <div class="field col">
-          <a class="forgot-a" >Forgot Password?</a>
+          <a class="forgot-a">Forgot Password?</a>
         </div>
       </div>
 
       <div class="form grid justify-content-center" style="margin-top: 4rem">
-        <app-button label="Sign In" type="submit" (click)="login()"> </app-button>
+        <app-button label="Sign In" type="submit" (click)="login()">
+        </app-button>
       </div>
 
       <div class="Signup">

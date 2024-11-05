@@ -17,6 +17,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
+import { DialogModule } from 'primeng/dialog';
 
 
 const COMPONENTS = [
@@ -36,7 +37,8 @@ const IMPORTS = [
   InputIconModule,
   PasswordModule,
   FormsModule, 
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  DialogModule
 ];
 
 @NgModule({

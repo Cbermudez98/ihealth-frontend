@@ -67,6 +67,7 @@ div app-button {
   display: flex;
   justify-content: end;
   padding-right: 1rem;
+  color: red;
 }
 
 .SignIn {
@@ -74,4 +75,12 @@ div app-button {
   font-size: 3rem;
   font-weight: 700;
   margin-left: 1rem;
+}
+
+.ng-valid:not(form).ng-touched{
+  border: green solid 2px;
+}
+
+.ng-invalid:not(form).ng-touched{
+  border: red solid 2px;
 }
