@@ -23,7 +23,7 @@ export class LoginService {
 
   login(object: Login): Observable<ResponseAccess> {
     return this.http.post<ResponseAccess>(
-      `${this.baseUrl}Auth/Login`,
+      `${this.baseUrl}auth/login`,
       object
     );
   }

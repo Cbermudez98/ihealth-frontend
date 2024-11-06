@@ -1,19 +1,12 @@
-<div class="w-full" style="margin: 15px">
-  <p-floatLabel style="font-weight: 400; color: black; font-size: 15px">
+<div class="w-full" style="margin: 15px" *ngIf="control">
+  <p-floatLabel>
     <input
       pInputText
       [type]="type"
       [placeholder]="placeholder"
       [id]="label"
-      [value]="control.value"
-      class="w-full border-2 border-black rounded-2"
-      style="
-        border-radius: 20px;
-        padding: 17px;
-        padding-left: 20px;
-        border: black solid;
-        font-size: 15px;
-      "
+      [formControl]="control"
+      class="w-full"
     />
     <label [for]="label">{{ label }}</label>
   </p-floatLabel>

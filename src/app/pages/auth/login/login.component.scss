@@ -77,10 +77,13 @@ div app-button {
   margin-left: 1rem;
 }
 
-.ng-valid:not(form).ng-touched{
-  border: green solid 2px;
+
+
+::ng-deep .p-inputtext.ng-valid.ng-touched {
+  border-color: green;
 }
 
-.ng-invalid:not(form).ng-touched{
-  border: red solid 2px;
+/* Cambia el color a rojo si es inválido */
+::ng-deep .p-inputtext.ng-invalid.ng-touched {
+  border-color: red;
 }

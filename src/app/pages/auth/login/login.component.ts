@@ -1,38 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../../../services/auth/login.service';
+import { Login } from '../../../shared/interfaces/Login';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
-  loginError: string = '';
-  loginForm = this.formBuilder.group({
+export class LoginComponent {
+  private Loginservice = inject(LoginService);
+  private router = inject(Router);
+  public formBuild = inject(FormBuilder);
+
+  public loginForm: FormGroup = this.formBuild.group({
     email: ['mrawadyecid@gmail.com', [Validators.required, Validators.email]],
-    Password: ['root', [Validators.required]],
+    password: ['Rawadmunoz2004', [Validators.required]],
   });
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
-
-  ngOnInit(): void {}
-
-  get email() {
-    return this.loginForm.controls.email;
-  }
-
-  get password() {
-    return this.loginForm.controls.Password;
-  }
 
   login() {
-    if (this.loginForm.valid) {
-      console.log('Login Complete');
-      this.router.navigateByUrl('/dashboard');
-      this.loginForm.reset();
-    } else {
-      this.loginForm.markAllAsTouched();
-      alert('Hubo un error en la digitacion');
-    }
+    if (this.loginForm.invalid) return;
+
+    const object: Login = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
+
+    this.Loginservice.login(object).subscribe({
+      next: (data) => {
+        if (data.status) {
+          localStorage.setItem('access_token', data.data.access_token);
+          alert('Login Exitoso, token guardado');
+          this.router.navigate(['dashboard']);
+        } else {
+          alert('Las Credenciales Son Incorrectas');
+        }
+      },
+      error(err) {
+        alert('Hubo Un Error' + err.message);
+        console.log('Hubo Un Error' + err.message);
+      },
+    });
+  }
+
+  register() {
+    this.router.navigate(['/register']);
   }
 }

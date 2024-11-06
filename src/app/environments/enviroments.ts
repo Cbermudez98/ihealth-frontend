@@ -1,3 +1,3 @@
 export  const environment = {
-    apiUrl: "https://ihealth-back-unicolombo.com/"
-}
+    apiUrl: "http://localhost:3000/"
+}       

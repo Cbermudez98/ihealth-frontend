@@ -8,63 +8,25 @@
       <div class="SignIn">Sing In</div>
 
       <form [formGroup]="loginForm">
-        <p class="error">{{ loginError }}</p>
-
         <div class="field">
-          <div
-            *ngIf="email.invalid && (email.dirty || email.touched)"
-            class="text-danger"
-          >
-            <span *ngIf="email.errors?.['required']" class="error"
-              >El email es requerido</span
-            >
-
-            <span *ngIf="email.errors?.['email']" class="error"
-              >El email tiene un formato invalido</span
-            >
-          </div>
-
-          <div
-            *ngIf="password.invalid && (password.dirty || password.touched)"
-            class="text-danger"
-          >
-            <span *ngIf="password.errors?.['required']" class="error"
-              >El password es requerido</span
-            >
-          </div>
-
-          <input
-            style="margin-right: 5px"
-            type="text"
-            formControlName="email"
-          />
-          <input type="password" formControlName="Password" />
-
-          <app-input
+          <app-input  
             name="email"
             label="Email"
             placeholder="email@unicolombo.edu.co"
             id="email"
+            formControlName="email"
           >
           </app-input>
         </div>
 
         <div class="field">
-          <div
-            *ngIf="password.invalid && (password.dirty || password.touched)"
-            class="text-danger"
-          >
-            <span *ngIf="password.errors?.['required']" class="error"
-              >El password es requerido</span
-            >
-          </div>
           <app-input
-            class="innn"
             name="password"
             label="Password"
             type="password"
             placeholder="Password"
             id="password"
+            formControlName="password"
           ></app-input>
         </div>
       </form>
@@ -85,7 +47,7 @@
 
       <div class="Signup">
         <label for="">Don't have an account?&nbsp;</label>
-        <a class="Signup-a">Sign Up.</a>
+        <a class="Signup-a" (click)="register()">Sign Up.</a>
       </div>
     </div>
   </div>
