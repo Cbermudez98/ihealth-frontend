@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
@@ -19,6 +21,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
+
 
 
 const COMPONENTS = [
@@ -41,7 +44,8 @@ const IMPORTS = [
   FormsModule, 
   ReactiveFormsModule,
   DialogModule,
-  SidebarModule
+  SidebarModule,
+  RouterModule
 ];
 
 @NgModule({
