@@ -1,59 +1,43 @@
-<div class="flex min-h-screen">
-  <div class="w-full md:w-6 p-4 md:p-8">
-    <div class="mb-5 mt-4" style="padding-left: 1rem">
-      <img src="../../../assets/images/login/IHealth Logo(250 x 250 px).svg" />
-    </div>
+<div class="SignIn">Sing In</div>
 
-    <div class="flex-column">
-      <div class="SignIn">Sing In</div>
-
-      <form [formGroup]="loginForm">
-        <div class="field">
-          <app-input  
-            name="email"
-            label="Email"
-            placeholder="email@unicolombo.edu.co"
-            id="email"
-            formControlName="email"
-          >
-          </app-input>
-        </div>
-
-        <div class="field">
-          <app-input
-            name="password"
-            label="Password"
-            type="password"
-            placeholder="Password"
-            id="password"
-            formControlName="password"
-          ></app-input>
-        </div>
-      </form>
-
-      <div class="formgrid grid" style="margin-top: 2rem">
-        <div class="field col">
-          <app-checkbox label="Save Account"></app-checkbox>
-        </div>
-        <div class="field col">
-          <a class="forgot-a">Forgot Password?</a>
-        </div>
-      </div>
-
-      <div class="form grid justify-content-center" style="margin-top: 4rem">
-        <app-button label="Sign In" type="submit" (click)="login()">
-        </app-button>
-      </div>
-
-      <div class="Signup">
-        <label for="">Don't have an account?&nbsp;</label>
-        <a class="Signup-a" (click)="register()">Sign Up.</a>
-      </div>
-    </div>
+<form [formGroup]="loginForm">
+  <div class="field">
+    <app-input
+      name="email"
+      label="Email"
+      placeholder="email@unicolombo.edu.co"
+      id="email"
+      formControlName="email"
+    >
+    </app-input>
   </div>
 
-  <div
-    class="hidden md:block w-11 bg-no-repeat bg-cover"
-    style="background-color: #005aa9"
-  ></div>
+  <div class="field">
+    <app-input
+      name="password"
+      label="Password"
+      type="password"
+      placeholder="Password"
+      id="password"
+      formControlName="password"
+    ></app-input>
+  </div>
+</form>
+
+<div class="formgrid grid" style="margin-top: 2rem">
+  <div class="field col">
+    <app-checkbox label="Save Account"></app-checkbox>
+  </div>
+  <div class="field col">
+    <a class="forgot-a">Forgot Password?</a>
+  </div>
+</div>
+
+<div class="form grid justify-content-center" style="margin-top: 4rem">
+  <app-button label="Sign In" type="submit" (click)="login()"> </app-button>
+</div>
+
+<div class="Signup">
+  <label for="">Don't have an account?&nbsp;</label>
+  <a class="Signup-a" (click)="register()">Sign Up.</a>
 </div>

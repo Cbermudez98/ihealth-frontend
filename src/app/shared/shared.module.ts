@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
+import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
+import { RegisterInformationComponent } from '../pages/auth/register-information/register-information.component';
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -30,7 +32,9 @@ const COMPONENTS = [
   RegisterComponent,
   InputComponent,
   ButtonComponent,
-  CheckboxComponent
+  CheckboxComponent,
+  AuthPageComponent,
+  RegisterInformationComponent
 ];
 const IMPORTS = [
   CommonModule,
