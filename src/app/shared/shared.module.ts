@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
@@ -13,6 +12,7 @@ import { RegisterInformationComponent } from '../pages/auth/register-information
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { InpuPasswordComponent } from './components/inpu-password/inpu-password.component';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,8 +23,8 @@ import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
-
-
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 const COMPONENTS = [
   DashboardComponent,
@@ -34,7 +34,8 @@ const COMPONENTS = [
   ButtonComponent,
   CheckboxComponent,
   AuthPageComponent,
-  RegisterInformationComponent
+  RegisterInformationComponent,
+  InpuPasswordComponent
 ];
 const IMPORTS = [
   CommonModule,
@@ -45,16 +46,20 @@ const IMPORTS = [
   IconFieldModule,
   InputIconModule,
   PasswordModule,
-  FormsModule, 
+  FormsModule,
   ReactiveFormsModule,
   DialogModule,
   SidebarModule,
-  RouterModule
+  RouterModule,
+  ToastModule,
 ];
+
+const PROVIDERS = [MessageService];
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
+  providers: [...PROVIDERS],
 })
 export class SharedModule {}

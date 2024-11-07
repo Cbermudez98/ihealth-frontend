@@ -1,9 +1,14 @@
 <div class="SignIn">Sing Up</div>
 
-<form [formGroup]="registerForm" >
-
+<form [formGroup]="registerForm">
   <div class="field">
-    <app-input name="name" label="Name" placeholder="Jane Doe" id="name" formControlName="name" >
+    <app-input
+      name="name"
+      label="Name"
+      placeholder="Jane Doe"
+      id="name"
+      formControlName="name"
+    >
     </app-input>
   </div>
 
@@ -19,22 +24,20 @@
   </div>
 
   <div class="field">
-    <app-input
+    <app-inpu-password
       name="password"
       label="Password"
-      type="password"
       placeholder="Password"
       id="password"
       formControlName="password"
-    ></app-input>
+    >
+    </app-inpu-password>
   </div>
 </form>
 
 <div class="formgrid grid" style="margin-top: 2rem">
   <div class="field col">
-    <app-checkbox
-      label="I agree to all Term, Privacy Poicy and Fees"
-    ></app-checkbox>
+    <app-checkbox label="I accept the Privacy Police"></app-checkbox>
   </div>
 </div>
 

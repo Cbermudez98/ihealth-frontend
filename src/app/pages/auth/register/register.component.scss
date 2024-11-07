@@ -7,7 +7,7 @@ div app-input {
   justify-content: center;
 }
 
-div app-input-password {
+div app-inpu-password {
   display: flex;
   justify-content: center;
 }
@@ -78,10 +78,10 @@ div app-button {
   margin-left: 1rem;
 }
 
-::ng-deep .p-inputtext.ng-valid.ng-touched {
+::ng-deep input.ng-valid.ng-touched {
   border-color: green;
 }
 
-::ng-deep .p-inputtext.ng-invalid.ng-touched {
+::ng-deep input.ng-invalid.ng-touched {
   border-color: red;
 }

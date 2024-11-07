@@ -31,7 +31,6 @@ export class LoginComponent {
       next: (data) => {
         if (data.status) {
           localStorage.setItem('access_token', data.data.access_token);
-          alert('Login Exitoso, token guardado');
           this.router.navigate(['dashboard']);
         } else {
           alert('Las Credenciales Son Incorrectas');

@@ -3,6 +3,7 @@ import { LoginService } from '../../../services/auth/login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
@@ -15,10 +16,19 @@ export class RegisterComponent {
   public formBuild = inject(FormBuilder);
 
   public registerForm: FormGroup = this.formBuild.group({
-    name: ['Rawad',[Validators.required]],
+    name: ['Rawad', [Validators.required]],
     email: ['mrawadyecid@gmail.com', [Validators.required, Validators.email]],
     password: ['Rawadmunoz2004', [Validators.required]],
   });
+  constructor(private messageService: MessageService) {}
+
+  showError(errorMessage: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: errorMessage,
+    });
+  }
 
   register() {
     if (this.registerForm.invalid) return;
@@ -46,22 +56,17 @@ export class RegisterComponent {
     };
 
     this.Loginservice.register(object).subscribe({
-      next:(data) => {
+      next: (data) => {
         if (data.status) {
-          alert('Registro Exitoso, Digita Tu Informacion');
-          console.log(object)
-          console.log("Response"+data)
+          console.log(object);
           this.router.navigate(['auth/register-information']);
-      
+        } else {
         }
-      else{
-        alert("Las Credenciales Son Incorrectas")
-      }
       },
-      error(err){
-        alert('Hubo Un Error' + err.message);
+      error: (err) => {
+        this.showError('Se Perdio La Conexion Con El Servidor');
         console.log('Hubo Un Error' + err.message);
-      }
+      },
     });
   }
 }

@@ -20,4 +20,5 @@ export class InputComponent <T> extends ControlValueAccessorDirective <T> {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() type: InputType = 'text';
+  @Input() togleMask: boolean = false;
 }

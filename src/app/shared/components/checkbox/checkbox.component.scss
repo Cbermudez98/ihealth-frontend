@@ -1,4 +1,28 @@
 * {
   font-family: "DM Sans", sans-serif;
-  font-weight: 400;
+}
+label {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+::ng-deep .p-checkbox-box {
+  border: 1px solid #000000;
+  background: #ffffff !important;
+  width: 20px;
+  height: 20px;
+  color: #4b5563 !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: none;
+  outline-color: transparent !important;
+}
+
+/* Cambiar estilo al marcar */
+::ng-deep .p-checkbox-box.p-highlight {
+  background-color: #005aa9 !important; /* Fondo azul cuando está marcado */
+  border-color: #005aa9 !important; /* Borde azul cuando está marcado */
+}
+
+::ng-deep .p-checkbox-box .p-checkbox-icon {
+  color: white; /* Cambiar el color del ícono */
 }
