@@ -3,17 +3,18 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ControlValueAccessorDirective } from '../control-value-accessor.directive';
 
 @Component({
-  selector: 'app-inpu-password',
-  templateUrl: './inpu-password.component.html',
-  styleUrl: './inpu-password.component.scss',
+  selector: 'app-input-password',
+  templateUrl: './input-password.component.html',
+  styleUrl: './input-password.component.scss',
   providers:  [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InpuPasswordComponent),
+    useExisting: forwardRef(() => InputPasswordComponent),
     multi: true,
   }],
 })
-export class InpuPasswordComponent <T> extends ControlValueAccessorDirective <T> {
+export class InputPasswordComponent <T> extends ControlValueAccessorDirective <T> {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() togleMask: boolean = false;
+  @Input() showMeter: boolean = false;
 }

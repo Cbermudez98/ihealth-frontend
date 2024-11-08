@@ -7,12 +7,11 @@ import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
 import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
-import { RegisterInformationComponent } from '../pages/auth/register-information/register-information.component';
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { InpuPasswordComponent } from './components/inpu-password/inpu-password.component';
+import { InputPasswordComponent } from './components/input-password/input-password.component';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -34,8 +33,7 @@ const COMPONENTS = [
   ButtonComponent,
   CheckboxComponent,
   AuthPageComponent,
-  RegisterInformationComponent,
-  InpuPasswordComponent
+  InputPasswordComponent
 ];
 const IMPORTS = [
   CommonModule,

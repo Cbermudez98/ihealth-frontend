@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseAccess } from '../../shared/interfaces/ResponseAccess';
 import { Login } from '../../shared/interfaces/Login';
-import { HttpService } from '../http.service';
+import { HttpService } from '../HTTP/http.service';
 import { User } from '../../shared/interfaces/User';
 
 @Injectable({

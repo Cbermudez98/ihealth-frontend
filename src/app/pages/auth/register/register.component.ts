@@ -3,7 +3,7 @@ import { LoginService } from '../../../services/auth/login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
-import { MessageService } from 'primeng/api';
+import { ToastService } from '../../../services/Toast/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -20,15 +20,12 @@ export class RegisterComponent {
     email: ['mrawadyecid@gmail.com', [Validators.required, Validators.email]],
     password: ['Rawadmunoz2004', [Validators.required]],
   });
-  constructor(private messageService: MessageService) {}
+  constructor(private toastService: ToastService) {}
 
-  showError(errorMessage: string) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: errorMessage,
-    });
+  showError() {
+    this.toastService.show('InternalError');
   }
+  
 
   register() {
     if (this.registerForm.invalid) return;
@@ -64,8 +61,8 @@ export class RegisterComponent {
         }
       },
       error: (err) => {
-        this.showError('Se Perdio La Conexion Con El Servidor');
-        console.log('Hubo Un Error' + err.message);
+        this.showError();
+        console.error('Hubo un error:', err.message);
       },
     });
   }

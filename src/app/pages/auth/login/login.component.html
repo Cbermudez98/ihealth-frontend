@@ -13,18 +13,18 @@
   </div>
 
   <div class="field">
-    <app-input
+    <app-input-password
       name="password"
       label="Password"
-      type="password"
       placeholder="Password"
       id="password"
       formControlName="password"
-    ></app-input>
+    >
+    </app-input-password>
   </div>
 </form>
 
-<div class="formgrid grid" style="margin-top: 2rem">
+<div class="formgrid grid" style="margin-top: 1rem">
   <div class="field col">
     <app-checkbox label="Save Account"></app-checkbox>
   </div>
@@ -33,7 +33,7 @@
   </div>
 </div>
 
-<div class="form grid justify-content-center" style="margin-top: 4rem">
+<div class="form grid justify-content-center">
   <app-button label="Sign In" type="submit" (click)="login()"> </app-button>
 </div>
 
