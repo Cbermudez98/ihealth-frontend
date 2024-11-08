@@ -13,6 +13,8 @@ import { RegisterInformationComponent } from '../pages/auth/register-information
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { InputCalenderComponent } from './components/input-calender/input-calender.component';
+import { ButtonIconComponent } from './components/button-icon/button-icon.component';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,7 +25,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
-
+import { CalendarModule } from 'primeng/calendar';
 
 
 const COMPONENTS = [
@@ -34,7 +36,9 @@ const COMPONENTS = [
   ButtonComponent,
   CheckboxComponent,
   AuthPageComponent,
-  RegisterInformationComponent
+  RegisterInformationComponent,
+  InputCalenderComponent, 
+  ButtonIconComponent
 ];
 const IMPORTS = [
   CommonModule,
@@ -49,7 +53,8 @@ const IMPORTS = [
   ReactiveFormsModule,
   DialogModule,
   SidebarModule,
-  RouterModule
+  RouterModule,
+  CalendarModule
 ];
 
 @NgModule({

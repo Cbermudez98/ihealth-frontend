@@ -1,1 +1,36 @@
-<p>register-information works!</p>
+<div class="text-5xl font-700 mb-3">Informacion</div>      
+
+<app-input-calender class=""></app-input-calender>
+<div class="font-extralight mt-4 mb-3">Selecciona tu genero:</div>
+<div class="flex justify-content-center align-items-center gap-2">
+  <app-button-icon label="Hombre" gender="Hombre" url="../../../../assets/images/register-info/men.svg"></app-button-icon>
+  <app-button-icon label="Mujer" gender="Mujer" url="../../../../assets/images/register-info/women.svg" ></app-button-icon>
+</div>
+<app-input
+  label="Codigo estudiantil"
+  placeholder="1008002252"
+></app-input>
+
+<div class="font-extralight">Direccion:</div>
+
+<div class="filed">
+<app-input
+  label="Barrio"
+  placeholder="El rodeo"
+></app-input>
+</div>
+
+<div class="filed">
+<app-input
+  label="Calle"
+  placeholder="mazana 05 lote 20 #30"
+></app-input>
+</div>
+<div class="filed">
+<app-input
+  label="Referencias"
+  placeholder="cerca de la iglesia san juan"
+></app-input>
+</div>
+
+<app-button label="Send" routerLink="/login"></app-button>

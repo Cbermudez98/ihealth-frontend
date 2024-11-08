@@ -1,0 +1,37 @@
+
+* {
+  font-family: "DM Sans", sans-serif;
+}
+
+input:focus {
+  box-shadow: none;
+}
+
+::ng-deep .p-calendar .p-inputtext {
+    border-color: black;
+    border-radius: 20px;
+    padding: 17px;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+::ng-deep .p-calendar .p-inputtext {
+  width: 100% !important;   /* Hace que el input ocupe el 100% del contenedor */
+  box-sizing: border-box;   /* Asegura que el padding no exceda el ancho */
+  padding-left: 20px;       /* Ajusta el padding según necesites */
+  padding-right: 20px;
+}
+
+::ng-deep .p-calendar {
+  width: 100%;               /* Asegura que el componente ocupe el ancho completo */
+  display: flex;             /* Ayuda a que el input se alinee correctamente */
+  align-items: center;       /* Centra verticalmente el contenido dentro del contenedor */
+}
+
+::ng-deep .p-datepicker {
+  position: absolute !important;  /* Asegura que el calendario esté posicionado debajo */
+  top: 100% !important;           /* Coloca el calendario justo debajo del input */
+  left: 0;
+  margin-top: 4px;                /* Añade un pequeño margen para separar del input */
+  z-index: 1000;    /* Evita que el calendario se desplace hacia arriba */
+  }
