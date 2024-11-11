@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/auth/login.service';
 import { Login } from '../../../shared/interfaces/Login';
+import { ToastService } from '../../../services/Toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,12 @@ export class LoginComponent {
     email: ['mrawadyecid@gmail.com', [Validators.required, Validators.email]],
     password: ['Rawadmunoz2004', [Validators.required]],
   });
+
+  constructor(private toastService: ToastService) {}
+
+  showError() {
+    this.toastService.show('InternalError');
+  }
 
   login() {
     if (this.loginForm.invalid) return;
@@ -36,9 +43,9 @@ export class LoginComponent {
           alert('Las Credenciales Son Incorrectas');
         }
       },
-      error(err) {
-        alert('Hubo Un Error' + err.message);
-        console.log('Hubo Un Error' + err.message);
+      error: (err) => {
+        this.showError();
+        console.error('Hubo un error:', err.message);
       },
     });
   }

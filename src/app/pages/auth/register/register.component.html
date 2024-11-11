@@ -1,18 +1,149 @@
 <div class="SignIn">Sing Up</div>
 
 <form [formGroup]="registerForm">
-  <div class="field">
-    <app-input
-      name="name"
-      label="Name"
-      placeholder="Jane Doe"
-      id="name"
-      formControlName="name"
-    >
-    </app-input>
-  </div>
+  <div class="flex-column">
+    <p-steps
+      [model]="items"
+      [(activeIndex)]="activeIndex"
+      [readonly]="true"
+    ></p-steps>
 
-  <div class="field">
+    <div class="field mt-7" *ngIf="activeIndex === 0">
+      <app-input
+        name="email"
+        label="Email"
+        placeholder="email@unicolombo.edu.co"
+        id="email"
+        formControlName="email"
+      >
+      </app-input>
+      <div class="next-btn">
+        <button class="next" (click)="next()">Next</button>
+      </div>
+    </div>
+
+    <div class="field mt-7" *ngIf="activeIndex === 1">
+      <app-input
+        name="name"
+        label="Name"
+        placeholder="Jane"
+        id="name"
+        formControlName="name"
+      >
+      </app-input>
+
+      <app-input
+        name="lastname"
+        label="Last Name"
+        placeholder="Doe"
+        id="lastname"
+        formControlName="lastname"
+      >
+      </app-input>
+
+      <app-input
+        name="age"
+        label="Age"
+        placeholder="Age"
+        id="age"
+        formControlName="age"
+      >
+      </app-input>
+
+      <app-input
+        name="code"
+        label="Code"
+        placeholder="12345678"
+        id="code"
+        formControlName="code"
+      >
+      </app-input>
+
+      <app-input
+        name="gender"
+        label="Gender"
+        placeholder="M"
+        id="gender"
+        formControlName="gender"
+      >
+      </app-input>
+
+      <div class="control">
+        <button class="back" (click)="previous()">Back</button>
+        <button class="next" (click)="next()">Next</button>
+      </div>
+    </div>
+
+    <div class="field mt-7" *ngIf="activeIndex === 2">
+      <app-input
+        name="neighborhood"
+        label="Neighborhood"
+        placeholder="El pozon"
+        id="neighborhood"
+        formControlName="neighborhood"
+      >
+      </app-input>
+
+      <app-input
+        name="street"
+        label="Street"
+        placeholder="39B"
+        id="street"
+        formControlName="street"
+      >
+      </app-input>
+
+      <app-input
+        name="number"
+        label="Number"
+        placeholder="#29-198"
+        id="number"
+        formControlName="number"
+      >
+      </app-input>
+
+      <app-input
+        name="code"
+        label="Code"
+        placeholder="12345678"
+        id="code"
+        formControlName="code"
+      >
+      </app-input>
+
+      <app-input
+        name="aditional"
+        label="Aditional Information"
+        placeholder="El pozon cll 39B #29-198 apto 504"
+        id="aditional"
+        formControlName="aditional"
+      >
+      </app-input>
+
+      <div class="control">
+        <button class="back" (click)="previous()">Back</button>
+        <button class="next" (click)="next()">Next</button>
+      </div>
+    </div>
+
+    <div class="field mt-7" *ngIf="activeIndex === 3">
+      <app-input-password
+        name="password"
+        label="Password"
+        placeholder="Password"
+        id="password"
+        formControlName="password"
+      >
+      </app-input-password>
+
+      <div class="control">
+        <button class="back" (click)="previous()">Back</button>
+        <button class="next" type="submit" (click)="register()">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+<!--  <div class="field">
     <app-input
       name="email"
       label="Email"
@@ -48,4 +179,4 @@
 <div class="Signup">
   <label for="">Already have account?&nbsp;</label>
   <a class="Signup-a" routerLink="/auth/login">Sign In.</a>
-</div>
+</div> -->

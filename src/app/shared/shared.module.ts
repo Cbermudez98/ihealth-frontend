@@ -23,6 +23,7 @@ import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
+import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
 
 const COMPONENTS = [
@@ -50,6 +51,7 @@ const IMPORTS = [
   SidebarModule,
   RouterModule,
   ToastModule,
+  StepsModule
 ];
 
 const PROVIDERS = [MessageService];
