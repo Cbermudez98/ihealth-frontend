@@ -26,7 +26,8 @@ import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { CalendarModule } from 'primeng/calendar';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 const COMPONENTS = [
   DashboardComponent,
@@ -54,11 +55,12 @@ const IMPORTS = [
   DialogModule,
   SidebarModule,
   RouterModule,
-  CalendarModule
+  CalendarModule,
+  DropdownModule
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, DropdownComponent],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
 })

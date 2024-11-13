@@ -1,10 +1,16 @@
 <div class="w-full">
-    <p-floatLabel>
-        <p-calendar 
+        <p-floatLabel>
+            <p-calendar 
                 [(ngModel)]="date" 
+                (ngModelChange)="calculateAge($event)" 
                 inputId="birth_date"
                 [inline]="false" 
                 class="w-full"
-                />
-        <label for="birth_date">Fecha de nacimiento</label>
-</p-floatLabel></div>
+            ></p-calendar>
+            <label for="birth_date">Fecha de nacimiento</label>
+        </p-floatLabel>
+    </div>
+    <div *ngIf="age !== null">
+        Edad: {{ age }} años
+    </div>
+    

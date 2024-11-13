@@ -1,4 +1,6 @@
-<button class="button" value="{{gender}}">
+<button class="button" 
+    (click)="selectGender()"
+    [ngClass]="{ 'selected': isSelected }" >
     <img src="{{url}}">
     <label>{{label}}</label>
 </button>

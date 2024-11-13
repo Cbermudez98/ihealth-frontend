@@ -1,36 +1,73 @@
-<div class="text-5xl font-700 mb-3">Informacion</div>      
+  <div class="text-5xl font-700 mb-3">Informacion</div>
 
-<app-input-calender class=""></app-input-calender>
-<div class="font-extralight mt-4 mb-3">Selecciona tu genero:</div>
-<div class="flex justify-content-center align-items-center gap-2">
-  <app-button-icon label="Hombre" gender="Hombre" url="../../../../assets/images/register-info/men.svg"></app-button-icon>
-  <app-button-icon label="Mujer" gender="Mujer" url="../../../../assets/images/register-info/women.svg" ></app-button-icon>
-</div>
-<app-input
-  label="Codigo estudiantil"
-  placeholder="1008002252"
-></app-input>
+  <form [formGroup]="registerUserFrom">
+
+  <app-input-calender (ageCalculated)="onAgeCalculated($event)"></app-input-calender>
+
+  <div class="font-extralight mt-4 mb-3">Selecciona tu genero:</div>
+  
+  <div class="flex justify-content-center align-items-center gap-2">
+    <app-button-icon 
+    label="Hombre"
+    gender="H"
+    url="../../../../assets/images/register-info/men.svg"
+    [isSelected]="registerUserFrom.get('gender')?.value === 'H'"
+    (genderSelected)="onGenderSelected($event)"
+    ></app-button-icon>
+    <app-button-icon 
+    label="Mujer"
+    gender="M"
+    [isSelected]="registerUserFrom.get('gender')?.value === 'M'"
+    (genderSelected)="onGenderSelected($event)"
+    url="../../../../assets/images/register-info/women.svg"
+    ></app-button-icon>
+  </div>
+
+  <app-input
+    formControlName="code"
+    label="Codigo estudiantil"
+    placeholder="198297418712"
+  ></app-input>
 
 <div class="font-extralight">Direccion:</div>
 
-<div class="filed">
-<app-input
-  label="Barrio"
-  placeholder="El rodeo"
-></app-input>
-</div>
+  <div class="filed">
+    <app-input
+      formControlName="neighborhood"
+      label="Barrio"
+      placeholder="El pozon"
+    ></app-input>
+  </div>
 
-<div class="filed">
-<app-input
-  label="Calle"
-  placeholder="mazana 05 lote 20 #30"
-></app-input>
-</div>
-<div class="filed">
-<app-input
-  label="Referencias"
-  placeholder="cerca de la iglesia san juan"
-></app-input>
-</div>
+  <div class="filed">
+    <app-input
+      formControlName="street"
+      label="Calle"
+      placeholder="39B"
+    ></app-input>
+  </div>
+
+  <div class="filed">
+    <app-input
+      formControlName="numberDirection"
+      label="numero de Direccion"
+      placeholder="#29-198"
+    ></app-input>
+  </div>
+
+  <div class="filed">
+    <app-input
+      formControlName="aditionalInformation"
+      label="Referencias"
+      placeholder="El pozon cll 39B #29-198 apto 504"
+    ></app-input>
+  </div>
+
+  <div class="font-extralight">Carrera y semestre:</div>
+  <div class="flex justify-content-center align-items-center gap-2 p-5">
+      <app-dropdown></app-dropdown>
+      <app-dropdown></app-dropdown>
+  </div>
+</form>
 
 <app-button label="Send" routerLink="/login"></app-button>

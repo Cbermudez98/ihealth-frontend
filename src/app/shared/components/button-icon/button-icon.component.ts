@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button-icon',
@@ -6,10 +6,14 @@ import { Component, Input } from '@angular/core';
   styleUrl: './button-icon.component.scss'
 })
 export class ButtonIconComponent {
-  @Input() gender: string ='';
-  @Input() label: string = '';
-  @Input() url: string = '';
-  @Input() type: 'button' | 'submit' = 'button';
-  @Input() severity: string = 'primary';
-  @Input() disabled: boolean = false;
+    @Input() label: string = '';
+    @Input() gender: string = '';
+    @Input() url: string = '';
+    @Input() isSelected: boolean = false; 
+    @Output() genderSelected = new EventEmitter<string>();
+  
+    selectGender() {
+      this.isSelected = true;
+      this.genderSelected.emit(this.gender);
+    }
 }
