@@ -1,9 +1,9 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { LoginService } from '../../../services/auth/login.service';
+import { LoginService } from '../../../shared/services/auth/login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
-import { ToastService } from '../../../services/Toast/toast.service';
+import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
     password: ['Rawadmunoz2004', [Validators.required]],
   });
   constructor(private toastService: ToastService) {}
-  
 
   ngOnInit(): void {
     this.items = [
@@ -45,7 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   next() {
-    if (this.registerForm.invalid) return
+    if (this.registerForm.invalid) return;
     if (this.activeIndex < this.items.length - 1) {
       this.activeIndex++;
     }
@@ -57,13 +56,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  showSuccess() {
-    this.toastService.show('Success');
-  }
-  showError() {
-    this.toastService.show('InternalError');
-  }
-  register() {
+  async register() {
     if (this.registerForm.invalid) return;
 
     const object: User = {
@@ -83,24 +76,28 @@ export class RegisterComponent implements OnInit {
         aditional_information: this.registerForm.value.aditional,
       },
       student_detail: {
-        carreer_id: 0,
-        semester: 0,
+        carreer: {
+          id: 1,
+        },
+        semester: 5,
       },
     };
 
-    this.Loginservice.register(object).subscribe({
-      next: (data) => {
-        if (data.status) {
-          console.log(object);
-          this.router.navigate(['auth/login']);
-          this.showSuccess();
-        } else {
-        }
-      },
-      error: (err) => {
-        this.showError();
-        console.error('Hubo un error:', err.message);
-      },
-    });
+    const data = await this.Loginservice.register(object);
+    if (data.status) {
+      console.log(object);
+      this.router.navigate(['auth/login']);
+      this.toastService.show({
+        severity: 'success',
+        detail: 'Success at login',
+        sumary: '',
+      });
+    } else {
+      console.log('Error');
+    }
+  }
+
+  login() {
+    this.router.navigate(['auth/login']);
   }
 }

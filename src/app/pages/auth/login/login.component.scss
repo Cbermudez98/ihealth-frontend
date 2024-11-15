@@ -66,12 +66,12 @@ div app-button {
 }
 
 .error {
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 300;
   display: flex;
-  justify-content: end;
-  padding-right: 1rem;
+  padding-left: 1rem;
   color: red;
+  margin: 0;
 }
 
 .SignIn {
@@ -81,10 +81,3 @@ div app-button {
   margin-left: 1rem;
 }
 
-::ng-deep .p-inputtext.ng-valid.ng-touched {
-  border-color: green;
-}
-
-::ng-deep .p-inputtext.ng-invalid.ng-touched {
-  border-color: red;
-}

@@ -25,23 +25,25 @@ const apiStatus = {
   },
 };
 
+type Severity = "error" | "success" | "warning";
+
+export interface IToast {
+  severity: Severity,
+  sumary: string,
+  detail: string
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
   constructor(private messageService: MessageService) {}
   
-  show(statusKey: keyof typeof apiStatus) {
-    const status = apiStatus[statusKey];
-
-    if (status) {
-      this.messageService.add({
-        severity: status.severity,
-        summary: `HTTP ${status.code}`,
-        detail: status.message,
-      });
-    } else {
-      console.error(`Status key "${statusKey}" not found in apiStatus.`);
-    }
+  show(info: IToast) {
+    this.messageService.add({
+      severity: info.severity,
+      summary: info.sumary,
+      detail: info.detail,
+    });
   }
 }

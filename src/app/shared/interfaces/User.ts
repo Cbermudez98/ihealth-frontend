@@ -15,7 +15,9 @@ export interface User {
     aditional_information: string;
   };
   student_detail: {
-    carreer_id: number;
+    carreer: {
+      id: number
+    };
     semester: number;
   };
 }

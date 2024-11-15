@@ -10,6 +10,9 @@
       formControlName="email"
     >
     </app-input>
+    <p class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+      {{ getErrorMessage('email') }}
+    </p>
   </div>
 
   <div class="field">
@@ -21,6 +24,9 @@
       formControlName="password"
     >
     </app-input-password>
+    <p class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      {{ getErrorMessage('password') }}
+    </p>
   </div>
 </form>
 
@@ -34,7 +40,13 @@
 </div>
 
 <div class="form grid justify-content-center">
-  <app-button label="Sign In" type="submit" (click)="login()"> </app-button>
+  <app-button
+    label="Sign In"
+    type="submit"
+    [disabled]="loginForm.invalid"
+    (click)="login()"
+  >
+  </app-button>
 </div>
 
 <div class="Signup">
