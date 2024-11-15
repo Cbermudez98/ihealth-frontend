@@ -7,9 +7,10 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ControlValueAccessorDirective } from './shared/components/control-value-accessor.directive';
 import { ToastModule } from 'primeng/toast';
+
 @NgModule({
   declarations: [AppComponent, ControlValueAccessorDirective],
-  imports: [SharedModule, CoreModule, AppRoutingModule, HttpClientModule, ToastModule,BrowserAnimationsModule],
+  imports: [SharedModule, CoreModule, AppRoutingModule, HttpClientModule, ToastModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

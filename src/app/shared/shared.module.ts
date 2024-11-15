@@ -22,9 +22,11 @@ import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
+import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
+import { InputCalenderComponent } from './components/input-calender/input-calender.component';
 
 const COMPONENTS = [
   DashboardComponent,
@@ -34,8 +36,10 @@ const COMPONENTS = [
   ButtonComponent,
   CheckboxComponent,
   AuthPageComponent,
-  InputPasswordComponent
+  InputPasswordComponent,
+  InputCalenderComponent
 ];
+
 const IMPORTS = [
   CommonModule,
   FloatLabelModule,
@@ -51,7 +55,8 @@ const IMPORTS = [
   SidebarModule,
   RouterModule,
   ToastModule,
-  StepsModule
+  StepsModule,
+  CalendarModule
 ];
 
 const PROVIDERS = [MessageService];
@@ -60,6 +65,6 @@ const PROVIDERS = [MessageService];
   declarations: [...COMPONENTS],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
-  providers: [...PROVIDERS],
+  providers: [...PROVIDERS]
 })
 export class SharedModule {}
