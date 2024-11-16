@@ -1,0 +1,26 @@
+button {
+  width: 315px;
+  height: 55px;
+  border-radius: 30px;
+  background: #005aa9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 35px;
+  margin: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+}
+button:hover {
+  background-color: #014b8b;
+}
+button label {
+  color: #fff;
+  font-family: "DM Sans";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+}
