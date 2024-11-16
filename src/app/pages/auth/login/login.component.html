@@ -1,0 +1,55 @@
+<div class="SignIn">Sing In</div>
+
+<form [formGroup]="loginForm">
+  <div class="field">
+    <app-input
+      name="email"
+      label="Email"
+      placeholder="email@unicolombo.edu.co"
+      id="email"
+      formControlName="email"
+    >
+    </app-input>
+    <p class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+      {{ getErrorMessage('email') }}
+    </p>
+  </div>
+
+  <div class="field">
+    <app-input-password
+      name="password"
+      label="Password"
+      placeholder="Password"
+      id="password"
+      formControlName="password"
+    >
+    </app-input-password>
+    <p class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      {{ getErrorMessage('password') }}
+    </p>
+  </div>
+</form>
+
+<div class="formgrid grid" style="margin-top: 1rem">
+  <div class="field col">
+    <app-checkbox label="Save Account"></app-checkbox>
+  </div>
+  <div class="field col">
+    <a class="forgot-a">Forgot Password?</a>
+  </div>
+</div>
+
+<div class="form grid justify-content-center">
+  <app-button
+    label="Sign In"
+    type="submit"
+    [disabled]="loginForm.invalid"
+    (click)="login()"
+  >
+  </app-button>
+</div>
+
+<div class="Signup">
+  <label for="">Don't have an account?&nbsp;</label>
+  <a class="Signup-a" (click)="register()">Sign Up.</a>
+</div>

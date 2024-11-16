@@ -1,0 +1,13 @@
+<div class="w-full" style="margin: 15px" *ngIf="control">
+  <p-floatLabel>
+    <input
+      pInputText
+      [type]="type"
+      [placeholder]="placeholder"
+      [id]="label"
+      [formControl]="control"
+      class="w-full"
+    />
+    <label [for]="label">{{ label }}</label>
+  </p-floatLabel>
+</div>

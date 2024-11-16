@@ -1,0 +1,146 @@
+* {
+  font-family: "DM Sans", sans-serif;
+}
+
+div app-input {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+div app-input-password {
+  display: flex;
+  justify-content: center;
+}
+
+div app-input-calender {
+  display: flex;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+div app-button {
+  display: flex;
+  justify-content: center;
+}
+
+.field.col app-checkbox {
+  margin-left: 1rem;
+  display: grid;
+  justify-content: start;
+}
+
+.field.col a {
+  margin-right: 1rem;
+  display: grid;
+  justify-content: end;
+}
+
+.Signup {
+  display: flex;
+  justify-content: center;
+}
+
+.forgot-a {
+  color: #005aa9;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.Signup label {
+  color: #000;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.Signup a {
+  color: #005aa9;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.error {
+  font-size: 10px;
+  font-weight: 300;
+  display: flex;
+  justify-content: end;
+  padding-right: 1rem;
+  color: red;
+}
+
+.SignIn {
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-left: 1rem;
+}
+
+::ng-deep input.ng-valid.ng-touched {
+  border-color: green;
+}
+
+::ng-deep input.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.control{
+  display:flex;
+  justify-content: center;
+}
+
+.next-btn{
+  display: flex;
+  justify-content: end;
+}
+
+
+.next{
+  display: inline;
+  min-width: auto;
+  height: 50px;
+  margin-top: 100px;
+  margin-left: 7px;
+  margin-right: 1.5rem;
+  background-color: #005aa9;
+  color: white;
+  border: none;
+  padding: 5px 35px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.next:hover{
+  background-color: #014b8b;
+}
+
+.back{
+  display: inline;
+  min-width: auto;
+  height: 50px;
+  margin-top: 100px;
+  margin-left: 1.5rem;
+  margin-right: 50px;
+  background-color: #005aa9;
+  color: white;
+  border: none;
+  padding: 5px 35px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.back:hover{
+  background-color: #014b8b;
+}
+
