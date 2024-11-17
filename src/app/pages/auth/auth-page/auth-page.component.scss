@@ -1,0 +1,11 @@
+/* Padding general para pantallas grandes */
+.custom-padding {
+    padding: 2rem 1.5rem 1rem 1.5rem; /* Corresponde a pt-2, pr-6, pb-7, pl-6 */
+  }
+  
+  /* Ajustes para pantallas móviles */
+  @media (max-width: 768px) {
+    .custom-padding {
+      padding: 1rem; /* Reduce el padding en móviles */
+    }
+  }

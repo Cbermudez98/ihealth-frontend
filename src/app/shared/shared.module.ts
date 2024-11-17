@@ -8,10 +8,13 @@ import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
 import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
 
+
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { InputPasswordComponent } from './components/input-password/input-password.component';
+import { InputCalenderComponent } from './components/input-calender/input-calender.component';
+import { CascadeSelectComponent } from './components/cascade-select/cascade-select.component';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -26,7 +29,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
-import { InputCalenderComponent } from './components/input-calender/input-calender.component';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 const COMPONENTS = [
   DashboardComponent,
@@ -37,7 +40,8 @@ const COMPONENTS = [
   CheckboxComponent,
   AuthPageComponent,
   InputPasswordComponent,
-  InputCalenderComponent
+  InputCalenderComponent,
+  CascadeSelectComponent,
 ];
 
 const IMPORTS = [
@@ -56,7 +60,8 @@ const IMPORTS = [
   RouterModule,
   ToastModule,
   StepsModule,
-  CalendarModule
+  CalendarModule,
+  CascadeSelectModule,
 ];
 
 const PROVIDERS = [MessageService];
@@ -65,6 +70,6 @@ const PROVIDERS = [MessageService];
   declarations: [...COMPONENTS],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
-  providers: [...PROVIDERS]
+  providers: [...PROVIDERS],
 })
 export class SharedModule {}

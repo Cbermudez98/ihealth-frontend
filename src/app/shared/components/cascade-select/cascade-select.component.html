@@ -1,0 +1,16 @@
+<div class="w-full" style="margin: 15px" *ngIf="control">
+  <p-floatLabel>
+    <p-cascadeSelect
+      inputId="cs-city"
+      [(ngModel)]="selectedCity"
+      [options]="countries"
+      optionLabel="cname"
+      optionGroupLabel="name"
+      [optionGroupChildren]="['states', 'cities']"
+      [style]="{ minWidth: '14rem' }"
+      placeholder="Select a City"
+    >
+    </p-cascadeSelect>
+    <label for="cs-city">City</label>
+  </p-floatLabel>
+</div>

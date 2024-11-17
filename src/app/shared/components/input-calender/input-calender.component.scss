@@ -1,10 +1,10 @@
-
-* {
-    font-family: "DM Sans", sans-serif;
+::ng-deep * {
+    font-family: "DM Sans", sans-serif !important;
+    color: black;
   }
   
-  input:focus {
-    box-shadow: none;
+  ::ng-deep input:focus {
+    box-shadow: none; 
   }
   
   ::ng-deep .p-calendar .p-inputtext {

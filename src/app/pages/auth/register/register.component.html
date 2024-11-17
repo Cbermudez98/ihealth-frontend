@@ -6,6 +6,7 @@
       [model]="items"
       [(activeIndex)]="activeIndex"
       [readonly]="true"
+      class="steps-container"
     ></p-steps>
 
     <div class="field mt-7" *ngIf="activeIndex === 0">
@@ -42,11 +43,11 @@
       </app-input>
 
       <app-input-calender
-      name="age"
-      label="Age"
-      placeholder="Age"
-      id="age"
-      formControlName="age"
+        name="age"
+        label="Age"
+        placeholder="Age"
+        id="age"
+        formControlName="age"
       >
       </app-input-calender>
 
@@ -143,7 +144,7 @@
     </div>
   </div>
 </form>
-<div class="Signup">
+<div class="Signup" style="margin-top: 1  rem;">
   <label for="">Already have account?&nbsp;</label>
   <a class="Signup-a" (click)="login()">Sign In.</a>
 </div>
