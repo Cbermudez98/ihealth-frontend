@@ -14,6 +14,8 @@ import { KEYS } from '../../../core/constants.enum';
 export class LoginService {
   constructor(private Http: HttpService, private readonly storageService: StorageService) {}
 
+  //career(object: )
+
   register(object: User): Promise<ResponseAccess> {
     const url = `${environment.apiUrl}user`
     return this.Http.request<ResponseAccess>(url, 'POST', object);

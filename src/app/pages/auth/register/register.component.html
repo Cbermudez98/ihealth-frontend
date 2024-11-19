@@ -1,6 +1,6 @@
 <div class="SignIn">Sing Up</div>
 
-<form [formGroup]="registerForm">
+
   <div class="flex-column">
     <p-steps
       [model]="items"
@@ -9,124 +9,121 @@
       class="steps-container"
     ></p-steps>
 
-    <div class="field mt-7" *ngIf="activeIndex === 0">
-      <app-input
-        name="email"
-        label="Email"
-        placeholder="email@unicolombo.edu.co"
-        id="email"
-        formControlName="email"
-      >
-      </app-input>
-      <div class="next-btn">
-        <button class="next" (click)="next()">Next</button>
-      </div>
+    <form [formGroup]="emailForm">
+      <div class="field mt-7" *ngIf="activeIndex === 0">
+        <app-input
+          name="email"
+          label="Email"
+          placeholder="email@unicolombo.edu.co"
+          id="email"
+          formControlName="email"
+        >
+        </app-input>
+        <div class="next-btn">
+          <button class="next" (click)="next()">Next</button>
+        </div>
     </div>
+    </form>
 
-    <div class="field mt-7" *ngIf="activeIndex === 1">
-      <app-input
-        name="name"
-        label="Name"
-        placeholder="Jane"
-        id="name"
-        formControlName="name"
-      >
-      </app-input>
+    <form [formGroup]="personalForm">
+      <div class="field mt-7" *ngIf="activeIndex === 1">
+        <app-input
+          name="name"
+          label="Name"
+          placeholder="Jane"
+          id="name"
+          formControlName="name"
+        >
+        </app-input>
 
-      <app-input
-        name="lastname"
-        label="Last Name"
-        placeholder="Doe"
-        id="lastname"
-        formControlName="lastname"
-      >
-      </app-input>
+        <app-input
+          name="lastname"
+          label="Last Name"
+          placeholder="Doe"
+          id="lastname"
+          formControlName="lastname"
+        >
+        </app-input>
 
-      <app-input-calender
-        name="age"
-        label="Age"
-        placeholder="Age"
-        id="age"
-        formControlName="age"
-      >
-      </app-input-calender>
+        <app-input-calender
+          name="age"
+          label="Age"
+          placeholder="Age"
+          id="age"
+          formControlName="age"
+        >
+        </app-input-calender>
 
-      <app-input
-        name="code"
-        label="Code"
-        placeholder="12345678"
-        id="code"
-        formControlName="code"
-      >
-      </app-input>
+        <app-input
+          name="code"
+          label="Code"
+          placeholder="12345678"
+          id="code"
+          formControlName="code"
+        >
+        </app-input>
 
-      <app-input
-        name="gender"
-        label="Gender"
-        placeholder="M"
-        id="gender"
-        formControlName="gender"
-      >
-      </app-input>
+        <app-drop-down
+          formControlName="gender"
+          [options]="genderOptions"
+          placeholder="Select a gender" 
+          [optionLabel]="'name'"
+          [optionValue]="'code'"
+        ></app-drop-down>
 
-      <div class="control">
-        <button class="back" (click)="previous()">Back</button>
-        <button class="next" (click)="next()">Next</button>
+        <div class="control">
+          <button class="back" (click)="previous()">Back</button>
+          <button class="next" (click)="next()">Next</button>
+        </div>
       </div>
-    </div>
+    </form>
 
-    <div class="field mt-7" *ngIf="activeIndex === 2">
-      <app-input
-        name="neighborhood"
-        label="Neighborhood"
-        placeholder="El pozon"
-        id="neighborhood"
-        formControlName="neighborhood"
-      >
-      </app-input>
+    <form [formGroup]="directionForm">
+      <div class="field mt-7" *ngIf="activeIndex === 2">
+        <app-input
+          name="neighborhood"
+          label="Neighborhood"
+          placeholder="El pozon"
+          id="neighborhood"
+          formControlName="neighborhood"
+        >
+        </app-input>
 
-      <app-input
-        name="street"
-        label="Street"
-        placeholder="39B"
-        id="street"
-        formControlName="street"
-      >
-      </app-input>
+        <app-input
+          name="street"
+          label="Street"
+          placeholder="39B"
+          id="street"
+          formControlName="street"
+        >
+        </app-input>
 
-      <app-input
-        name="number"
-        label="Number"
-        placeholder="#29-198"
-        id="number"
-        formControlName="number"
-      >
-      </app-input>
+        <app-input
+          name="number"
+          label="Number"
+          placeholder="#29-198"
+          id="number"
+          formControlName="number"
+        >
+        </app-input>
 
-      <app-input
-        name="code"
-        label="Code"
-        placeholder="12345678"
-        id="code"
-        formControlName="code"
-      >
-      </app-input>
+        <app-input
+          name="aditional"
+          label="Aditional Information"
+          placeholder="El pozon cll 39B #29-198 apto 504"
+          id="aditional"
+          formControlName="aditional"
+        >
+        </app-input>
 
-      <app-input
-        name="aditional"
-        label="Aditional Information"
-        placeholder="El pozon cll 39B #29-198 apto 504"
-        id="aditional"
-        formControlName="aditional"
-      >
-      </app-input>
-
-      <div class="control">
-        <button class="back" (click)="previous()">Back</button>
-        <button class="next" (click)="next()">Next</button>
+        <div class="control">
+          <button class="back" (click)="previous()">Back</button>
+          <button class="next" (click)="next()">Next</button>
+        </div>
       </div>
-    </div>
+    </form>
 
+    <form [formGroup]="passwordForm">
     <div class="field mt-7" *ngIf="activeIndex === 3">
       <app-input-password
         name="password"
@@ -140,10 +137,11 @@
       <div class="control">
         <button class="back" (click)="previous()">Back</button>
         <button class="next" type="submit" (click)="register()">Submit</button>
-      </div>
-    </div>
+      </div> 
+    </div> 
+  </form>
   </div>
-</form>
+
 <div class="Signup" style="margin-top: 1  rem;">
   <label for="">Already have account?&nbsp;</label>
   <a class="Signup-a" (click)="login()">Sign In.</a>

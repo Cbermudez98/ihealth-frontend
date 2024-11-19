@@ -1,0 +1,13 @@
+::ng-deep .p-dropdown{
+        border: 1px solid #000;
+        border-radius: 20px; 
+        padding: 5px ;
+        display: flex;
+        margin: 0 15px 0 15px  ;
+        max-width: none; 
+}
+
+::ng-deep .p-dropdown-panel {
+        max-width: none;
+        padding: 17px 17px 17px 20px;       
+      }

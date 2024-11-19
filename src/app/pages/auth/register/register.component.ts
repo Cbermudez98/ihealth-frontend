@@ -18,20 +18,35 @@ export class RegisterComponent implements OnInit {
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
 
-  public registerForm: FormGroup = this.formBuild.group({
-    name: ['Rawad Yecith', [Validators.required]],
-    lastname: ['Muñoz Romero', [Validators.required]],
-    age: ['11/12/2004', [Validators.required]],
-    gender: ['M', [Validators.required]],
-    code: ['123456789', [Validators.required]],
-    neighborhood: ['El pozon', [Validators.required]],
-    street: ['39B', [Validators.required]],
-    number: ['#29-198', [Validators.required]],
-    aditional: ['El pozon cll 39B #29-198 apto 504', [Validators.required]],
+  //Options of gender dropDown
+  genderOptions = [
+    { name: 'Hombre', code: 'H' },
+    { name: 'Mujer', code: 'M' }
+  ];
 
-    email: ['mrawadyecid@gmail.com', [Validators.required, Validators.email]],
-    password: ['Rawadmunoz2004', [Validators.required]],
-  });
+  public emailForm: FormGroup = this.formBuild.group({
+    email: ['', [Validators.required, Validators.email]],
+  })
+
+  public personalForm: FormGroup = this.formBuild.group({
+    name: ['', [Validators.required]],
+    lastname: ['', [Validators.required]],
+    age: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+    code: ['', [Validators.required]]
+  })
+
+  public directionForm: FormGroup = this.formBuild.group({
+    neighborhood: ['', [Validators.required]],
+    street: ['', [Validators.required]],
+    number: ['', [Validators.required]],
+    aditional: ['', [Validators.required]],
+  })
+  
+  public passwordForm: FormGroup = this.formBuild.group({
+    password: ['', [Validators.required]],
+  })
+
   constructor(private toastService: ToastService) {}
 
   ngOnInit(): void {
@@ -44,7 +59,14 @@ export class RegisterComponent implements OnInit {
   }
 
   next() {
-    if (this.registerForm.invalid) return;
+    const forms = [this.emailForm, this.personalForm, this.directionForm, this.passwordForm];
+
+    const currentForm = forms[this.activeIndex];
+    if (currentForm.invalid) {
+      currentForm.markAllAsTouched(); 
+      return; 
+    }
+
     if (this.activeIndex < this.items.length - 1) {
       this.activeIndex++;
     }
@@ -57,23 +79,23 @@ export class RegisterComponent implements OnInit {
   }
 
   async register() {
-    if (this.registerForm.invalid) return;
+    if (this.passwordForm.invalid) return;
 
     const object: User = {
-      name: this.registerForm.value.name,
+      name: this.personalForm.value.name,
       auth: {
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.password,
+        email: this.emailForm.value.email,
+        password: this.passwordForm.value.password,
       },
-      last_name: this.registerForm.value.lastname,
-      age: this.registerForm.value.age,
-      code: this.registerForm.value.code,
-      gender: this.registerForm.value.gender,
+      last_name: this.personalForm.value.lastname,
+      age: this.personalForm.value.age,
+      code: this.personalForm.value.code,
+      gender: this.personalForm.value.gender,
       direction: {
-        neighborhood: this.registerForm.value.neighborhood,
-        street: this.registerForm.value.street,
-        number: this.registerForm.value.number,
-        aditional_information: this.registerForm.value.aditional,
+        neighborhood: this.directionForm.value.neighborhood,
+        street: this.directionForm.value.street,
+        number: this.directionForm.value.number,
+        aditional_information: this.directionForm.value.aditional,
       },
       student_detail: {
         carreer: {
