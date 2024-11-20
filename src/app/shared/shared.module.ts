@@ -14,9 +14,11 @@ import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { InputPasswordComponent } from './components/input-password/input-password.component';
 import { InputCalenderComponent } from './components/input-calender/input-calender.component';
-import { CascadeSelectComponent } from './components/cascade-select/cascade-select.component';
+import { DropDownComponent } from './components/drop-down/drop-down.component';
+
 
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -41,7 +43,7 @@ const COMPONENTS = [
   AuthPageComponent,
   InputPasswordComponent,
   InputCalenderComponent,
-  CascadeSelectComponent,
+  DropDownComponent
 ];
 
 const IMPORTS = [
@@ -62,6 +64,7 @@ const IMPORTS = [
   StepsModule,
   CalendarModule,
   CascadeSelectModule,
+  DropdownModule
 ];
 
 const PROVIDERS = [MessageService];
