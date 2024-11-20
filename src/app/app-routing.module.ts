@@ -8,10 +8,9 @@ import { AuthPageComponent } from './pages/auth/auth-page/auth-page.component';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./pages/home/home.module').then((m) => m.HomeModule),
+    pathMatch: 'full',
+    redirectTo: 'auth/login',
   },
-
   {
     path: 'auth',
     component: AuthPageComponent,
@@ -29,6 +28,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomeModule),
   },
 ];
 
