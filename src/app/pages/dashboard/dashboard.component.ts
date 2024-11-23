@@ -1,18 +1,16 @@
-import { Component, ViewChild} from '@angular/core';
-import { Sidebar } from 'primeng/sidebar';
+// dashboard.component.ts
+import { Component } from '@angular/core';
+import { SidebarService } from '../../shared/services/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  @ViewChild('sidebarRef') sidebar!: Sidebar;
+  constructor(private sidebarService: SidebarService) {}
 
-  sidebarVisible = false; // Controla la visibilidad del sidebar
-
-  closeCallback(event: Event) {
-    this.sidebar.hide(); // Cierra el sidebar
+  toggleSidebar() {
+    this.sidebarService.toggleSidebar();
   }
-  
 }

@@ -15,7 +15,7 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { InputPasswordComponent } from './components/input-password/input-password.component';
 import { InputCalenderComponent } from './components/input-calender/input-calender.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
-
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
@@ -26,12 +26,12 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
-import { SidebarModule } from 'primeng/sidebar';
 import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+
 
 const COMPONENTS = [
   DashboardComponent,
@@ -43,7 +43,8 @@ const COMPONENTS = [
   AuthPageComponent,
   InputPasswordComponent,
   InputCalenderComponent,
-  DropDownComponent
+  DropDownComponent,
+  SidebarComponent
 ];
 
 const IMPORTS = [
@@ -58,13 +59,12 @@ const IMPORTS = [
   FormsModule,
   ReactiveFormsModule,
   DialogModule,
-  SidebarModule,
   RouterModule,
   ToastModule,
   StepsModule,
   CalendarModule,
   CascadeSelectModule,
-  DropdownModule
+  DropdownModule,
 ];
 
 const PROVIDERS = [MessageService];

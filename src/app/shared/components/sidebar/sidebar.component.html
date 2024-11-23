@@ -1,0 +1,25 @@
+<!-- sidebar.component.html -->
+<div class="sidebar" [class.open]="isOpen">
+  <button (click)="toggleSidebar()">Close Sidebar</button>
+  <img src="../../../../assets/images/login/IHealth Logo(250 x 250 px).svg" alt="">
+  <ul>
+    <li *ngFor="let route of routes">
+      <a [routerLink]="route.route">
+        {{ route.name }}
+      </a>
+    </li>
+  </ul>
+  <div class="sidebar-section">
+    <h3>Additional Links</h3>
+    <ul>
+      <li><button routerLink="/home">Home</button></li>
+      <li><a href="#">Link 2</a></li>
+      <li><a href="#">Link 3</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-section">
+    <h3>Contact Info</h3>
+    <p>"Email: exampleexample.com"</p>
+    <p>Phone: (123) 456-7890</p>
+  </div>
+</div>
