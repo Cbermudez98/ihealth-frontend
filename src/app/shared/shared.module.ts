@@ -7,6 +7,8 @@ import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
 import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
+import { DashboardHomeComponent } from '../pages/dashboard-home/dashboard-home.component';
+
 
 
 import { InputComponent } from './components/input/input.component';
@@ -16,6 +18,7 @@ import { InputPasswordComponent } from './components/input-password/input-passwo
 import { InputCalenderComponent } from './components/input-calender/input-calender.component';
 import { CascadeSelectComponent } from './components/cascade-select/cascade-select.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -33,6 +36,9 @@ import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { CardModule } from 'primeng/card';
+import { MessagesModule } from 'primeng/messages';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const COMPONENTS = [
   DashboardComponent,
@@ -45,7 +51,9 @@ const COMPONENTS = [
   InputPasswordComponent,
   InputCalenderComponent,
   CascadeSelectComponent,
-  DropDownComponent
+  DropDownComponent,
+  DashboardHomeComponent,
+  NotificationComponent
 ];
 
 const IMPORTS = [
@@ -66,13 +74,15 @@ const IMPORTS = [
   StepsModule,
   CalendarModule,
   CascadeSelectModule,
-  DropdownModule
+  DropdownModule,
+  CardModule,
+  MessagesModule
 ];
 
 const PROVIDERS = [MessageService];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, CalendarComponent],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
   providers: [...PROVIDERS],
