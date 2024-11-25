@@ -29,11 +29,14 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    children: [
+      {
+        path: 'user',
+        component: UserComponent,
+      },
+    ],
   },
-  {
-    path:'user',
-    component:UserComponent,
-  },
+
   {
     path: 'home',
     loadChildren: () =>
