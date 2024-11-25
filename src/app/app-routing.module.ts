@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardPageComponent } from './pages/dashboard/dashboard-page/dashboard-page.component';
 import { AuthPageComponent } from './pages/auth/auth-page/auth-page.component';
-import { UserComponent } from './pages/user/user.component';
+import { UserComponent } from './pages/dashboard/pages/student/user/user.component';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: DashboardPageComponent,
     children: [
       {
         path: 'user',
