@@ -1,0 +1,25 @@
+* {
+  font-family: "DM Sans", sans-serif;
+}
+
+.dashboard-content {
+  margin-left: 80px;
+  padding: 20px;
+  transition: filter 0.3s ease, background 0.3s ease;
+}
+
+.dashboard-content.blur {
+  background: rgba(0, 0, 0, 0.03);
+  filter: blur(25px);
+}
+
+.open-btn {
+  display: flex;
+  margin-left: 30px;
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+i {
+  cursor: pointer;
+}
