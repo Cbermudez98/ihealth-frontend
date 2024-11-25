@@ -100,10 +100,15 @@ h2{
 
     .notification,
     .schedule {
-        flex: 0; 
+        flex: 1; 
         text-align: center; 
         margin: 0;
     }
+
+    .schedule{
+        width: 100%;
+    }
+
     .notification .titles{
         text-align: center;
     }
