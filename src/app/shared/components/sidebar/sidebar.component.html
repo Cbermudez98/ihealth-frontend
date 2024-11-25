@@ -24,7 +24,9 @@
       *ngFor="let route of routes"
       [label]="route.name"
       [src]="route.icon"
-      [routerLink]="route.route">
-    </app-sidebar-btn> 
+      [routerLink]="route.route"
+      (click)="toggleSidebar()"
+    >
+    </app-sidebar-btn>
   </div>
 </div>

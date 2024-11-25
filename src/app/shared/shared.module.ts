@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { DashboardPageComponent } from '../pages/dashboard/dashboard-page/dashboard-page.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
 import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
@@ -35,7 +35,7 @@ import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.compon
 
 
 const COMPONENTS = [
-  DashboardComponent,
+  DashboardPageComponent,
   LoginComponent,
   RegisterComponent,
   InputComponent,
