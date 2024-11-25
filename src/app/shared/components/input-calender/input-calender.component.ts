@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessorDirective } from '../control-value-accessor.directive';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class InputCalenderComponent <T>extends ControlValueAccessorDirective<T> implements OnInit{
+  @Input() label: string = '';
     date: Date | undefined;
     age: number | null = null;
     

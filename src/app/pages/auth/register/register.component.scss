@@ -2,6 +2,8 @@
   font-family: "DM Sans", sans-serif;
 }
 
+
+
 div app-input {
   display: flex;
   justify-content: center;
@@ -11,6 +13,11 @@ div app-input {
 div app-input-password {
   display: flex;
   justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+div app-input .name .ng-untouched .ng-dirty .ng-invalid{
+  margin-bottom: 0px;
 }
 
 div app-input-calender {
@@ -95,18 +102,17 @@ div app-button {
   border-color: red;
 }
 
-.control{
-  display:flex;
+.control {
+  display: flex;
   justify-content: center;
 }
 
-.next-btn{
+.next-btn {
   display: flex;
   justify-content: end;
 }
 
-
-.next{
+.next {
   display: inline;
   min-width: auto;
   height: 50px;
@@ -121,11 +127,11 @@ div app-button {
   font-size: 16px;
   cursor: pointer;
 }
-.next:hover{
+.next:hover {
   background-color: #014b8b;
 }
 
-.back{
+.back {
   display: inline;
   min-width: auto;
   height: 50px;
@@ -140,7 +146,19 @@ div app-button {
   font-size: 16px;
   cursor: pointer;
 }
-.back:hover{
+.back:hover {
   background-color: #014b8b;
 }
 
+@media (max-width: 576px) {
+  ::ng-deep .p-steps-item {
+    margin-top: 1rem !important;
+    margin-right: 1rem !important;
+  }
+  ::ng-deep .steps-container {
+    display: flex !important;
+    flex-direction: column !important;
+    padding-left: 1rem !important;
+    align-items: center !important;
+  }
+}

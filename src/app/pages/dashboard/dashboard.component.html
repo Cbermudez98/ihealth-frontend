@@ -1,2 +1,6 @@
-<app-button routerLink="/dashboard" label="Home"></app-button>
-<h1>Dashboard</h1>
+<app-sidebar></app-sidebar>
+<div class="open-btn">
+  <i class="fi fi-br-menu-burger" (click)="toggleSidebar()"></i>
+</div>
+
+<div class="dashboard-content flex-column"></div>

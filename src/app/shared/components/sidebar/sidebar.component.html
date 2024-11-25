@@ -1,0 +1,30 @@
+<div class="sidebar" [class.open]="isOpen">
+  <div class="logo">
+    <img src="../../../../assets/images/login/IHealth Logo.svg" width="75%" />
+  </div>
+  <div class="open-btn">
+    <i class="fi fi-br-menu-burger" (click)="toggleSidebar()"></i>
+  </div>
+
+  <div class="avatar">
+    <div class="avatar-img">
+      <i class="fi fi-rr-user"></i>
+    </div>
+    <div class="info">
+      <div class="usr-name">
+        <span>Username</span>
+      </div>
+      <div class="code">
+        <span>1234567890</span>
+      </div>
+    </div>
+  </div>
+  <div class="btn-container">
+    <app-sidebar-btn
+      *ngFor="let route of routes"
+      [label]="route.name"
+      [src]="route.icon"
+      [routerLink]="route.route">
+    </app-sidebar-btn> 
+  </div>
+</div>
