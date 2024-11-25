@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^18.2.10",
     "@angular/platform-browser-dynamic": "^18.2.10",
     "@angular/router": "^18.2.10",
+    "@flaticon/flaticon-uicons": "^3.3.1",
     "cors": "^2.8.5",
     "ihealth-frontend": "file:",
     "primeflex": "^3.3.1",

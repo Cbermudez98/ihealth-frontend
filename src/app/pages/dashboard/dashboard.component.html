@@ -1,19 +1,6 @@
-<!-- dashboard.component.html -->
-<button (click)="toggleSidebar()">Toggle Sidebar</button>
 <app-sidebar></app-sidebar>
-<div class="dashboard-content flex-column">
-  <h1>Bienvenido al Dashboard</h1>
-  <div class="content-section">
-    <h2>Section 1</h2>
-    <p>This is some content for section 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec orci fermentum, a tincidunt nisi facilisis.</p>
-  </div>
-  <div class="content-section">
-    <h2>Section 2</h2>
-    <p>This is some content for section 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec orci fermentum, a tincidunt nisi facilisis.</p>
-  </div>
-  <div class="content-section">
-    <h2>Section 3</h2>
-    <img src="https://via.placeholder.com/150" alt="Placeholder Image">
-    <p>This is some content for section 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec orci fermentum, a tincidunt nisi facilisis.</p>
-  </div>
+<div class="open-btn">
+  <i class="fi fi-br-menu-burger" (click)="toggleSidebar()"></i>
 </div>
+
+<div class="dashboard-content flex-column"></div>

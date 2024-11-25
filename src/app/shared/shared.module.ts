@@ -31,6 +31,7 @@ import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.component';
 
 
 const COMPONENTS = [
@@ -44,7 +45,8 @@ const COMPONENTS = [
   InputPasswordComponent,
   InputCalenderComponent,
   DropDownComponent,
-  SidebarComponent
+  SidebarComponent,
+  SidebarBtnComponent,
 ];
 
 const IMPORTS = [
