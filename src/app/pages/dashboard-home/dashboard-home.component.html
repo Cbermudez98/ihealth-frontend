@@ -1,20 +1,39 @@
-<div class="m-5 mt-8">
-    <p-card header="Good morning">
-        <p class="m-0">
-        <span>Rawad muñoz</span> <br>
-        have a nice day
-        </p>
-    </p-card>
-    <div >
-        <div class="titles mt-5">
-            <h2>Notification</h2>
-        </div>
-        <app-notification></app-notification>
-        <div class="titles mt-5">
-            <h2>Schedule</h2>
-        </div>
-        <div class="titles">
-            <app-calendar></app-calendar>
-        </div>  
+<div class="container">
+  <div class="info">
+    <div class="text">
+      <div class="welcome">
+        <span>Good Morning</span>
+      </div>
+      <div class="name">
+        <span>Jane doe</span>
+      </div>
+      <div class="quote">
+        <span>Have nice day</span>
+      </div>
     </div>
+    <div class="img-doc">
+      <img
+        src="../../../assets/images/dashboard/doctor.svg"
+        height="400"
+        width="400"
+      />
+    </div>
+  </div>
+
+  <div class="events">
+    <div class="schedule">
+      <div class="titles">
+        <h2>Schedule</h2>
+      </div>
+      <div class="calendar">
+        <app-calendar></app-calendar>
+      </div>
+    </div>
+    <div class="notification">
+      <div class="titles">
+        <h2>Notification</h2>
+      </div>
+      <app-notification></app-notification>
+    </div>
+  </div>
 </div>

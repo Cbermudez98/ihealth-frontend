@@ -36,10 +36,11 @@
       .message-content {
         display: flex;
         flex-direction: column;
-        flex-grow: 1; /* Ocupar todo el espacio disponible */
+        flex-grow: 1;
       }
       
       .message-text {
+        text-align: left;
         font-size: 14px;
         color: #333;
       }
