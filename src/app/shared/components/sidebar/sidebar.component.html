@@ -1,9 +1,9 @@
 <div class="sidebar" [class.open]="isOpen">
-  <div class="logo">
-    <img src="../../../../assets/images/login/IHealth Logo.svg" width="75%" />
-  </div>
   <div class="open-btn">
     <i class="fi fi-br-menu-burger" (click)="toggleSidebar()"></i>
+  </div>
+  <div class="logo">
+    <img src="../../../../assets/images/login/IHealth Logo.svg" width="75%" />
   </div>
 
   <div class="avatar">
@@ -12,10 +12,10 @@
     </div>
     <div class="info">
       <div class="usr-name">
-        <span>Username</span>
+        <span>{{ info?.name }} {{ info?.last_name }}</span>
       </div>
       <div class="code">
-        <span>1234567890</span>
+        <span>{{ info?.code }}</span>
       </div>
     </div>
   </div>
@@ -28,5 +28,9 @@
       (click)="toggleSidebar()"
     >
     </app-sidebar-btn>
+    <app-sidebar-btn 
+    label="Logout"
+    src="fi fi-br-exit"
+    (click)="logout()"></app-sidebar-btn>
   </div>
 </div>

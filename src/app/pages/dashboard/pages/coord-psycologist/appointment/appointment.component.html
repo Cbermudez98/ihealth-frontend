@@ -1,0 +1,115 @@
+<div class="title">
+  <h1>Appointments</h1>
+</div>
+<div class="table">
+  <p-table
+    #dt
+    [value]="appointments"
+    [rowHover]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-end">
+        <div class="flex justify-content-between">
+          <p-button
+            [outlined]="true"
+            icon="pi pi-filter-slash"
+            label="Clear"
+            (click)="clearFilters(dt)"
+          />
+          <p-iconField iconPosition="left">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+          </p-iconField>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name" style="min-width: 14rem">
+          <div class="flex justify-content-between align-items-center">
+           <label>Name</label> 
+            <p-sortIcon field="name"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="name"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="dni" style="min-width: 10rem">
+          <div class="flex justify-content-center align-items-center">
+            <label>Dni</label>
+            <p-sortIcon field="dni"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="dni"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="appointmentDate" style="min-width: 10rem">
+          <div class="flex justify-content-center align-items-center">
+            <label>Date</label> 
+            <p-sortIcon field="appointmentDate"></p-sortIcon>
+            <p-columnFilter
+              type="date"
+              field="Date"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="hour" style="min-width: 10rem" class="centered">
+          <div class="flex justify-content-center align-items-center">
+            <label>Hour</label>
+            <p-sortIcon field="hour"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="hour"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="status" style="min-width: 10rem" class="centered">
+          <div class="flex justify-content-between align-items-center">
+            <label>Status</label>
+            <p-sortIcon field="status"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="status"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-appointment>
+      <tr>
+        <td>{{ appointment.name }}</td>
+        <td>{{ appointment.dni }}</td>
+        <td>{{ appointment.appointmentDate | date }}</td>
+        <td class="centered">
+          {{ appointment.startTime }} - {{ appointment.endTime }}
+        </td>
+        <td class="centered">{{ appointment.status }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8" class="centered">No appointments found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
