@@ -13,6 +13,13 @@ export class UserComponent implements OnInit {
   users: IUser[] = [];
   loading: boolean = true;
   searchValue: string = '';
+  userToShow: {
+    name: string,
+    last_name: string;
+    code: string;
+    email: string;
+    faculty: string;
+  }[] = [];
 
   constructor(private readonly httpService: HttpService) {}
 
@@ -20,11 +27,15 @@ export class UserComponent implements OnInit {
     const Url = environment.apiUrl;
     const getUsers = Url + 'user/all';
 
-    const response = (await this.httpService.request<{ data: IUser[]; status: boolean }>(getUsers, 'GET')).data;
-    if (response.status) {
-      this.users = response.data;
-    }
-    console.log(response);
+    const response = (await this.httpService.request<IUser[]>(getUsers, 'GET')).data;
+    console.log("🚀  ~ UserComponent ~ ngOnInit ~ response:", response);
+    this.userToShow = response.map((resp) => ({
+      name: resp.name,
+      last_name: resp.last_name,
+      code: resp.code.toString(),
+      email: resp.auth.email,
+      faculty: resp.student_detail.career.name
+    }));
     this.loading = false;
   }
 

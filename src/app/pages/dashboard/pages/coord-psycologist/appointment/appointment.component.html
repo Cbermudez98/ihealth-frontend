@@ -4,7 +4,7 @@
 <div class="table">
   <p-table
     #dt
-    [value]="appointments"
+    [value]="appointmentsToShow"
     [rowHover]="true"
     [rows]="10"
     [showCurrentPageReport]="true"
@@ -35,7 +35,7 @@
       <tr>
         <th pSortableColumn="name" style="min-width: 14rem">
           <div class="flex justify-content-between align-items-center">
-           <label>Name</label> 
+           <label>Name</label>
             <p-sortIcon field="name"></p-sortIcon>
             <p-columnFilter
               type="text"
@@ -57,13 +57,13 @@
             ></p-columnFilter>
           </div>
         </th>
-        <th pSortableColumn="appointmentDate" style="min-width: 10rem">
+        <th pSortableColumn="date" style="min-width: 10rem">
           <div class="flex justify-content-center align-items-center">
-            <label>Date</label> 
-            <p-sortIcon field="appointmentDate"></p-sortIcon>
+            <label>Date</label>
+            <p-sortIcon field="date"></p-sortIcon>
             <p-columnFilter
-              type="date"
-              field="Date"
+              type="text"
+              field="date"
               display="menu"
               class="ml-auto"
             ></p-columnFilter>
@@ -99,9 +99,9 @@
       <tr>
         <td>{{ appointment.name }}</td>
         <td>{{ appointment.dni }}</td>
-        <td>{{ appointment.appointmentDate | date }}</td>
+        <td>{{ appointment.date | date }}</td>
         <td class="centered">
-          {{ appointment.startTime }} - {{ appointment.endTime }}
+          {{ appointment.hour }}
         </td>
         <td class="centered">{{ appointment.status }}</td>
       </tr>

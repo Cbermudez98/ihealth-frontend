@@ -4,7 +4,7 @@
 <div class="table">
   <p-table
     #dt
-    [value]="users"
+    [value]="userToShow"
     [rowHover]="true"
     [rows]="10"
     [showCurrentPageReport]="true"
@@ -42,7 +42,7 @@
           ></p-columnFilter>
         </th>
         <th pSortableColumn="last_name" style="width: 18%">
-          <label>Last Name</label> 
+          <label>Last Name</label>
           <p-sortIcon field="last_name"></p-sortIcon>
           <p-columnFilter
             type="text"
@@ -62,7 +62,7 @@
           <label>Email</label><p-sortIcon field="auth.email"></p-sortIcon>
           <p-columnFilter
             type="text"
-            field="auth.email"
+            field="email"
             display="menu"
           ></p-columnFilter>
         </th>
@@ -70,7 +70,7 @@
           <label>Faculty</label> <p-sortIcon field="student_detail.career.name"></p-sortIcon>
           <p-columnFilter
             type="text"
-            field="student_detail.career.name"
+            field="name"
             display="menu"
           ></p-columnFilter>
         </th>
@@ -81,8 +81,8 @@
         <td>{{ user.name }}</td>
         <td>{{ user.last_name }}</td>
         <td>{{ user.code }}</td>
-        <td>{{ user.auth.email }}</td>
-        <td>{{ user.student_detail.career.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.faculty }}</td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
