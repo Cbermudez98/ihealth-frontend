@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { DashboardPageComponent } from '../pages/dashboard/dashboard-page/dashboard-page.component';
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
 import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
-
+import { AppointmentComponent } from '../pages/dashboard/pages/coord-psycologist/appointment/appointment.component';
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -16,6 +16,7 @@ import { InputPasswordComponent } from './components/input-password/input-passwo
 import { InputCalenderComponent } from './components/input-calender/input-calender.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
@@ -30,14 +31,25 @@ import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
+import { TableModule } from 'primeng/table';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.component';
-
+import { UserComponent } from '../pages/dashboard/pages/coord-psycologist/user/user.component';
+import { HttpService } from './services/HTTP/http.service';
+import { EventsCalendarComponent } from './components/events-calendar/events-calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ScheduleComponent } from '../pages/dashboard/pages/schedule/schedule.component';
+import { AppointmentFormComponent } from './component/appointment-form/appointment-form.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { LoaderService } from './services/loader/loader.service';
+import { DashboardHomeComponent } from '../pages/dashboard/pages/home/dashboard-home.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const COMPONENTS = [
-  DashboardComponent,
+  DashboardPageComponent,
   LoginComponent,
   RegisterComponent,
+  AppointmentComponent,
   InputComponent,
   ButtonComponent,
   CheckboxComponent,
@@ -47,6 +59,14 @@ const COMPONENTS = [
   DropDownComponent,
   SidebarComponent,
   SidebarBtnComponent,
+  UserComponent,
+  EventsCalendarComponent,
+  ScheduleComponent,
+  NotificationComponent,
+  AppointmentFormComponent,
+  DashboardHomeComponent,
+  NotificationComponent,
+  CalendarComponent
 ];
 
 const IMPORTS = [
@@ -67,12 +87,16 @@ const IMPORTS = [
   CalendarModule,
   CascadeSelectModule,
   DropdownModule,
+  TableModule,
+  ButtonModule,
+  FullCalendarModule,
+  InputTextareaModule
 ];
 
-const PROVIDERS = [MessageService];
+const PROVIDERS = [MessageService, HttpService, LoaderService];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS,],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
   providers: [...PROVIDERS],

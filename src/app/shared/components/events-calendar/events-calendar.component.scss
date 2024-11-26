@@ -1,0 +1,36 @@
+::ng-deep full-calendar {
+    font-family: 'DM Sans', sans-serif !important;
+  }
+
+  ::ng-deep .fc {
+    font-family: 'DM Sans', sans-serif !important;
+  }
+
+  ::ng-deep .fc-scrollgrid.fc-scrollgrid-liquid {
+    border-radius: 20px; 
+    overflow: hidden !important;   
+  }
+  
+
+::ng-deep .fc-button {
+    background-color: #085FCE !important;
+    border-radius: 11px !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+  ::ng-deep .fc-scroller {
+    overflow-y: auto; 
+    scrollbar-width: thin; 
+  }
+  
+  ::ng-deep .fc-scroller::-webkit-scrollbar {
+    width: 8px; 
+  }
+  
+  ::ng-deep .fc-scroller::-webkit-scrollbar-thumb {
+    background-color: #ccc; 
+    border-radius: 4px;   
+  }
+  
+  

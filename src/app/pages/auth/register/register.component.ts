@@ -147,17 +147,13 @@ export class RegisterComponent implements OnInit {
     };
 
     const data = await this.Loginservice.register(object);
-    if (data.status) {
-      console.log(object);
-      this.router.navigate(['auth/login']);
-      this.toastService.show({
-        severity: 'success',
-        detail: 'Success at login',
-        sumary: '',
-      });
-    } else {
-      console.log('Error');
-    }
+    console.log(object);
+    this.router.navigate(['auth/login']);
+    this.toastService.show({
+      severity: 'success',
+      detail: 'Success at login',
+      sumary: '',
+    });
   }
 
   login() {

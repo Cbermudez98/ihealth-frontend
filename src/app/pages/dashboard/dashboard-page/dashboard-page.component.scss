@@ -5,17 +5,14 @@
 .dashboard-content {
   margin-left: 80px;
   padding: 20px;
+  padding-top: 0px;
+  padding-right: 55px;
   transition: filter 0.3s ease, background 0.3s ease;
 }
 
 .dashboard-content.blur {
   background: rgba(0, 0, 0, 0.03);
   filter: blur(25px);
-}
-
-div {
-  display: flex;
-  align-items: flex-end;
 }
 
 .open-btn {
