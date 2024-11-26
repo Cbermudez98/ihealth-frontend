@@ -196,6 +196,9 @@ export class AppointmentFormComponent implements OnInit {
         'GET'
       )
     ).data;
+    console.log(
+      `${environment.apiUrl}schedule?day=${DAYS[event.getDay()]}&date=${date}`
+    );
     this.schedulesToShow = this.schedules.map((sche) => ({
       id: sche.id,
       name: `${sche.day} ${sche.start_time} - ${sche.end_time}`,

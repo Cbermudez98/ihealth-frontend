@@ -1,5 +1,7 @@
-<p-calendar 
-    class="max-w-full justify-center" 
-    [(ngModel)]="date" 
-    [inline]="true" 
-    [showWeek]="true" />
+<p-calendar
+    class="max-w-full justify-center"
+    [(ngModel)]="dates"
+    [inline]="true"
+    [showWeek]="true"
+    selectionMode="multiple"
+    [readonlyInput]="true"/>
