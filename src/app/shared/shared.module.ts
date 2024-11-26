@@ -32,6 +32,7 @@ import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.component';
+import { HttpService } from './services/HTTP/http.service';
 
 
 const COMPONENTS = [
@@ -69,7 +70,7 @@ const IMPORTS = [
   DropdownModule,
 ];
 
-const PROVIDERS = [MessageService];
+const PROVIDERS = [MessageService, HttpService];
 
 @NgModule({
   declarations: [...COMPONENTS],
