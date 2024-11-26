@@ -2,12 +2,13 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import { DashboardPageComponent } from './pages/dashboard/dashboard-page/dashboard-page.component';
+import { DashboardHomeComponent } from './pages/dashboard/pages/home/dashboard-home.component';
 import { AuthPageComponent } from './pages/auth/auth-page/auth-page.component';
 import { AppointmentComponent } from './pages/dashboard/pages/coord-psycologist/appointment/appointment.component';
 import { UserComponent } from './pages/dashboard/pages/coord-psycologist/user/user.component';
 import { authGuard } from './shared/services/guards/auth.guard';
-import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { ScheduleComponent } from './pages/dashboard/pages/schedule/schedule.component';
+import { DashboardPageComponent } from './pages/dashboard/dashboard-page/dashboard-page.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
     component: DashboardPageComponent,
     children: [
       {
+        path: 'home',
+        canActivate: [authGuard],
+        component: DashboardHomeComponent,
+      },
+      {
         path: 'appointment',
         canActivate: [authGuard],
         component: AppointmentComponent,
@@ -48,6 +54,11 @@ const routes: Routes = [
         path: "schedule",
         canActivate: [authGuard],
         component: ScheduleComponent
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
       }
     ],
   },

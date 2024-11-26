@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../shared/services/HTTP/http.service';
-import { environment } from '../../environments/enviroments';
-import { StorageService } from '../../shared/services/storage/storage.service';
-import { IUserStorage } from '../../interfaces/IUser';
-import { KEYS } from '../../core/constants.enum';
+import { HttpService } from '../../../../shared/services/HTTP/http.service';
+import { environment } from '../../../../environments/enviroments';
+import { StorageService } from '../../../../shared/services/storage/storage.service';
+import { IUserStorage } from '../../../../interfaces/IUser';
+import { KEYS } from '../../../../core/constants.enum';
 
 @Component({
   selector: 'app-schedule',

@@ -16,6 +16,7 @@ import { InputPasswordComponent } from './components/input-password/input-passwo
 import { InputCalenderComponent } from './components/input-calender/input-calender.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
@@ -37,10 +38,12 @@ import { UserComponent } from '../pages/dashboard/pages/coord-psycologist/user/u
 import { HttpService } from './services/HTTP/http.service';
 import { EventsCalendarComponent } from './components/events-calendar/events-calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { ScheduleComponent } from '../pages/schedule/schedule.component';
+import { ScheduleComponent } from '../pages/dashboard/pages/schedule/schedule.component';
 import { AppointmentFormComponent } from './component/appointment-form/appointment-form.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoaderService } from './services/loader/loader.service';
+import { DashboardHomeComponent } from '../pages/dashboard/pages/home/dashboard-home.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const COMPONENTS = [
   DashboardPageComponent,
@@ -58,7 +61,12 @@ const COMPONENTS = [
   SidebarBtnComponent,
   UserComponent,
   EventsCalendarComponent,
-  ScheduleComponent
+  ScheduleComponent,
+  NotificationComponent,
+  AppointmentFormComponent,
+  DashboardHomeComponent,
+  NotificationComponent,
+  CalendarComponent
 ];
 
 const IMPORTS = [
@@ -88,7 +96,7 @@ const IMPORTS = [
 const PROVIDERS = [MessageService, HttpService, LoaderService];
 
 @NgModule({
-  declarations: [...COMPONENTS, AppointmentFormComponent],
+  declarations: [...COMPONENTS,],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
   providers: [...PROVIDERS],
