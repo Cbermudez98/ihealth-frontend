@@ -7,6 +7,7 @@
       [id]="label"
       [formControl]="control"
       class="w-full"
+      (input)="onInput($event)"
     />
     <label [for]="label">{{ label }}</label>
   </p-floatLabel>

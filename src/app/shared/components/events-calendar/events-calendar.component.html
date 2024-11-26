@@ -1,0 +1,14 @@
+<full-calendar
+    *ngIf="calendarOptions"
+    #fullcalendar
+    [options]="calendarOptions"
+>
+    <ng-template
+        #eventContent
+        let-arg
+    >
+        <b>{{ arg.event.title }}</b>
+        - {{ arg.event.start.getDate() }}
+    </ng-template>
+</full-calendar>
+<app-appointment-form (onHide)="ngOnInit()"></app-appointment-form>

@@ -1,13 +1,14 @@
-<div class="w-full" *ngIf="control">
+<div class="w-full">
     <p-floatLabel>
-        <p-calendar 
-            [formControl]="control" 
-            [(ngModel)]="date" 
-            (ngModelChange)="calculateAge($event)" 
+        <p-calendar
+            [formControl]="control"
+            [(ngModel)]="date"
+            (ngModelChange)="calculateAge($event)"
             inputId="birth_date"
-            [inline]="false" 
+            [inline]="false"
             class="w-full"
+            [minDate]="minDate"
         ></p-calendar>
-        <label for="birth_date">Fecha de nacimiento</label>
+        <label [for]="label">{{ label }}</label>
     </p-floatLabel>
 </div>

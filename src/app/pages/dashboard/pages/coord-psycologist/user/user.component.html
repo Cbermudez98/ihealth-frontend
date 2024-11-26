@@ -1,0 +1,94 @@
+<div class="title">
+  <h1>Users</h1>
+</div>
+<div class="table">
+  <p-table
+    #dt
+    [value]="userToShow"
+    [rowHover]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="loading"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-end">
+        <div class="flex justify-content-between">
+          <p-button
+            [outlined]="true"
+            icon="pi pi-filter-slash"
+            label="Clear"
+            (click)="clearFilters(dt)"
+          ></p-button>
+          <p-iconField iconPosition="left">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+          </p-iconField>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name" style="width: 18%">
+          <label>Name</label> <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="name"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th pSortableColumn="last_name" style="width: 18%">
+          <label>Last Name</label>
+          <p-sortIcon field="last_name"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="last_name"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th pSortableColumn="code" style="width: 15%">
+          <label>Code</label> <p-sortIcon field="code"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="code"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th pSortableColumn="auth.email" style="width: 25%">
+          <label>Email</label><p-sortIcon field="auth.email"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="email"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+        <th pSortableColumn="student_detail.career.name" style="width: 25%">
+          <label>Faculty</label> <p-sortIcon field="student_detail.career.name"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="name"
+            display="menu"
+          ></p-columnFilter>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.code }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.faculty }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" class="centered">No users found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
+import { idText } from 'typescript';
 
 @Component({
   selector: 'app-register',
@@ -18,20 +19,66 @@ export class RegisterComponent implements OnInit {
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
 
-  public registerForm: FormGroup = this.formBuild.group({
-    name: ['Rawad Yecith', [Validators.required]],
-    lastname: ['Muñoz Romero', [Validators.required]],
-    age: ['11/12/2004', [Validators.required]],
-    gender: ['M', [Validators.required]],
-    code: ['123456789', [Validators.required]],
-    neighborhood: ['El pozon', [Validators.required]],
-    street: ['39B', [Validators.required]],
-    number: ['#29-198', [Validators.required]],
-    aditional: ['El pozon cll 39B #29-198 apto 504', [Validators.required]],
+  //Options of gender dropDown
+  genderOptions = [
+    { name: 'Hombre', code: 'H' },
+    { name: 'Mujer', code: 'M' },
+  ];
 
-    email: ['mrawadyecid@gmail.com', [Validators.required, Validators.email]],
-    password: ['Rawadmunoz2004', [Validators.required]],
+  carreerOptions = [
+    { name: 'Licenciatura En Bilinguismo', id: '1' },
+    { name: 'Contaduria Publica', id: '2' },
+    { name: 'Administracion De Empresas', id: '3' },
+    { name: 'Derecho', id: '4' },
+    { name: 'Ingenieria Industrial', id: '5' },
+    { name: 'Ingenieria De Sistemas', id: '6' },
+    { name: 'Administracion De Empresas Turisticas y Hoteleras', id: '7' },
+    { name: 'Tecnologia En Desarrollo De Sistemas De Informacion', id: '8' },
+    { name: 'Tecnologia En Sistemas De Gestion De Calidad', id: '9' },
+    {
+      name: 'Tecnologia En Gestion De Servicios Turisticos y Hoteleros',
+      id: '10',
+    },
+  ];
+
+  semesterOptions = [
+    { name: '1', id: '1' },
+    { name: '2', id: '2' },
+    { name: '3', id: '3' },
+    { name: '4', id: '4' },
+    { name: '5', id: '5' },
+    { name: '6', id: '6' },
+    { name: '7', id: '7' },
+    { name: '8', id: '8' },
+    { name: '9', id: '9' },
+    { name: '10', id: '10' },
+  ];
+
+  public emailForm: FormGroup = this.formBuild.group({
+    email: ['', [Validators.required, Validators.email]],
   });
+
+  public personalForm: FormGroup = this.formBuild.group({
+    name: ['', [Validators.required]],
+    lastname: ['', [Validators.required]],
+    age: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
+    code: ['', [Validators.required]],
+    carreer: ['', [Validators.required]],
+    semester: ['', [Validators.required]],
+  });
+
+  public directionForm: FormGroup = this.formBuild.group({
+    neighborhood: ['', [Validators.required]],
+    street: ['', [Validators.required]],
+    number: ['', [Validators.required]],
+    aditional: ['', [Validators.required]],
+  });
+
+  public passwordForm: FormGroup = this.formBuild.group({
+    password: ['', [Validators.required]],
+  });
+
   constructor(private toastService: ToastService) {}
 
   ngOnInit(): void {
@@ -44,7 +91,19 @@ export class RegisterComponent implements OnInit {
   }
 
   next() {
-    if (this.registerForm.invalid) return;
+    const forms = [
+      this.emailForm,
+      this.personalForm,
+      this.directionForm,
+      this.passwordForm,
+    ];
+
+    const currentForm = forms[this.activeIndex];
+    if (currentForm.invalid) {
+      currentForm.markAllAsTouched();
+      return;
+    }
+
     if (this.activeIndex < this.items.length - 1) {
       this.activeIndex++;
     }
@@ -57,44 +116,44 @@ export class RegisterComponent implements OnInit {
   }
 
   async register() {
-    if (this.registerForm.invalid) return;
+    if (this.passwordForm.invalid) return;
 
     const object: User = {
-      name: this.registerForm.value.name,
+      name: this.personalForm.value.name,
       auth: {
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.password,
+        email: this.emailForm.value.email,
+        password: this.passwordForm.value.password,
       },
-      last_name: this.registerForm.value.lastname,
-      age: this.registerForm.value.age,
-      code: this.registerForm.value.code,
-      gender: this.registerForm.value.gender,
+      last_name: this.personalForm.value.lastname,
+      age: 18,
+      code: this.personalForm.value.code,
+      gender: this.personalForm.value.gender,
       direction: {
-        neighborhood: this.registerForm.value.neighborhood,
-        street: this.registerForm.value.street,
-        number: this.registerForm.value.number,
-        aditional_information: this.registerForm.value.aditional,
+        neighborhood: this.directionForm.value.neighborhood,
+        street: this.directionForm.value.street,
+        number: this.directionForm.value.number,
+        aditional_information: this.directionForm.value.aditional,
       },
+
       student_detail: {
-        carreer: {
-          id: 1,
+        career: {
+          id:this.personalForm.value.carreer,
         },
-        semester: 5,
+        semester: this.personalForm.value.semester,
+      },
+      role: {
+        id: 1,
       },
     };
 
     const data = await this.Loginservice.register(object);
-    if (data.status) {
-      console.log(object);
-      this.router.navigate(['auth/login']);
-      this.toastService.show({
-        severity: 'success',
-        detail: 'Success at login',
-        sumary: '',
-      });
-    } else {
-      console.log('Error');
-    }
+    console.log(object);
+    this.router.navigate(['auth/login']);
+    this.toastService.show({
+      severity: 'success',
+      detail: 'Success at login',
+      sumary: '',
+    });
   }
 
   login() {

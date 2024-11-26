@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input} from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ControlValueAccessorDirective } from '../control-value-accessor.directive';
 
@@ -21,4 +21,9 @@ export class InputComponent <T> extends ControlValueAccessorDirective <T> {
   @Input() placeholder: string = '';
   @Input() type: InputType = 'text';
   @Input() togleMask: boolean = false;
+  @Output() input = new EventEmitter<Event>();
+
+  onInput(event: Event) {
+    this.input.emit(event);
+  }
 }
