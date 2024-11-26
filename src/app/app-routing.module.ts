@@ -7,7 +7,7 @@ import { AuthPageComponent } from './pages/auth/auth-page/auth-page.component';
 import { AppointmentComponent } from './pages/dashboard/pages/coord-psycologist/appointment/appointment.component';
 import { UserComponent } from './pages/dashboard/pages/coord-psycologist/user/user.component';
 import { authGuard } from './shared/services/guards/auth.guard';
-
+import { ScheduleComponent } from './pages/schedule/schedule.component';
 
 const routes: Routes = [
   {
@@ -43,6 +43,11 @@ const routes: Routes = [
         path: 'user',
         canActivate: [authGuard],
         component: UserComponent,
+      },
+      {
+        path: "schedule",
+        canActivate: [authGuard],
+        component: ScheduleComponent
       }
     ],
   },

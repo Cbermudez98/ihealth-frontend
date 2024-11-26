@@ -16,12 +16,17 @@ export class AppointmentComponent implements OnInit {
 
   constructor(private readonly httpService: HttpService) {}
 
-   async ngOnInit() {
+  async ngOnInit() {
     const Url = environment.apiUrl;
     const getAppointments = Url + 'appointment/history/all';
 
-    const appointments = await this.httpService.request<ResponseAppointments>(getAppointments, 'GET');
-    if(appointments.status){
+    const appointments = (
+      await this.httpService.request<ResponseAppointments>(
+        getAppointments,
+        'GET'
+      )
+    ).data;
+    if (appointments.status) {
       this.appointments = appointments.data;
     }
     this.loading = false;

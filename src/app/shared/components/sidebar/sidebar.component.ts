@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../services/sidebar/sidebar.service';
 import { HttpService } from '../../services/HTTP/http.service';
 import { environment } from '../../../environments/enviroments';
-import { ResponseMenu } from '../../interfaces/ResponseMenu';
-import { ResponseUser} from '../../interfaces/ResponseUser';
+import { IRoute } from '../../interfaces/ResponseMenu';
+import { IUser } from '../../interfaces/ResponseUser';
 import { StorageService } from '../../services/storage/storage.service';
 import { Router } from '@angular/router';
+import { KEYS } from '../../../core/constants.enum';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,15 +15,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  routes: any[] = [];
-  info: ResponseUser['data'] | null = null;
+  routes: IRoute[] = [];
+  info: IUser | null = null;
   isOpen = false;
 
   constructor(
     private readonly sidebarService: SidebarService,
     private readonly httpService: HttpService,
     private readonly storageService: StorageService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   async ngOnInit() {
@@ -30,18 +31,22 @@ export class SidebarComponent implements OnInit {
     const getMenu = url + 'menu';
     const getUser = url + 'user';
 
-    const menu = await this.httpService.request<ResponseMenu>(getMenu, 'GET');
-    if(menu.status){
-      this.routes = menu.data;
-    }
+    const menu = (await this.httpService.request<IRoute[]>(getMenu, 'GET'))
+      .data;
+    this.routes = menu;
+
     console.log(menu);
 
-    const user = await this.httpService.request<ResponseUser>(getUser, 'GET');
+    const user = (await this.httpService.request<IUser>(getUser, 'GET'))
+      .data;
     console.log(user);
-    if(user.status){
-      this.info = user.data;
-    }
-
+    this.info = user;
+    this.storageService.set(KEYS.USER, {
+      id: user.id,
+      name: user.name,
+      last_name: user.last_name,
+      role: user.role.name
+    });
 
     this.sidebarService.sidebarOpen$.subscribe((isOpen) => {
       this.isOpen = isOpen;
@@ -49,7 +54,7 @@ export class SidebarComponent implements OnInit {
       if (content) {
         content.classList.toggle('blur', this.isOpen);
       }
-    }); 
+    });
   }
 
   toggleSidebar(): void {
@@ -57,7 +62,8 @@ export class SidebarComponent implements OnInit {
   }
 
   logout() {
-    this.storageService.remove('access_token');
+    this.storageService.remove(KEYS.TOKEN);
+    this.storageService.remove(KEYS.USER);
     this.router.navigate(['auth/login']);
   }
 }

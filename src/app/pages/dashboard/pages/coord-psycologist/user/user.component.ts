@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
-import { ResponseUser } from '../../../../../shared/interfaces/ResponseUser';
+import { IUser } from '../../../../../shared/interfaces/ResponseUser';
 import { HttpService } from '../../../../../shared/services/HTTP/http.service';
 import { environment } from '../../../../../environments/enviroments';
 
@@ -10,7 +10,7 @@ import { environment } from '../../../../../environments/enviroments';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  users: ResponseUser['data'][] = []; 
+  users: IUser[] = [];
   loading: boolean = true;
   searchValue: string = '';
 
@@ -20,9 +20,9 @@ export class UserComponent implements OnInit {
     const Url = environment.apiUrl;
     const getUsers = Url + 'user/all';
 
-    const response = await this.httpService.request<{ data: ResponseUser['data'][]; status: boolean }>(getUsers, 'GET');
+    const response = (await this.httpService.request<{ data: IUser[]; status: boolean }>(getUsers, 'GET')).data;
     if (response.status) {
-      this.users = response.data; 
+      this.users = response.data;
     }
     console.log(response);
     this.loading = false;

@@ -25,12 +25,12 @@ const apiStatus = {
   },
 };
 
-type Severity = "error" | "success" | "warning";
+type Severity = 'error' | 'success' | 'warning';
 
 export interface IToast {
-  severity: Severity,
-  sumary: string,
-  detail: string
+  severity: Severity;
+  sumary: string;
+  detail: string;
 }
 
 @Injectable({
@@ -38,8 +38,9 @@ export interface IToast {
 })
 export class ToastService {
   constructor(private messageService: MessageService) {}
-  
+
   show(info: IToast) {
+    console.log('🚀  ~ ToastService ~ show ~ info:', info);
     this.messageService.add({
       severity: info.severity,
       summary: info.sumary,

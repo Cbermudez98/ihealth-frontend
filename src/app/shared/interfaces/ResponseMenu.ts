@@ -1,12 +1,4 @@
-export interface ResponseMenu {
-  code: number;
-  data: Route[];
-  message: string;
-  status: boolean;
-  timestamp: string;
-}
-
-export interface Route {
+export interface IRoute {
   id: number;
   name: string;
   icon: string;
