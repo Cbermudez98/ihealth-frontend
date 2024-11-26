@@ -7,6 +7,7 @@ import { DashboardPageComponent } from '../pages/dashboard/dashboard-page/dashbo
 import { LoginComponent } from '../pages/auth/login/login.component';
 import { RegisterComponent } from '../pages/auth/register/register.component';
 import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
+import { AppointmentComponent } from '../pages/dashboard/pages/coord-psycologist/appointment/appointment.component';
 
 
 import { InputComponent } from './components/input/input.component';
@@ -30,14 +31,17 @@ import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { MessageService } from 'primeng/api';
+import { TableModule } from 'primeng/table';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.component';
+import { UserComponent } from '../pages/dashboard/pages/coord-psycologist/user/user.component';
 
 
 const COMPONENTS = [
   DashboardPageComponent,
   LoginComponent,
   RegisterComponent,
+  AppointmentComponent,
   InputComponent,
   ButtonComponent,
   CheckboxComponent,
@@ -47,6 +51,7 @@ const COMPONENTS = [
   DropDownComponent,
   SidebarComponent,
   SidebarBtnComponent,
+  UserComponent
 ];
 
 const IMPORTS = [
@@ -67,6 +72,7 @@ const IMPORTS = [
   CalendarModule,
   CascadeSelectModule,
   DropdownModule,
+  TableModule
 ];
 
 const PROVIDERS = [MessageService];

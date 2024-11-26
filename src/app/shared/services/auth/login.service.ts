@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 import { ResponseAccess } from '../../interfaces/ResponseAccess';
 import { Login } from '../../interfaces/Login';
 import { HttpService } from '../HTTP/http.service';
-import { User } from '../../interfaces/User';
 import { environment } from '../../../environments/enviroments';
 import { StorageService } from '../storage/storage.service';
 import { KEYS } from '../../../core/constants.enum';
+import { User } from '../../interfaces/User';
 
 @Injectable({
   providedIn: 'root',
