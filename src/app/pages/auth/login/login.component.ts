@@ -1,10 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../shared/services/auth/login.service';
 import { Login } from '../../../shared/interfaces/Login';
@@ -25,9 +20,10 @@ export class LoginComponent {
     password: ['', [Validators.required]],
   });
 
-  constructor(private toastService: ToastService) {
-    alert('Hello world');
-  }
+
+  constructor(private toastService: ToastService) {}
+
+
 
   async login() {
     try {
@@ -38,14 +34,14 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       };
 
-      const data = await this.Loginservice.login(object);
+      const data =  await this.Loginservice.login(object);
       this.router.navigate(['dashboard']);
     } catch (error) {
       this.toastService.show({
-        severity: 'error',
-        detail: 'Error at login',
-        sumary: 'Error at credential',
-      });
+        severity: "error",
+        detail: "Error at login",
+        sumary: "Error at credential"
+      })
     }
   }
 
@@ -62,4 +58,5 @@ export class LoginComponent {
     }
     return '';
   }
+
 }
