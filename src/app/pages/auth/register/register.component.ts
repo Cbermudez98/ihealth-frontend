@@ -24,7 +24,11 @@ export class RegisterComponent implements OnInit {
     { name: 'Hombre', code: 'H' },
     { name: 'Mujer', code: 'M' },
   ];
-
+  docOptions = [
+    { name: 'C.C', id: '1' },
+    { name: 'T.I', id: '2' },
+    { name: 'C.E', id: '3' },
+  ];
   carreerOptions = [
     { name: 'Licenciatura En Bilinguismo', id: '1' },
     { name: 'Contaduria Publica', id: '2' },

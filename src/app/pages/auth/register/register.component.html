@@ -64,6 +64,23 @@
       </app-input>
 
       <app-drop-down
+      formControlName="document"
+      [options]="docOptions"
+      placeholder="Select a Document Type"
+      [optionLabel]="'name'"
+      [optionValue]="'id'"
+    ></app-drop-down>
+
+    <app-input
+    name="id"
+    label="id"
+    placeholder="123456"
+    id="id"
+    formControlName="id"
+  >
+  </app-input>
+
+      <app-drop-down
         formControlName="gender"
         [options]="genderOptions"
         placeholder="Select a gender"
