@@ -5,8 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
-import { apiService, Career } from '../../../shared/services/api/api.service';
+import { HttpService} from '../../../shared/services/HTTP/http.service';
 import { Subject, takeUntil } from 'rxjs';
+import { environment } from '../../../environments/enviroments';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
   private Loginservice = inject(LoginService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
-  private apiService = inject<apiService>(apiService);
+  public httpService = inject(HttpService);
  
   docOptions = [
     { name: 'C.C', id: 'CC' },
@@ -32,17 +33,15 @@ export class RegisterComponent implements OnInit {
     { name: 'Hombre', code: 'H' },
     { name: 'Mujer', code: 'M' },
   ];
-  carreerOptions: Career[] = [];
   
-  private unsubscribe$ = new Subject<void>();
-
+  carreerOptions: {id: number; name: string}[] = [];
+  
   loadCareers(): void {
-    this.apiService.getCareers().subscribe(response => {
-      if (response && Array.isArray(response.data)) {
-        this.carreerOptions = response.data; 
-      } else {
-        console.error('La API no devolvió un array en response.data:', response);
-        this.carreerOptions = [];
+    const url = `${environment.apiUrl}/career`;
+    this.httpService.request<{id: number; name : string}[]>(url,'GET')
+    .then(response => {
+      if (response && Array.isArray(response.data)){
+        this.carreerOptions = response.data;
       }
     })
   }
