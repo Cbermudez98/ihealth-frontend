@@ -5,7 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
-
+import { apiService, Career } from '../../../shared/services/api/api.service';
+import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   private Loginservice = inject(LoginService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
-
+  private apiService = inject<apiService>(apiService);
  
   docOptions = [
     { name: 'C.C', id: 'CC' },
@@ -31,21 +32,22 @@ export class RegisterComponent implements OnInit {
     { name: 'Hombre', code: 'H' },
     { name: 'Mujer', code: 'M' },
   ];
-  carreerOptions = [
-    { name: 'Licenciatura En Bilinguismo', id: '1' },
-    { name: 'Contaduria Publica', id: '2' },
-    { name: 'Administracion De Empresas', id: '3' },
-    { name: 'Derecho', id: '4' },
-    { name: 'Ingenieria Industrial', id: '5' },
-    { name: 'Ingenieria De Sistemas', id: '6' },
-    { name: 'Administracion De Empresas Turisticas y Hoteleras', id: '7' },
-    { name: 'Tecnologia En Desarrollo De Sistemas De Informacion', id: '8' },
-    { name: 'Tecnologia En Sistemas De Gestion De Calidad', id: '9' },
-    {
-      name: 'Tecnologia En Gestion De Servicios Turisticos y Hoteleros',
-      id: '10',
-    },
-  ];
+  carreerOptions: Career[] = [];
+  
+  private unsubscribe$ = new Subject<void>();
+
+  loadCareers(): void {
+    this.apiService.getCareers().subscribe(response => {
+      if (response && Array.isArray(response.data)) {
+        this.carreerOptions = response.data; 
+      } else {
+        console.error('La API no devolvió un array en response.data:', response);
+        this.carreerOptions = [];
+      }
+    })
+  }
+  
+
   semesterOptions = [
     { name: '1', id: '1' },
     { name: '2', id: '2' },
@@ -97,7 +99,8 @@ export class RegisterComponent implements OnInit {
       { label: 'Password' },
     ];
 
-   
+    this.loadCareers();
+    
     this.personalForm.get('document')?.valueChanges.subscribe((value) => {
       const idControl = this.personalForm.get('id');
 
