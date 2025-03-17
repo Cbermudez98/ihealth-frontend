@@ -6,7 +6,6 @@ import { User } from '../../../shared/interfaces/User';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
 import { HttpService} from '../../../shared/services/HTTP/http.service';
-import { Subject, takeUntil } from 'rxjs';
 import { environment } from '../../../environments/enviroments';
 @Component({
   selector: 'app-register',
@@ -19,7 +18,7 @@ export class RegisterComponent implements OnInit {
   private Loginservice = inject(LoginService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
-  public httpService = inject(HttpService);
+  public httpService = inject(HttpService)
  
   docOptions = [
     { name: 'C.C', id: 'CC' },
@@ -33,15 +32,15 @@ export class RegisterComponent implements OnInit {
     { name: 'Hombre', code: 'H' },
     { name: 'Mujer', code: 'M' },
   ];
-  
-  carreerOptions: {id: number; name: string}[] = [];
+
+  careerOptions: {id: number; name: string}[] = [];
   
   loadCareers(): void {
     const url = `${environment.apiUrl}/career`;
     this.httpService.request<{id: number; name : string}[]>(url,'GET')
     .then(response => {
       if (response && Array.isArray(response.data)){
-        this.carreerOptions = response.data;
+        this.careerOptions = response.data;
       }
     })
   }
