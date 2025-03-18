@@ -1,16 +1,16 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LoginService } from '../../../shared/services/auth/login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
-import { idText } from 'typescript';
-
+import { HttpService} from '../../../shared/services/HTTP/http.service';
+import { environment } from '../../../environments/enviroments';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   items: MenuItem[] = [];
@@ -18,28 +18,33 @@ export class RegisterComponent implements OnInit {
   private Loginservice = inject(LoginService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
+  public httpService = inject(HttpService)
+ 
+  docOptions = [
+    { name: 'C.C', id: 'CC' },
+    { name: 'T.I', id: 'TI' },
+    { name: 'C.E', id: 'CE' },
+    { name: 'P.A', id: 'PA' },
+  ];
 
-  //Options of gender dropDown
+
   genderOptions = [
     { name: 'Hombre', code: 'H' },
     { name: 'Mujer', code: 'M' },
   ];
 
-  carreerOptions = [
-    { name: 'Licenciatura En Bilinguismo', id: '1' },
-    { name: 'Contaduria Publica', id: '2' },
-    { name: 'Administracion De Empresas', id: '3' },
-    { name: 'Derecho', id: '4' },
-    { name: 'Ingenieria Industrial', id: '5' },
-    { name: 'Ingenieria De Sistemas', id: '6' },
-    { name: 'Administracion De Empresas Turisticas y Hoteleras', id: '7' },
-    { name: 'Tecnologia En Desarrollo De Sistemas De Informacion', id: '8' },
-    { name: 'Tecnologia En Sistemas De Gestion De Calidad', id: '9' },
-    {
-      name: 'Tecnologia En Gestion De Servicios Turisticos y Hoteleros',
-      id: '10',
-    },
-  ];
+  careerOptions: {id: number; name: string}[] = [];
+  
+  loadCareers(): void {
+    const url = `${environment.apiUrl}/career`;
+    this.httpService.request<{id: number; name : string}[]>(url,'GET')
+    .then(response => {
+      if (response && Array.isArray(response.data)){
+        this.careerOptions = response.data;
+      }
+    })
+  }
+  
 
   semesterOptions = [
     { name: '1', id: '1' },
@@ -54,6 +59,7 @@ export class RegisterComponent implements OnInit {
     { name: '10', id: '10' },
   ];
 
+
   public emailForm: FormGroup = this.formBuild.group({
     email: ['', [Validators.required, Validators.email]],
   });
@@ -62,6 +68,8 @@ export class RegisterComponent implements OnInit {
     name: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
     age: ['', [Validators.required]],
+    id: [{ value: '', disabled: true }, [Validators.required]], 
+    document: ['', [Validators.required]], 
     gender: ['', [Validators.required]],
     code: ['', [Validators.required]],
     carreer: ['', [Validators.required]],
@@ -88,6 +96,31 @@ export class RegisterComponent implements OnInit {
       { label: 'Direction' },
       { label: 'Password' },
     ];
+
+    this.loadCareers();
+    
+    this.personalForm.get('document')?.valueChanges.subscribe((value) => {
+      const idControl = this.personalForm.get('id');
+
+      if (value) {
+
+        idControl?.enable();
+
+
+        if (['CC', 'TI', 'CE'].includes(value)) {
+          idControl?.setValidators([Validators.required, Validators.pattern(/^\d+$/)]);
+        } else if (value === 'PA') {
+          idControl?.setValidators([Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]);
+        }
+      } else {
+    
+        idControl?.disable();
+        idControl?.clearValidators();
+      }
+
+
+      idControl?.updateValueAndValidity();
+    });
   }
 
   next() {
@@ -134,10 +167,9 @@ export class RegisterComponent implements OnInit {
         number: this.directionForm.value.number,
         aditional_information: this.directionForm.value.aditional,
       },
-
       student_detail: {
         career: {
-          id:this.personalForm.value.carreer,
+          id: this.personalForm.value.carreer,
         },
         semester: this.personalForm.value.semester,
       },
