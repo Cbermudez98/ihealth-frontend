@@ -1,4 +1,4 @@
-<div class="SignIn">Sing Up</div>
+<div class="SignIn">Sign Up</div>
 
 <div class="flex-column">
   <p-steps
@@ -64,6 +64,22 @@
       </app-input>
 
       <app-drop-down
+      formControlName="document"
+      [options]="docOptions"
+      placeholder="Select a Document Type"
+      [optionLabel]="'name'"
+      [optionValue]="'id'"
+    ></app-drop-down>
+
+     <app-input
+      name="id"
+      label="Document"
+      placeholder="1234567890"
+      id="id"
+      formControlName="id"
+    ></app-input>
+
+      <app-drop-down
         formControlName="gender"
         [options]="genderOptions"
         placeholder="Select a gender"
@@ -73,7 +89,7 @@
 
       <app-drop-down
         formControlName="carreer"
-        [options]="carreerOptions"
+        [options]="careerOptions"
         placeholder="Select a career"
         [optionLabel]="'name'"
         [optionValue]="'id'"
