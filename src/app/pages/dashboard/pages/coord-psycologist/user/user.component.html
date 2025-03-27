@@ -1,5 +1,5 @@
 <div class="title">
-  <h1>Users</h1>
+  <h1>Usuarios</h1>
 </div>
 <div class="table">
   <p-table
@@ -34,7 +34,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="name" style="width: 18%">
-          <label>Name</label> <p-sortIcon field="name"></p-sortIcon>
+          <label>Nombres</label> <p-sortIcon field="name"></p-sortIcon>
           <p-columnFilter
             type="text"
             field="name"
@@ -42,7 +42,7 @@
           ></p-columnFilter>
         </th>
         <th pSortableColumn="last_name" style="width: 18%">
-          <label>Last Name</label>
+          <label>Apellidos</label>
           <p-sortIcon field="last_name"></p-sortIcon>
           <p-columnFilter
             type="text"
@@ -51,7 +51,7 @@
           ></p-columnFilter>
         </th>
         <th pSortableColumn="code" style="width: 15%">
-          <label>Code</label> <p-sortIcon field="code"></p-sortIcon>
+          <label>Codigo</label> <p-sortIcon field="code"></p-sortIcon>
           <p-columnFilter
             type="text"
             field="code"
@@ -59,7 +59,7 @@
           ></p-columnFilter>
         </th>
         <th pSortableColumn="auth.email" style="width: 25%">
-          <label>Email</label><p-sortIcon field="auth.email"></p-sortIcon>
+          <label>Correo electronico</label><p-sortIcon field="auth.email"></p-sortIcon>
           <p-columnFilter
             type="text"
             field="email"
@@ -67,7 +67,7 @@
           ></p-columnFilter>
         </th>
         <th pSortableColumn="student_detail.career.name" style="width: 25%">
-          <label>Faculty</label> <p-sortIcon field="student_detail.career.name"></p-sortIcon>
+          <label>Facultad</label> <p-sortIcon field="student_detail.career.name"></p-sortIcon>
           <p-columnFilter
             type="text"
             field="name"
@@ -87,7 +87,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="5" class="centered">No users found.</td>
+        <td colspan="5" class="centered">No se encontro usuario.</td>
       </tr>
     </ng-template>
   </p-table>
