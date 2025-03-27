@@ -25,7 +25,7 @@ const apiStatus = {
   },
 };
 
-type Severity = 'error' | 'success' | 'warning';
+type Severity = 'error' | 'success' | 'warning' | 'warn';
 
 export interface IToast {
   severity: Severity;

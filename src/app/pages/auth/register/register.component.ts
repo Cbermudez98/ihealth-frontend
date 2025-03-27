@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   careerOptions: {id: number; name: string}[] = [];
   
   loadCareers(): void {
-    const url = `${environment.apiUrl}/career`;
+    const url = `${environment.apiUrl}career`;
     this.httpService.request<{id: number; name : string}[]>(url,'GET')
     .then(response => {
       if (response && Array.isArray(response.data)){

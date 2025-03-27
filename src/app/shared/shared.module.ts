@@ -44,6 +44,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoaderService } from './services/loader/loader.service';
 import { DashboardHomeComponent } from '../pages/dashboard/pages/home/dashboard-home.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ToastComponent } from './components/toast/toast.component';
 
 const COMPONENTS = [
   DashboardPageComponent,
@@ -66,7 +70,9 @@ const COMPONENTS = [
   AppointmentFormComponent,
   DashboardHomeComponent,
   NotificationComponent,
-  CalendarComponent
+  CalendarComponent,
+  MenuComponent,
+  ToastComponent
 ];
 
 const IMPORTS = [
@@ -90,13 +96,15 @@ const IMPORTS = [
   TableModule,
   ButtonModule,
   FullCalendarModule,
-  InputTextareaModule
+  InputTextareaModule,
+  PanelMenuModule,
+  MultiSelectModule
 ];
 
 const PROVIDERS = [MessageService, HttpService, LoaderService];
 
 @NgModule({
-  declarations: [...COMPONENTS,],
+  declarations: [...COMPONENTS, MenuComponent, ToastComponent,],
   imports: [...IMPORTS],
   exports: [...COMPONENTS],
   providers: [...PROVIDERS],

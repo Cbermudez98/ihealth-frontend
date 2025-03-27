@@ -1,13 +1,28 @@
 <div class="flex justify-content-center" *ngIf="control">
     <form class="w-full">
-    <p-dropdown
+      <p-multiSelect
+        *ngIf="multiple; else singleSelect"
         [formControl]="control"
         [options]="options"
         [optionLabel]="optionLabel"
         [placeholder]="placeholder"
+        [display]="'chip'"
         [optionValue]="optionValue"
         class="w-full"
         (onChange)="setData($event)"
-        />
+      ></p-multiSelect>
+  
+      <ng-template #singleSelect>
+        <p-dropdown
+          [formControl]="control"
+          [options]="options"
+          [optionLabel]="optionLabel"
+          [placeholder]="placeholder"
+          [optionValue]="optionValue"
+          class="w-full"
+          (onChange)="setData($event)"
+        ></p-dropdown>
+      </ng-template>
     </form>
-</div>
+  </div>
+  

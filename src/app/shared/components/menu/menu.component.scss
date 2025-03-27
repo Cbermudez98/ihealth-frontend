@@ -1,0 +1,55 @@
+* {
+  font-family: DM Sans;
+}
+
+.title {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+.title h1 {
+  padding-top: 0px;
+  margin-bottom: 15px;
+  color: #000;
+  text-align: center;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+label {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 15px; 
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px; 
+}
+
+.centered {
+  text-align: center;
+}
+
+th.centered,
+td.centered {
+  text-align: center;
+}
+
+::ng-deep p-button {
+  border: #005aa9;
+  color: black;
+}
+
+::ng-deep p-button:focus {
+  box-shadow: none;
+}
+
+.table {
+  margin-top: 20px;
+}
