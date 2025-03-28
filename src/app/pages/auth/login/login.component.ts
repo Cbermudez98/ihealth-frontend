@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../../shared/services/auth/login.service';
 import { Login } from '../../../shared/interfaces/Login';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
+import { JwtDecodeService } from '../../../shared/services/jwt-decode.service';
+
+import { KEYS } from '../../../core/constants.enum';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +17,7 @@ import { ToastService } from '../../../shared/services/Toast/toast.service';
 export class LoginComponent {
   private Loginservice = inject(LoginService);
   private router = inject(Router);
+  private jwtDecodeService = inject(JwtDecodeService);
   public formBuild = inject(FormBuilder);
 
   public loginForm: FormGroup = this.formBuild.group({
@@ -34,14 +39,24 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       };
 
-      const data =  await this.Loginservice.login(object);
+      const data = await this.Loginservice.login(object);
+
+      if (data && data.access_token) {
+
+        const decodedToken: any = jwtDecode(data.access_token);
+        const role = decodedToken?.role || null;
+        if (role) {
+          localStorage.setItem('user_role', role);
+        }
+      }
+
       this.router.navigate(['dashboard']);
     } catch (error) {
       this.toastService.show({
-        severity: "error",
-        detail: "Error at login",
-        sumary: "Error at credential"
-      })
+        severity: 'error',
+        detail: 'Error at login',
+        sumary: 'Error at credential'
+      });
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="SignIn">Inicia sesion</div>
+<div class="SignIn">Iniciar sesión</div>
 
 <form [formGroup]="loginForm">
   <div class="field">
@@ -33,13 +33,13 @@
 
 <div class="formgrid grid" style="margin-top: 1rem">
   <div class="field col">
-    <a class="forgot-a">Olcidaste tu contraseña?</a>
+    <a class="forgot-a">Olvidaste tu contraseña?</a>
   </div>
 </div>
 
 <div class="form grid justify-content-center">
   <app-button
-    label="Inicia sesion"
+    label="Iniciar sesión"
     type="submit"
     [disabled]="loginForm.invalid"
     (click)="login()"
@@ -48,6 +48,6 @@
 </div>
 
 <div class="Signup">
-  <label for="">No tienes cuenta registrate aqui?&nbsp;</label>
+  <label for="">¿No tienes cuenta? registrate aqui&nbsp;</label>
   <a class="Signup-a" (click)="register()">registrate.</a>
 </div>
