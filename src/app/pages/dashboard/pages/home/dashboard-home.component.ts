@@ -12,8 +12,10 @@ export class DashboardHomeComponent {
   name: string = '';
   message: string = '';
   constructor(private readonly storageService: StorageService) {
-    const userStorage: IUserStorage = this.storageService.get(KEYS.USER);
-    this.name = `${userStorage.name} ${userStorage.last_name}`;
+    setTimeout(() => {
+      const userStorage: IUserStorage = this.storageService.get(KEYS.USER);
+      this.name = `${userStorage.name} ${userStorage.last_name}`;
+    }, 1000);
 
     const newDate = new Date();
     const hour = newDate.getHours();
