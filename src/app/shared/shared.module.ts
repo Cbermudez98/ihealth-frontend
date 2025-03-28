@@ -44,6 +44,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoaderService } from './services/loader/loader.service';
 import { DashboardHomeComponent } from '../pages/dashboard/pages/home/dashboard-home.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { jwtDecode } from "jwt-decode";
+
 
 const COMPONENTS = [
   DashboardPageComponent,
