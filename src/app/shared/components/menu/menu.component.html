@@ -20,27 +20,20 @@
         <app-input label="Ruta" [(ngModel)]="newItem.route" name="route"></app-input>
       </div>
       <div class="col-6">
-        <app-drop-down 
-          [(ngModel)]="newItem.roles" 
-          name="roles" 
-          [options]="careerRoles"
-          optionLabel="name"
-          optionValue="id"
-          placeholder="Seleccione roles"
-          [multiple]="true"
-          (emitData)="newItem.roles = $event">
+        <app-drop-down [(ngModel)]="newItem.roles" name="roles" [options]="careerRoles" optionLabel="name"
+          optionValue="id" placeholder="Seleccione roles" [multiple]="true" (emitData)="updateRoles($event)">
         </app-drop-down>
+
       </div>
     </div>
   </div>
 </div>
 
-<form (submit)="saveMenuItem()" class="menu-form"> 
+<form (submit)="saveMenuItem()" class="menu-form">
   <div class="form-buttons">
     <button pButton type="submit" [label]="isEditing ? 'Actualizar' : 'Agregar'" icon="pi pi-save"></button>
-    <button 
-      pButton type="button" label="Cancelar" icon="pi pi-times"
-      class="p-button-text" (click)="resetForm()" *ngIf="isEditing">
+    <button pButton type="button" label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="resetForm()"
+      *ngIf="isEditing">
     </button>
   </div>
 </form>
@@ -59,12 +52,15 @@
     <ng-template pTemplate="body" let-item>
       <tr>
         <td class="centered">{{ item.name }}</td>
-        <td class="centered"><i [class]="item.icon"></i></td>
+        <td class="centered">
+          <i [class]="item.icon" class="pi pi-lg"></i>
+        </td>
         <td class="centered">{{ item.route }}</td>
         <td class="centered">{{ getRolesAsString(item.roles) }}</td>
         <td class="centered">
           <button pButton icon="pi pi-pencil" class="p-button-sm p-button-text" (click)="editMenuItem(item)"></button>
-          <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger" (click)="deleteMenuItem(item.id)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger"
+            (click)="deleteMenuItem(item.id)"></button>
         </td>
       </tr>
     </ng-template>

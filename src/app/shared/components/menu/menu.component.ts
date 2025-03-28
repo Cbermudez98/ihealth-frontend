@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
   newItem: IRoute = { id: 0, name: '', icon: '', route: '', roles: [] };
   isEditing = false;
 
-  constructor(private menuService: MenuService, private messageService: ToastService, private HttpService: HttpService) {}
+  constructor(private menuService: MenuService, private messageService: ToastService, private httpService: HttpService) {}
 
   async ngOnInit(): Promise<void> {
     await this.loadRoles();
@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
   async loadRoles(): Promise<void> {
     try {
       const url = `${environment.apiUrl}roles`;
-      const response = await this.HttpService.request<{ id: number; name: string }[]>(url, 'GET');
+      const response = await this.httpService.request<{ id: number; name: string }[]>(url, 'GET');
       this.careerRoles = response.data;
     } catch (error) {
       this.messageService.show({
@@ -43,19 +43,14 @@ export class MenuComponent implements OnInit {
       this.menuItems = await this.menuService.getMenuItems();
 
       this.menuItems.forEach(menu => {
-        if (!Array.isArray(menu.roles)) {
-          menu.roles = [];
-        } else {
-          menu.roles = menu.roles.map(role => {
-            if (typeof role === 'object' && role !== null && 'id' in role && 'name' in role) {
-              return role;
-            } else if (typeof role === 'number') {
-              const foundRole = this.careerRoles.find(r => r.id === role);
-              return foundRole ? { id: role, name: foundRole.name } : { id: role, name: 'Desconocido' };
-            }
-            return { id: 0, name: 'Desconocido' };
-          });
-        }
+        menu.route = `/dashboard/${menu.route.replace(/^\/?dashboard\//, '')}`;
+        menu.roles = (menu.roles || []).map(role => {
+          if (typeof role === 'number') {
+            const foundRole = this.careerRoles.find(r => r.id === role);
+            return foundRole ? { id: role, name: foundRole.name } : { id: role, name: 'Desconocido' };
+          }
+          return role && typeof role === 'object' && 'name' in role ? role : { id: 0, name: 'Desconocido' };
+        });
       });
 
       console.log('Menú actualizado con nombres de roles:', this.menuItems);
@@ -82,7 +77,7 @@ export class MenuComponent implements OnInit {
 
     try {
       const formattedName = this.newItem.name.charAt(0).toUpperCase() + this.newItem.name.slice(1);
-      const formattedRoute = `dashboard/${this.newItem.route.trim().toLowerCase().replace(/^dashboard\//, '')}`;
+      const formattedRoute = `/dashboard/${this.newItem.route.trim().replace(/^\/?dashboard\//, '')}`;
 
       console.log('Guardando menú:', { formattedName, formattedRoute, rolesIds });
 
@@ -99,6 +94,7 @@ export class MenuComponent implements OnInit {
           route: formattedRoute,
           rolesIds,
         });
+
         this.messageService.show({ severity: 'success', sumary: 'Menú actualizado', detail: 'El menú se actualizó correctamente' });
       } else {
         await this.menuService.createMenu(formattedName, this.newItem.icon.trim(), formattedRoute, rolesIds);
@@ -120,18 +116,14 @@ export class MenuComponent implements OnInit {
       id: menu.id,
       name: menu.name,
       icon: menu.icon,
-      route: menu.route.replace(/^dashboard\//, ''), 
-      roles: Array.isArray(menu.roles)
-        ? menu.roles.map(role => {
-            if (typeof role === 'object' && role !== null && 'id' in role && 'name' in role) {
-              return { id: role.id, name: role.name };
-            } else if (typeof role === 'number') {
-              const foundRole = this.careerRoles.find(r => r.id === role);
-              return foundRole ? { id: foundRole.id, name: foundRole.name } : { id: role, name: 'Desconocido' };
-            }
-            return { id: 0, name: 'Desconocido' };
-          })
-        : [],
+      route: menu.route.replace(/^\/?dashboard\//, ''),
+      roles: (menu.roles || []).map(role => {
+        if (typeof role === 'number') {
+          const foundRole = this.careerRoles.find(r => r.id === role);
+          return foundRole ? { id: foundRole.id, name: foundRole.name } : { id: role, name: 'Desconocido' };
+        }
+        return role && typeof role === 'object' && 'name' in role ? { id: role.id, name: role.name } : { id: 0, name: 'Desconocido' };
+      }),
     };
 
     this.isEditing = true;
@@ -152,14 +144,20 @@ export class MenuComponent implements OnInit {
     if (!Array.isArray(roles) || roles.length === 0) {
       return 'N/A';
     }
-    return roles.map(role => role.name ?? 'Desconocido').join(', ');
+    return roles.map(role => (role?.name ? role.name : 'Desconocido')).join(', ');
   }
 
   resetForm(): void {
     this.newItem = { id: 0, name: '', icon: '', route: '', roles: [] };
     this.isEditing = false;
   }
-
+  
+  updateRoles(selectedRoleIds: number[]): void {
+    this.newItem.roles = selectedRoleIds.map(roleId => 
+      this.careerRoles.find(role => role.id === roleId) || { id: roleId, name: 'Desconocido' }
+    );
+  }
+  
   addMenuItem(): void {
     this.isEditing = false;
     this.resetForm();
