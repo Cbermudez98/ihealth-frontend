@@ -91,10 +91,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = [
-      { label: 'Email' },
-      { label: 'Personal' },
-      { label: 'Direction' },
-      { label: 'Password' },
+      { label: 'Correo electronico' },
+      { label: 'Información personal' },
+      { label: 'Dirección' },
+      { label: 'Contraseña' },
     ];
 
     this.loadCareers();
