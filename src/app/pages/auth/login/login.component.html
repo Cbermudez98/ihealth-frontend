@@ -1,10 +1,10 @@
-<div class="SignIn">Sign In</div>
+<div class="SignIn">Iniciar sesión</div>
 
 <form [formGroup]="loginForm">
   <div class="field">
     <app-input
       name="email"
-      label="Email"
+      label="Correo electronico"
       placeholder="email@unicolombo.edu.co"
       id="email"
       formControlName="email"
@@ -19,7 +19,7 @@
 
     <app-input-password
       name="password"
-      label="Password"
+      label="Contraseña"
       placeholder="Password"
       id="password"
       formControlName="password"
@@ -33,13 +33,13 @@
 
 <div class="formgrid grid" style="margin-top: 1rem">
   <div class="field col">
-    <a class="forgot-a">Forgot Password?</a>
+    <a class="forgot-a">Olvidaste tu contraseña?</a>
   </div>
 </div>
 
 <div class="form grid justify-content-center">
   <app-button
-    label="Sign In"
+    label="Iniciar sesión"
     type="submit"
     [disabled]="loginForm.invalid"
     (click)="login()"
@@ -48,6 +48,6 @@
 </div>
 
 <div class="Signup">
-  <label for="">Don't have an account?&nbsp;</label>
-  <a class="Signup-a" (click)="register()">Sign Up.</a>
+  <label for="">¿No tienes cuenta? &nbsp;</label>
+  <a class="Signup-a" (click)="register()">Registrate aqui.</a>
 </div>
