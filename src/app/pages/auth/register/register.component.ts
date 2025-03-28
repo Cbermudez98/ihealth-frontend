@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
   public httpService = inject(HttpService)
- 
+
   docOptions = [
     { name: 'C.C', id: 'CC' },
     { name: 'T.I', id: 'TI' },
@@ -34,9 +34,9 @@ export class RegisterComponent implements OnInit {
   ];
 
   careerOptions: {id: number; name: string}[] = [];
-  
+
   loadCareers(): void {
-    const url = `${environment.apiUrl}/career`;
+    const url = `${environment.apiUrl}career`;
     this.httpService.request<{id: number; name : string}[]>(url,'GET')
     .then(response => {
       if (response && Array.isArray(response.data)){
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-  
+
 
   semesterOptions = [
     { name: '1', id: '1' },
@@ -68,8 +68,8 @@ export class RegisterComponent implements OnInit {
     name: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
     age: ['', [Validators.required]],
-    id: [{ value: '', disabled: true }, [Validators.required]], 
-    document: ['', [Validators.required]], 
+    id: [{ value: '', disabled: true }, [Validators.required]],
+    document: ['', [Validators.required]],
     gender: ['', [Validators.required]],
     code: ['', [Validators.required]],
     carreer: ['', [Validators.required]],
@@ -98,7 +98,7 @@ export class RegisterComponent implements OnInit {
     ];
 
     this.loadCareers();
-    
+
     this.personalForm.get('document')?.valueChanges.subscribe((value) => {
       const idControl = this.personalForm.get('id');
 
@@ -113,7 +113,7 @@ export class RegisterComponent implements OnInit {
           idControl?.setValidators([Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]);
         }
       } else {
-    
+
         idControl?.disable();
         idControl?.clearValidators();
       }

@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../../shared/services/auth/login.service';
 import { Login } from '../../../shared/interfaces/Login';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
-import { JwtDecodeService } from '../../../shared/services/jwt-decode.service';
-
+import { JwtDecodeService } from '../../../shared/services/jwt-decode/jwt-decode.service';
 import { KEYS } from '../../../core/constants.enum';
-import { jwtDecode } from 'jwt-decode';
+
 
 @Component({
   selector: 'app-login',
@@ -41,12 +40,11 @@ export class LoginComponent {
 
       const data = await this.Loginservice.login(object);
 
-      if (data && data.access_token) {
-
-        const decodedToken: any = jwtDecode(data.access_token);
-        const role = decodedToken?.role || null;
+      if (data.access_token) {
+        // Extraer y guardar el rol en localStorage
+        const role = this.jwtDecodeService.getRole(data.access_token);
         if (role) {
-          localStorage.setItem('user_role', role);
+          localStorage.setItem(KEYS.ROLE, role);
         }
       }
 
