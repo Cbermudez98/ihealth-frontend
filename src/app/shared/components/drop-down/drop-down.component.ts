@@ -29,7 +29,7 @@ export class DropDownComponent<T>
   @Input() placeholder: string = 'Select an option';
   @Input() optionLabel: string = '';
   @Input() optionValue: string = '';
-  @Input() multiple: boolean = false; // Permitir selección múltiple
+  @Input() multiple: boolean = false;
   @Output() emitData = new EventEmitter<any>();
 
   public setData(event: any) {
