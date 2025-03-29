@@ -28,7 +28,7 @@ export class LoginService {
 
   async login(object: Login): Promise<ResponseAccess> {
     const url = `${environment.apiUrl}auth`;
-    const data = (await this.Http.request<ResponseAccess>(url, 'POST', object)).data;
+    const data = (await this.http.request<ResponseAccess>(url, 'POST', object)).data;
 
     // Guardar el token en el almacenamiento
     this.storageService.set(KEYS.TOKEN, { [KEYS.TOKEN]: data.access_token });

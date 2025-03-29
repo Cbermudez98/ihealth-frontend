@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { DashboardPageComponent } from '../pages/dashboard/dashboard-page/dashboard-page.component';
-import { LoginComponent } from '../pages/auth/login/login.component';
-import { RegisterComponent } from '../pages/auth/register/register.component';
-import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
+// import { LoginComponent } from '../pages/auth/login/login.component';
+// import { RegisterComponent } from '../pages/auth/register/register.component';
+// import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
 import { AppointmentComponent } from '../pages/dashboard/pages/coord-psycologist/appointment/appointment.component';
 
 import { InputComponent } from './components/input/input.component';
@@ -53,13 +53,13 @@ import { jwtDecode } from "jwt-decode";
 
 const COMPONENTS = [
   DashboardPageComponent,
-  LoginComponent,
-  RegisterComponent,
+  // LoginComponent,
+  // RegisterComponent,
   AppointmentComponent,
   InputComponent,
   ButtonComponent,
   CheckboxComponent,
-  AuthPageComponent,
+  // AuthPageComponent,
   InputPasswordComponent,
   InputCalenderComponent,
   DropDownComponent,
