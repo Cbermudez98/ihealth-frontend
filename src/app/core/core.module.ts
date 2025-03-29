@@ -6,6 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, BrowserModule, BrowserAnimationsModule],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+  ],
 })
 export class CoreModule {}

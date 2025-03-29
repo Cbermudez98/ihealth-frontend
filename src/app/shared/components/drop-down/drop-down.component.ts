@@ -33,7 +33,6 @@ export class DropDownComponent<T>
   @Output() emitData = new EventEmitter<any>();
 
   public setData(event: any) {
-    console.log('🚀 ~ DropDownComponent ~ setData ~ event:', event.value);
     this.emitData.emit(event.value);
   }
 }

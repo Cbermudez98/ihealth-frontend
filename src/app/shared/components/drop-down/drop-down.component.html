@@ -1,4 +1,4 @@
-<div class="flex justify-content-center" *ngIf="control">
+<div class="my-3" *ngIf="control">
     <form class="w-full">
       <p-multiSelect
         *ngIf="multiple; else singleSelect"
@@ -8,10 +8,10 @@
         [placeholder]="placeholder"
         [display]="'chip'"
         [optionValue]="optionValue"
-        styleClass="w-full custom-selec"
+        styleClass="w-full custom-select"
         (onChange)="setData($event)"
       ></p-multiSelect>
-  
+
       <ng-template #singleSelect>
         <p-dropdown
           [formControl]="control"
@@ -19,10 +19,9 @@
           [optionLabel]="optionLabel"
           [placeholder]="placeholder"
           [optionValue]="optionValue"
-          styleClass="w-full custom-selec"
+          styleClass="w-full custom-select"
           (onChange)="setData($event)"
         ></p-dropdown>
       </ng-template>
     </form>
   </div>
-  

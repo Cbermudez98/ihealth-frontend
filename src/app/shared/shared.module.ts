@@ -100,7 +100,9 @@ const IMPORTS = [
   FullCalendarModule,
   InputTextareaModule,
   PanelMenuModule,
-  MultiSelectModule
+  MultiSelectModule,
+  ReactiveFormsModule,
+  FormsModule
 ];
 
 const PROVIDERS = [MessageService, HttpService, LoaderService];
@@ -108,7 +110,7 @@ const PROVIDERS = [MessageService, HttpService, LoaderService];
 @NgModule({
   declarations: [...COMPONENTS, MenuComponent, ToastComponent,],
   imports: [...IMPORTS],
-  exports: [...COMPONENTS],
+  exports: [...COMPONENTS, ...IMPORTS],
   providers: [...PROVIDERS],
 })
 export class SharedModule {}

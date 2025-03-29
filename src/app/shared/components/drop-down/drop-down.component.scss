@@ -7,32 +7,26 @@
     box-shadow: none;
   }
 
-  .border {
-    border: 1px solid black;
-  }
+  :host ::ng-deep {
+    .p-dropdown {
+      border-radius: 20px !important;
+      border: 1px solid #005aa9;
+      margin-left: 15px;
+      width: 93% !important;
+      font-size: 12px !important;
 
-  p-multiselect {
-    border-color: black !important;
-    border-radius: 20px;
-    padding: 17px;
-    padding-left: 20px;
-    font-size: 15px;
-  }
+      .p-dropdown-label {
+        border-radius: 20px !important;
+      }
 
-  .custom-select .p-dropdown, 
-  .custom-select .p-multiselect {
-    border-color: black;
-    border-radius: 20px;
-  }
+      .p-dropdown-trigger {
+        border-top-right-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+      }
+    }
 
-  .custom-select .p-dropdown .p-dropdown-label,
-  .custom-select .p-multiselect .p-multiselect-label {
-    padding: 17px;
-    padding-left: 20px;
-    font-size: 15px;
-  }
-
-  .custom-select .p-dropdown-trigger,
-  .custom-select .p-multiselect-trigger {
-    padding-right: 20px;
+    .p-dropdown-panel {
+      border-radius: 20px !important;
+      margin-top: 5px;
+    }
   }

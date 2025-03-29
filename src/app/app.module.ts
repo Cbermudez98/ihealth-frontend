@@ -13,6 +13,7 @@ import { ControlValueAccessorDirective } from './shared/components/control-value
 import { ToastModule } from 'primeng/toast';
 import { authInterceptor } from './shared/interceptor/auth.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, ControlValueAccessorDirective],
@@ -23,6 +24,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     ToastModule,
     NgxSpinnerModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent],
