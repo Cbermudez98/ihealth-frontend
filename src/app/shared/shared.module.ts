@@ -48,6 +48,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastComponent } from './components/toast/toast.component';
+import { jwtDecode } from "jwt-decode";
+
 
 const COMPONENTS = [
   DashboardPageComponent,
