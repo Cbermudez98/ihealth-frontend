@@ -1,4 +1,4 @@
-import { Directive, Inject, Injector, OnInit } from '@angular/core';
+import { Directive, Inject, Injector, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -16,7 +16,7 @@ import { Subject, takeUntil, startWith, distinctUntilChanged, tap } from 'rxjs';
 export class ControlValueAccessorDirective<T>
   implements ControlValueAccessor, OnInit
 {
-  control: FormControl = new FormControl('');
+  @Input() control: FormControl = new FormControl('');
   isRequired = false;
 
   private _isDisabled = false;

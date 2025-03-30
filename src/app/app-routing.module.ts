@@ -6,7 +6,7 @@ import { UserComponent } from './pages/dashboard/pages/coord-psycologist/user/us
 import { authGuard } from './shared/services/guards/auth.guard';
 import { ScheduleComponent } from './pages/dashboard/pages/schedule/schedule.component';
 import { DashboardPageComponent } from './pages/dashboard/dashboard-page/dashboard-page.component';
-import { MenuComponent } from './shared/components/menu/menu.component';
+import { MenuComponent } from './pages/dashboard/pages/menu/menu.component';
 
 const routes: Routes = [
   {

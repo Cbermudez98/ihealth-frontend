@@ -26,7 +26,7 @@ export class DropDownComponent<T>
   implements OnInit
 {
   @Input() options: any[] = [];
-  @Input() placeholder: string = 'Select an option';
+  @Input() placeholder: string = 'Selecciona una opcion';
   @Input() optionLabel: string = '';
   @Input() optionValue: string = '';
   @Input() multiple: boolean = false;

@@ -21,7 +21,7 @@ export class InputComponent <T> extends ControlValueAccessorDirective <T> {
   @Input() placeholder: string = '';
   @Input() type: InputType = 'text';
   @Input() togleMask: boolean = false;
-  @Output() input = new EventEmitter<Event>();
+  @Output() input = new EventEmitter<any>();
 
   onInput(event: Event) {
     this.input.emit(event);

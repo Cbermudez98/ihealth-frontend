@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { DashboardPageComponent } from '../pages/dashboard/dashboard-page/dashboard-page.component';
 // import { LoginComponent } from '../pages/auth/login/login.component';
 // import { RegisterComponent } from '../pages/auth/register/register.component';
 // import { AuthPageComponent } from '../pages/auth/auth-page/auth-page.component';
-import { AppointmentComponent } from '../pages/dashboard/pages/coord-psycologist/appointment/appointment.component';
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -34,28 +32,21 @@ import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.component';
-import { UserComponent } from '../pages/dashboard/pages/coord-psycologist/user/user.component';
 import { HttpService } from './services/HTTP/http.service';
 import { EventsCalendarComponent } from './components/events-calendar/events-calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { ScheduleComponent } from '../pages/dashboard/pages/schedule/schedule.component';
 import { AppointmentFormComponent } from './component/appointment-form/appointment-form.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoaderService } from './services/loader/loader.service';
-import { DashboardHomeComponent } from '../pages/dashboard/pages/home/dashboard-home.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastComponent } from './components/toast/toast.component';
-import { jwtDecode } from "jwt-decode";
-
+import { jwtDecode } from 'jwt-decode';
 
 const COMPONENTS = [
-  DashboardPageComponent,
   // LoginComponent,
   // RegisterComponent,
-  AppointmentComponent,
   InputComponent,
   ButtonComponent,
   CheckboxComponent,
@@ -65,16 +56,12 @@ const COMPONENTS = [
   DropDownComponent,
   SidebarComponent,
   SidebarBtnComponent,
-  UserComponent,
   EventsCalendarComponent,
-  ScheduleComponent,
   NotificationComponent,
   AppointmentFormComponent,
-  DashboardHomeComponent,
   NotificationComponent,
   CalendarComponent,
-  MenuComponent,
-  ToastComponent
+  ToastComponent,
 ];
 
 const IMPORTS = [
@@ -102,14 +89,16 @@ const IMPORTS = [
   PanelMenuModule,
   MultiSelectModule,
   ReactiveFormsModule,
-  FormsModule
+  FormsModule,
 ];
+
+const PIPES = [DatePipe];
 
 const PROVIDERS = [MessageService, HttpService, LoaderService];
 
 @NgModule({
-  declarations: [...COMPONENTS, MenuComponent, ToastComponent,],
-  imports: [...IMPORTS],
+  declarations: [...COMPONENTS],
+  imports: [...IMPORTS, ...PIPES],
   exports: [...COMPONENTS, ...IMPORTS],
   providers: [...PROVIDERS],
 })

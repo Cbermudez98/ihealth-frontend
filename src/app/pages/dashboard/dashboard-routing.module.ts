@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MenuComponent } from '../../shared/components/menu/menu.component';
+import { MenuComponent } from './pages/menu/menu.component';
 import { AppointmentComponent } from './pages/coord-psycologist/appointment/appointment.component';
 import { UserComponent } from './pages/coord-psycologist/user/user.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
@@ -14,23 +14,36 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: DashboardHomeComponent,
+        loadChildren: () =>
+          import('./pages/home/dashboard-home.module').then(
+            (m) => m.DashboardHomeModule
+          ),
       },
       {
         path: 'menu',
-        component: MenuComponent,
+        loadChildren: () =>
+          import('./pages/menu/menu.module').then((m) => m.MenuModule),
       },
       {
         path: 'appointment',
-        component: AppointmentComponent,
+        loadChildren: () =>
+          import(
+            './pages/coord-psycologist/appointment/appointment.module'
+          ).then((m) => m.AppointmentModule),
       },
       {
         path: 'user',
-        component: UserComponent,
+        loadChildren: () =>
+          import('./pages/coord-psycologist/user/user.module').then(
+            (m) => m.UserModule
+          ),
       },
       {
         path: 'schedule',
-        component: ScheduleComponent,
+        loadChildren: () =>
+          import('./pages/schedule/schedule.module').then(
+            (m) => m.ScheduleModule
+          ),
       },
       {
         path: '',
