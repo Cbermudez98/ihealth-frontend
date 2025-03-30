@@ -9,7 +9,7 @@ import { KEYS } from '../../../core/constants.enum';
   providedIn: 'root'
 })
 export class MenuService {
-  private apiUrl = `${environment.apiUrl}menu`;
+  private apiUrl = `${environment.apiUrl}menu/all`;
   private addMenuUrl = `${environment.apiUrl}menu`;
 
   constructor(private httpService: HttpService, private storageService: StorageService) {}
@@ -19,15 +19,7 @@ export class MenuService {
       const response = await this.httpService.request<{ data: IRoute[] }>(this.apiUrl, 'GET');
       const menuItems = Array.isArray(response.data) ? response.data : [];
 
-      const tokenData = this.storageService.get(KEYS.TOKEN);
-      if (!tokenData || !tokenData[KEYS.TOKEN]) return [];
-
-      const payload = JSON.parse(atob(tokenData[KEYS.TOKEN].split('.')[1]));
-      const userRoles: string[] = payload.roles || [];
-
-      return menuItems.filter(item => 
-        !item.roles || item.roles.some((role: { id: number }) => userRoles.includes(role.id.toString()))
-      );
+      return menuItems
     } catch (error) {
       console.error('Error obteniendo el menú:', error);
       return [];
@@ -63,7 +55,7 @@ export class MenuService {
         menuData.roles = menuData.rolesIds.map(id => ({ id }));
       }
       delete menuData.rolesIds;
-      
+
 
       await this.httpService.request(`${this.apiUrl}/${menuId}`, 'PUT', menuData);
     } catch (error) {

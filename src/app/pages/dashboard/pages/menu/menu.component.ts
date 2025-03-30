@@ -176,6 +176,11 @@ export class MenuComponent implements OnInit {
 
   editMenuItem(menu: IRoute): void {
     console.log('Editando menú:', menu);
+    this.id = new FormControl(menu.id, [Validators.required]);
+    this.name.setValue(menu.name);
+    this.icon.setValue(menu.icon);
+    this.route.setValue(menu.route);
+    this.roles.setValue(menu.roles);
 
     this.newItem = {
       id: menu.id,
