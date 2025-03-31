@@ -30,3 +30,28 @@
       margin-top: 5px;
     }
   }
+
+  :host ::ng-deep {
+    .p-multiselect {
+      border-radius: 20px !important;
+      border: 1px solid #005aa9;
+      margin-left: 15px;
+      width: 93% !important;
+      font-size: 12px !important;
+
+      .p-multiselect-label {
+        border-radius: 20px !important;
+      }
+
+      .p-multiselect-trigger {
+        border-top-right-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+      }
+    }
+
+    .p-multiselect-panel {
+      border-radius: 20px !important;
+      margin-top: 5px;
+    }
+  }
+

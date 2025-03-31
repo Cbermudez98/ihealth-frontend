@@ -31,6 +31,10 @@ export class DropDownComponent<T>
   @Input() optionValue: string = '';
   @Input() multiple: boolean = false;
   @Output() emitData = new EventEmitter<any>();
+  @Input() set selected(value: any[]) {
+    this.selectedItems = value.map((v) => v.id);
+  }
+  public selectedItems: number[] = [];
 
   public setData(event: any) {
     this.emitData.emit(event.value);

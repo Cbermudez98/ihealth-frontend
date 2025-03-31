@@ -10,7 +10,9 @@
         [optionValue]="optionValue"
         styleClass="w-full custom-select"
         (onChange)="setData($event)"
-      ></p-multiSelect>
+        [(ngModel)]="selectedItems"
+        dataKey="name"
+        ></p-multiSelect>
 
       <ng-template #singleSelect>
         <p-dropdown

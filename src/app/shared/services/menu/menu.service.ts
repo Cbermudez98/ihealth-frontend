@@ -9,14 +9,14 @@ import { KEYS } from '../../../core/constants.enum';
   providedIn: 'root'
 })
 export class MenuService {
-  private apiUrl = `${environment.apiUrl}menu/all`;
+  private apiUrl = `${environment.apiUrl}menu`;
   private addMenuUrl = `${environment.apiUrl}menu`;
 
   constructor(private httpService: HttpService, private storageService: StorageService) {}
 
   async getMenuItems(): Promise<IRoute[]> {
     try {
-      const response = await this.httpService.request<{ data: IRoute[] }>(this.apiUrl, 'GET');
+      const response = await this.httpService.request<{ data: IRoute[] }>(`${this.apiUrl}/all`, 'GET');
       const menuItems = Array.isArray(response.data) ? response.data : [];
 
       return menuItems

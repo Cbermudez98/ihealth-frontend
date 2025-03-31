@@ -9,19 +9,19 @@
     <div class="col-6">
       <div class="grid">
         <div class="col-6">
-          <app-input label="Nombre" (input)="name.setValue($event?.target?.value || '')" name="name"></app-input>
+          <app-input label="Nombre" [value]="name.value" (input)="name.setValue($event?.target?.value || '')" name="name"></app-input>
         </div>
         <div class="col-6">
-          <app-input label="Ícono" (input)="icon.setValue($event?.target?.value || '')" name="icon"></app-input>
+          <app-input label="Ícono" [value]="icon.value" (input)="icon.setValue($event?.target?.value || '')" name="icon"></app-input>
         </div>
       </div>
 
       <div class="grid">
         <div class="col-6">
-          <app-input label="Ruta" (input)="route.setValue($event?.target?.value || '')" name="route"></app-input>
+          <app-input label="Ruta" [value]="route.value" (input)="route.setValue($event?.target?.value || '')" name="route"></app-input>
         </div>
-        <div class="col-6">
-          <app-drop-down class="custom-dropdown" name="roles" [options]="careerRoles" optionLabel="name"
+        <div class="col-6 custom">
+          <app-drop-down [selected]="roles.value" name="roles" [options]="careerRoles" optionLabel="name"
             optionValue="id" placeholder="Seleccione roles" [multiple]="true" (emitData)="updateRoles($event)">
           </app-drop-down>
         </div>

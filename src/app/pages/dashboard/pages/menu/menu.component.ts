@@ -98,15 +98,6 @@ export class MenuComponent implements OnInit {
   }
 
   async saveMenuItem(): Promise<void> {
-    if (!this.isFormValid()) {
-      this.messageService.show({
-        severity: 'warn',
-        sumary: 'Campos obligatorios',
-        detail: 'Todos los campos son requeridos',
-      });
-      return;
-    }
-
     this.loaderService.show();
 
     try {
@@ -123,16 +114,8 @@ export class MenuComponent implements OnInit {
         rolesIds,
       });
 
-      if (this.isEditing) {
-        const menuId = Number(this.newItem.id);
-        if (!menuId || menuId <= 0) {
-          this.messageService.show({
-            severity: 'error',
-            sumary: 'Error',
-            detail: 'ID inválido para actualizar',
-          });
-          return;
-        }
+      if (this.isEditing && this.id.value) {
+        const menuId = this.id.value;
 
         await this.menuService.updateMenu(menuId, {
           name: formattedName,
@@ -182,23 +165,6 @@ export class MenuComponent implements OnInit {
     this.route.setValue(menu.route);
     this.roles.setValue(menu.roles);
 
-    this.newItem = {
-      id: menu.id,
-      name: menu.name,
-      icon: menu.icon,
-      route: menu.route.replace(/^\/?dashboard\//, ''),
-      roles: menu.roles.map((role) => ({
-        id: Number(role.id),
-        name:
-          'name' in role
-            ? role.name
-            : this.careerRoles.find((r) => r.id === role.id)?.name ??
-              'Desconocido',
-      })),
-    };
-
-    this.rolesControl.setValue(menu.roles.map((role) => Number(role.id)));
-
     this.isEditing = true;
   }
 
@@ -235,8 +201,11 @@ export class MenuComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.newItem = { id: 0, name: '', icon: '', route: '', roles: [] };
-    this.rolesControl.setValue([]);
+    this.id.setValue('');
+    this.name.setValue('');
+    this.icon.setValue('');
+    this.route.setValue('');
+    this.roles.setValue([]);
     this.isEditing = false;
   }
 
