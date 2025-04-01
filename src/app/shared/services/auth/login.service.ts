@@ -33,6 +33,12 @@ export class LoginService {
     // Guardar el token en el almacenamiento
     this.storageService.set(KEYS.TOKEN, { [KEYS.TOKEN]: data.access_token });
 
+    // Extraer y guardar el rol en localStorage
+    const role = this.jwtDecodeService.getRole(data.access_token);
+    if (role) {
+      this.storageService.set(KEYS.ROLE, { role });
+    }
+
     // Decodificar el token
     const decodedToken = this.jwtDecodeService.decode(data.access_token);
     console.log('Token Decodificado:', decodedToken);

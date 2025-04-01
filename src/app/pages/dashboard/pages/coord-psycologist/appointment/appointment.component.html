@@ -1,5 +1,5 @@
 <div class="title">
-  <h1>Appointments</h1>
+  <h1>Citas</h1>
 </div>
 <div class="table">
   <p-table
@@ -35,7 +35,7 @@
       <tr>
         <th pSortableColumn="name" style="min-width: 14rem">
           <div class="flex justify-content-between align-items-center">
-           <label>Name</label>
+           <label>Nombre</label>
             <p-sortIcon field="name"></p-sortIcon>
             <p-columnFilter
               type="text"
@@ -47,7 +47,7 @@
         </th>
         <th pSortableColumn="dni" style="min-width: 10rem">
           <div class="flex justify-content-center align-items-center">
-            <label>Dni</label>
+            <label>Documento de Identidad</label>
             <p-sortIcon field="dni"></p-sortIcon>
             <p-columnFilter
               type="text"
@@ -59,7 +59,7 @@
         </th>
         <th pSortableColumn="date" style="min-width: 10rem">
           <div class="flex justify-content-center align-items-center">
-            <label>Date</label>
+            <label>Fecha</label>
             <p-sortIcon field="date"></p-sortIcon>
             <p-columnFilter
               type="text"
@@ -71,7 +71,7 @@
         </th>
         <th pSortableColumn="hour" style="min-width: 10rem" class="centered">
           <div class="flex justify-content-center align-items-center">
-            <label>Hour</label>
+            <label>Hora</label>
             <p-sortIcon field="hour"></p-sortIcon>
             <p-columnFilter
               type="text"
@@ -83,7 +83,7 @@
         </th>
         <th pSortableColumn="status" style="min-width: 10rem" class="centered">
           <div class="flex justify-content-between align-items-center">
-            <label>Status</label>
+            <label>Estado</label>
             <p-sortIcon field="status"></p-sortIcon>
             <p-columnFilter
               type="text"
@@ -108,7 +108,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="8" class="centered">No appointments found.</td>
+        <td colspan="8" class="centered">No se encontraron citas.</td>
       </tr>
     </ng-template>
   </p-table>
