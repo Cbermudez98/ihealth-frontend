@@ -45,14 +45,6 @@ export class LoginComponent {
 
       const data = await this.Loginservice.login(object);
 
-      if (data.access_token) {
-        // Extraer y guardar el rol en localStorage
-        const role = this.jwtDecodeService.getRole(data.access_token);
-        if (role) {
-          localStorage.setItem(KEYS.ROLE, role);
-        }
-      }
-
       this.router.navigate(['dashboard']);
       this.loadingSrv.hide();
     } catch (error) {
