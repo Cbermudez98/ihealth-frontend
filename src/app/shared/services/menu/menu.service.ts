@@ -50,7 +50,7 @@ export class MenuService {
   async updateMenu(menuId: number, menuData: Partial<IRoute>): Promise<void> {
     try {
 
-      await this.httpService.request(`${this.apiUrl}/${menuId}`, 'PUT', menuData);
+      await this.httpService.request(`${this.apiUrl}/${menuId}`, 'PATCH', menuData);
     } catch (error) {
       console.error('Error actualizando el menú:', error);
       throw error;
