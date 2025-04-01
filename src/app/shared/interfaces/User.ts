@@ -8,6 +8,10 @@ export interface User {
     email: string;
     password: string;
   };
+  document: {
+    id: number;
+  };
+  document_number: string;
   direction: {
     neighborhood: string;
     street: string;
