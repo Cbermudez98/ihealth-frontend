@@ -28,38 +28,6 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
     canActivate: [authGuard],
-    // children: [
-    //   {
-    //     path: 'home',
-    //     canActivate: [authGuard],
-    //     component: DashboardHomeComponent,
-    //   },
-    //   {
-    //     path: 'menu',
-    //     canActivate: [authGuard],
-    //     component: MenuComponent ,
-    //   },
-    //   {
-    //     path: 'appointment',
-    //     canActivate: [authGuard],
-    //     component: AppointmentComponent,
-    //   },
-    //   {
-    //     path: 'user',
-    //     canActivate: [authGuard],
-    //     component: UserComponent,
-    //   },
-    //   {
-    //     path: "schedule",
-    //     canActivate: [authGuard],
-    //     component: ScheduleComponent
-    //   },
-    //   {
-    //     path: '',
-    //     redirectTo: 'home',
-    //     pathMatch: 'full',
-    //   }
-    // ],
   },
 
   {

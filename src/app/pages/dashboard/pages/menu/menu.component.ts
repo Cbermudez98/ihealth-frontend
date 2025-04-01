@@ -65,28 +65,6 @@ export class MenuComponent implements OnInit {
   private async loadMenuItems(): Promise<void> {
     try {
       this.menuItems = await this.menuService.getMenuItems();
-
-      this.menuItems.forEach((menu) => {
-        menu.route = `/dashboard/${menu.route.replace(/^\/?dashboard\//, '')}`;
-
-        menu.roles = (menu.roles || []).map((role) => {
-          if (typeof role === 'number') {
-            const foundRole = this.careerRoles.find((r) => r.id === role);
-            return { id: role, name: foundRole?.name ?? 'Desconocido' };
-          }
-
-          if (typeof role === 'object' && role !== null && 'id' in role) {
-            return {
-              id: Number(role.id),
-              name: 'name' in role ? role.name : 'Desconocido',
-            };
-          }
-
-          return { id: 0, name: 'Desconocido' };
-        });
-      });
-
-      console.log('Menú actualizado con nombres de roles:', this.menuItems);
     } catch (error) {
       console.error('Error cargando el menú:', error);
       this.messageService.show({
@@ -101,27 +79,16 @@ export class MenuComponent implements OnInit {
     this.loaderService.show();
 
     try {
-      const formattedName =
-        this.newItem.name.charAt(0).toUpperCase() + this.newItem.name.slice(1);
-      const formattedRoute = `/${this.newItem.route
-        .trim()
-        .replace(/^\/?dashboard\//, '')}`;
-      const rolesIds = this.rolesControl.value || [];
-
-      console.log('Guardando menú:', {
-        formattedName,
-        formattedRoute,
-        rolesIds,
-      });
+      const rolesIds = (this.roles.value || []).map((i: any) => ({ id: i.id }));
 
       if (this.isEditing && this.id.value) {
         const menuId = this.id.value;
 
         await this.menuService.updateMenu(menuId, {
-          name: formattedName,
-          icon: this.newItem.icon.trim(),
-          route: formattedRoute,
-          rolesIds,
+          name: this.name.value,
+          icon: this.icon.value,
+          route: this.route.value,
+          roles: rolesIds,
         });
 
         this.messageService.show({
@@ -131,9 +98,9 @@ export class MenuComponent implements OnInit {
         });
       } else {
         await this.menuService.createMenu(
-          formattedName,
-          this.newItem.icon.trim(),
-          formattedRoute,
+          this.name.value,
+          this.icon.value.trim(),
+          this.route.value.trim(),
           rolesIds
         );
         this.messageService.show({
@@ -154,6 +121,7 @@ export class MenuComponent implements OnInit {
       });
     } finally {
       this.loaderService.hide();
+      await this.ngOnInit();
     }
   }
 
@@ -201,7 +169,9 @@ export class MenuComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.id.setValue('');
+    if(this.id) {
+      this.id.setValue('');
+    }
     this.name.setValue('');
     this.icon.setValue('');
     this.route.setValue('');

@@ -26,12 +26,8 @@ export class MenuService {
     }
   }
 
-  async createMenu(name: string, icon: string, route: string, rolesIds: number[]): Promise<void> {
+  async createMenu(name: string, icon: string, route: string, roles: number[]): Promise<void> {
     try {
-      if (!name || !icon || !route || !Array.isArray(rolesIds) || rolesIds.length === 0) {
-        throw new Error('Todos los campos son obligatorios y debe haber al menos un rol.');
-      }
-
       const formattedName = name.trim().charAt(0).toUpperCase() + name.trim().slice(1);
       const formattedRoute = `dashboard/${route.trim().toLowerCase()}`;
 
@@ -39,8 +35,10 @@ export class MenuService {
         icon: icon.trim(),
         name: formattedName,
         route: formattedRoute,
-        roles: rolesIds.map(id => ({ id }))
+        roles
       };
+
+      console.log(menuData);
 
       await this.httpService.request(this.addMenuUrl, 'POST', menuData);
     } catch (error) {
@@ -49,13 +47,8 @@ export class MenuService {
     }
   }
 
-  async updateMenu(menuId: number, menuData: Partial<IRoute & { rolesIds?: number[] }>): Promise<void> {
+  async updateMenu(menuId: number, menuData: Partial<IRoute>): Promise<void> {
     try {
-      if (menuData.rolesIds && menuData.rolesIds.length > 0) {
-        menuData.roles = menuData.rolesIds.map(id => ({ id }));
-      }
-      delete menuData.rolesIds;
-
 
       await this.httpService.request(`${this.apiUrl}/${menuId}`, 'PUT', menuData);
     } catch (error) {
