@@ -30,6 +30,7 @@
     "ihealth-frontend": "file:",
     "jwt-decode": "^4.0.0",
     "ngx-spinner": "^17.0.0",
+    "ngx-toastr": "^19.0.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.11",

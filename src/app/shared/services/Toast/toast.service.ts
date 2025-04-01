@@ -1,31 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
 
-const apiStatus = {
-  Success: {
-    severity: 'success',
-    code: 201,
-    message: 'Operation completed successfully.',
-  },
-  NotAuthorized: {
-    severity: 'error',
-    code: 401,
-    message: 'You are not authorized',
-  },
-  Forbidden: { severity: 'error', code: 403, message: 'Access is forbidden.' },
-  BadRequest: {
-    severity: 'error',
-    code: 400,
-    message: 'Invalid request data.',
-  },
-  InternalError: {
-    severity: 'error',
-    code: 500,
-    message: 'An internal server error occurred.',
-  },
-};
-
-type Severity = 'error' | 'success' | 'warning';
+type Severity = 'error' | 'success' | 'warning' | 'warn';
 
 export interface IToast {
   severity: Severity;
@@ -37,14 +14,25 @@ export interface IToast {
   providedIn: 'root',
 })
 export class ToastService {
-  constructor(private messageService: MessageService) {}
+  constructor(private readonly toastSrv: ToastrService) {}
 
   show(info: IToast) {
-    console.log('🚀  ~ ToastService ~ show ~ info:', info);
-    this.messageService.add({
-      severity: info.severity,
-      summary: info.sumary,
-      detail: info.detail,
-    });
+    switch (info.severity) {
+      case 'success':
+        this.toastSrv.success(info.detail, info.sumary);
+        break;
+      case 'error':
+        this.toastSrv.error(info.detail, info.sumary);
+        break;
+      case 'warn':
+        this.toastSrv.warning(info.detail, info.sumary);
+        break;
+      case 'warning':
+        this.toastSrv.warning(info.detail, info.sumary);
+        break;
+      default:
+        this.toastSrv.show(info.detail, info.sumary);
+        break;
+    }
   }
 }
