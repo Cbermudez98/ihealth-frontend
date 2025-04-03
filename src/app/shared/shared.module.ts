@@ -63,7 +63,7 @@ const COMPONENTS = [
   AppointmentFormComponent,
   NotificationComponent,
   CalendarComponent,
-  ToastComponent,,
+  ToastComponent,
   DynamicTableComponent
 ];
 
