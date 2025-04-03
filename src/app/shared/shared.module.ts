@@ -30,7 +30,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.component';
@@ -44,6 +44,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoaderService } from './services/loader/loader.service';
 import { DashboardHomeComponent } from '../pages/dashboard/pages/home/dashboard-home.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
 
 const COMPONENTS = [
   DashboardPageComponent,
@@ -66,7 +68,8 @@ const COMPONENTS = [
   AppointmentFormComponent,
   DashboardHomeComponent,
   NotificationComponent,
-  CalendarComponent
+  CalendarComponent,
+  DynamicTableComponent
 ];
 
 const IMPORTS = [
@@ -89,11 +92,12 @@ const IMPORTS = [
   DropdownModule,
   TableModule,
   ButtonModule,
+  ConfirmDialogModule,
   FullCalendarModule,
   InputTextareaModule
 ];
 
-const PROVIDERS = [MessageService, HttpService, LoaderService];
+const PROVIDERS = [MessageService, HttpService, LoaderService,ConfirmationService];
 
 @NgModule({
   declarations: [...COMPONENTS,],

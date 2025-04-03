@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Table } from 'primeng/table';
-import { IUser } from '../../../../../shared/interfaces/ResponseUser';
 import { HttpService } from '../../../../../shared/services/HTTP/http.service';
 import { environment } from '../../../../../environments/enviroments';
+import { IHeaders } from '../../../../../shared/interfaces/ITable'; 
 
 @Component({
   selector: 'app-user',
@@ -10,16 +9,21 @@ import { environment } from '../../../../../environments/enviroments';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  users: IUser[] = [];
+  headers: IHeaders = {
+    columns: [
+      { field: 'name', header: 'Name', type: 'Text' },
+      { field: 'last_name', header: 'Last Name', type: 'Text' },
+      { field: 'code', header: 'Code', type: 'Text' },
+      { field: 'email', header: 'Email', type: 'Text' },
+      { field: 'faculty', header: 'Faculty', type: 'Text' },
+    ],
+    data: [],
+    actions: {
+      update: (row) => this.onUpdate(row),
+      delete: (row) => this.onDelete(row),
+    }
+  };
   loading: boolean = true;
-  searchValue: string = '';
-  userToShow: {
-    name: string,
-    last_name: string;
-    code: string;
-    email: string;
-    faculty: string;
-  }[] = [];
 
   constructor(private readonly httpService: HttpService) {}
 
@@ -27,26 +31,25 @@ export class UserComponent implements OnInit {
     const Url = environment.apiUrl;
     const getUsers = Url + 'user/all';
 
-    const response = (await this.httpService.request<IUser[]>(getUsers, 'GET')).data;
-    console.log("🚀  ~ UserComponent ~ ngOnInit ~ response:", response);
-    this.userToShow = response.map((resp) => ({
+    const response = (await this.httpService.request<any[]>(getUsers, 'GET')).data;
+    console.log("🚀 ~ UserComponent ~ ngOnInit ~ response:", response);
+
+    this.headers.data = response.map((resp) => ({
       name: resp.name,
       last_name: resp.last_name,
       code: resp.code.toString(),
       email: resp.auth.email,
-      faculty: resp.student_detail.career.name
+      faculty: resp.student_detail.career.name,
     }));
+    console.log("🚀 ~ Datos formateados para la tabla:", this.headers.data);
     this.loading = false;
   }
 
-  clearFilters(table: Table) {
-    table.clear();
+  onUpdate(user: any) {
+    console.log("Actualizar usuario:", user);
   }
 
-  applyGlobalFilter(event: Event, table: Table) {
-    const input = event.target as HTMLInputElement;
-    if (input && input.value !== null) {
-      table.filterGlobal(input.value, 'contains');
-    }
+  onDelete(user: any) {
+    console.log("Eliminar usuario:", user);
   }
 }

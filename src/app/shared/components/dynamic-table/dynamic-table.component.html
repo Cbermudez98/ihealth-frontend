@@ -1,0 +1,68 @@
+<p-toast></p-toast>
+
+<p-table
+  [value]="headers.data"
+  [paginator]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+  [filterDelay]="0"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of headers.columns" [pSortableColumn]="col.field">
+        <span>{{ col.header }}</span>
+        
+        <ng-container *ngIf="headers.actions?.sort">
+          <button (click)="sortData(col.field, true)" pTooltip="Ordenar Ascendente">↑</button>
+          <button (click)="sortData(col.field, false)" pTooltip="Ordenar Descendente">↓</button>
+        </ng-container>
+        
+        <ng-container *ngIf="headers.actions?.filter">
+          <input type="text" (input)="onFilter($event, col.field)" placeholder="Filtrar..." />
+        </ng-container>
+      </th>
+      <th *ngIf="headers.actions?.update || headers.actions?.delete">Acciones</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td *ngFor="let col of headers.columns">
+        <ng-container *ngIf="editingRow && editingRow['id'] === row['id']; else viewMode">
+          <input *ngIf="editingRow && editingRow['id'] === row['id']" type="text" [(ngModel)]="editingRow[col.field]" />
+        </ng-container>        
+
+        <ng-template #viewMode>
+          <ng-container [ngSwitch]="col.type">
+            <span *ngSwitchCase="'Text'">{{ row[col.field] }}</span>
+            <i *ngSwitchCase="'Icon'" [class]="row[col.field]"></i>
+            <span *ngSwitchCase="'Number'">{{ row[col.field] }}</span>
+            <span *ngSwitchCase="'Date'">{{ row[col.field] | date }}</span>
+            <span *ngSwitchCase="'Array'">{{ row[col.field] | json }}</span>
+            <ng-container *ngSwitchDefault>
+              {{ row[col.field] }}
+            </ng-container>
+          </ng-container>
+        </ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="editingRow && editingRow['id'] === row['id']; else actionButtons">
+          <p-button icon="pi pi-check" (click)="saveEdit()" label="Guardar"></p-button>
+          <p-button icon="pi pi-times" (click)="cancelEdit()" severity="secondary" label="Cancelar"></p-button>
+        </ng-container>
+
+        <ng-template #actionButtons>
+          <p-button *ngIf="headers.actions?.update" icon="pi pi-pencil" (click)="onUpdate(row)" pTooltip="Editar"></p-button>
+          <p-button *ngIf="headers.actions?.delete" icon="pi pi-trash" severity="danger" (click)="onDelete(row)" pTooltip="Eliminar"></p-button>
+        </ng-template>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="100%">No se encontraron datos.</td>
+    </tr>
+  </ng-template>
+</p-table>
