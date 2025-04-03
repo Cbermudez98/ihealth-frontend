@@ -1,4 +1,4 @@
-<div class="SignIn">Sing Up</div>
+<div class="SignIn">Registro</div>
 
 <div class="flex-column">
   <p-steps
@@ -12,14 +12,14 @@
     <div class="field mt-7" *ngIf="activeIndex === 0">
       <app-input
         name="email"
-        label="Email"
+        label="Correo electronico"
         placeholder="email@unicolombo.edu.co"
         id="email"
         formControlName="email"
       >
       </app-input>
       <div class="next-btn">
-        <button class="next" (click)="next()">Next</button>
+        <button class="next" (click)="next()">Siguiente</button>
       </div>
     </div>
   </form>
@@ -29,7 +29,7 @@
       <app-input
         class="name"
         name="name"
-        label="Name"
+        label="Nombres"
         placeholder="Jane"
         id="name"
         formControlName="name"
@@ -38,7 +38,7 @@
 
       <app-input
         name="lastname"
-        label="Last Name"
+        label="Apellidos"
         placeholder="Doe"
         id="lastname"
         formControlName="lastname"
@@ -47,7 +47,7 @@
 
       <app-input-calender
         name="age"
-        label="Age"
+        label="Edad"
         placeholder="Age"
         id="age"
         formControlName="age"
@@ -56,7 +56,7 @@
 
       <app-input
         name="code"
-        label="Code"
+        label="Codigo"
         placeholder="12345678"
         id="code"
         formControlName="code"
@@ -64,17 +64,34 @@
       </app-input>
 
       <app-drop-down
+      formControlName="document"
+      [options]="docOptions"
+      placeholder="Selecciona tu tipo de documento"
+      [optionLabel]="'name'"
+      [optionValue]="'id'"
+      (emitData)="updateForm($event)"
+    ></app-drop-down>
+
+     <app-input
+      name="id"
+      label="Documento"
+      placeholder="1234567890"
+      id="id"
+      formControlName="document_number"
+    ></app-input>
+
+      <app-drop-down
         formControlName="gender"
         [options]="genderOptions"
-        placeholder="Select a gender"
+        placeholder="Selecciona tu genero"
         [optionLabel]="'name'"
         [optionValue]="'code'"
       ></app-drop-down>
 
       <app-drop-down
         formControlName="carreer"
-        [options]="carreerOptions"
-        placeholder="Select a career"
+        [options]="careerOptions"
+        placeholder="Selecciona tu carrera"
         [optionLabel]="'name'"
         [optionValue]="'id'"
       ></app-drop-down>
@@ -82,14 +99,14 @@
       <app-drop-down
         formControlName="semester"
         [options]="semesterOptions"
-        placeholder="Select a semester"
+        placeholder="Selecciona tu semestre"
         [optionLabel]="'name'"
         [optionValue]="'id'"
       ></app-drop-down>
 
       <div class="control">
-        <button class="back" (click)="previous()">Back</button>
-        <button class="next" (click)="next()">Next</button>
+        <button class="back" (click)="previous()">Atrás</button>
+        <button class="next" (click)="next()">Siguiente</button>
       </div>
     </div>
   </form>
@@ -98,7 +115,7 @@
     <div class="field mt-7" *ngIf="activeIndex === 2">
       <app-input
         name="neighborhood"
-        label="Neighborhood"
+        label="Barrio donde vives"
         placeholder="El pozon"
         id="neighborhood"
         formControlName="neighborhood"
@@ -107,7 +124,7 @@
 
       <app-input
         name="street"
-        label="Street"
+        label="Calle"
         placeholder="39B"
         id="street"
         formControlName="street"
@@ -116,7 +133,7 @@
 
       <app-input
         name="number"
-        label="Number"
+        label="Numero de la casa"
         placeholder="#29-198"
         id="number"
         formControlName="number"
@@ -125,7 +142,7 @@
 
       <app-input
         name="aditional"
-        label="Aditional Information"
+        label="información adicional"
         placeholder="El pozon cll 39B #29-198 apto 504"
         id="aditional"
         formControlName="aditional"
@@ -133,8 +150,8 @@
       </app-input>
 
       <div class="control">
-        <button class="back" (click)="previous()">Back</button>
-        <button class="next" (click)="next()">Next</button>
+        <button class="back" (click)="previous()">Atrás</button>
+        <button class="next" (click)="next()">Siguiente</button>
       </div>
     </div>
   </form>
@@ -143,7 +160,7 @@
     <div class="field mt-7" *ngIf="activeIndex === 3">
       <app-input-password
         name="password"
-        label="Password"
+        label="Digita tu contraseña"
         placeholder="Password"
         id="password"
         formControlName="password"
@@ -151,14 +168,14 @@
       </app-input-password>
 
       <div class="control">
-        <button class="back" (click)="previous()">Back</button>
-        <button class="next" type="submit" (click)="register()">Submit</button>
+        <button class="back" (click)="previous()">Regresar</button>
+        <button class="next" type="submit" (click)="register()">Registrarme</button>
       </div>
     </div>
   </form>
 </div>
 
 <div class="Signup" style="margin-top: 1 rem">
-  <label for="">Already have account?&nbsp;</label>
-  <a class="Signup-a" (click)="login()">Sign In.</a>
+  <label for="">¿Ya tienes cuenta?&nbsp;</label>
+  <a class="Signup-a" (click)="login()">Inicia sesion aqui.</a>
 </div>

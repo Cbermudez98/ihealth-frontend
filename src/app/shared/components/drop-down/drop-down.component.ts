@@ -12,7 +12,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-drop-down',
   templateUrl: './drop-down.component.html',
-  styleUrl: './drop-down.component.scss',
+  styleUrls: ['./drop-down.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -26,13 +26,17 @@ export class DropDownComponent<T>
   implements OnInit
 {
   @Input() options: any[] = [];
-  @Input() placeholder: string = 'select an option';
+  @Input() placeholder: string = 'Selecciona una opcion';
   @Input() optionLabel: string = '';
   @Input() optionValue: string = '';
+  @Input() multiple: boolean = false;
   @Output() emitData = new EventEmitter<any>();
+  @Input() set selected(value: any[]) {
+    this.selectedItems = value.map((v) => v.id);
+  }
+  public selectedItems: number[] = [];
 
   public setData(event: any) {
-    console.log('🚀  ~ DropDownComponent ~ setData ~ event:', event.value);
     this.emitData.emit(event.value);
   }
 }

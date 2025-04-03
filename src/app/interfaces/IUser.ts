@@ -42,3 +42,8 @@ export interface IUserStorage {
   last_name: string;
   role: string;
 }
+
+export interface IDocument {
+  id: number;
+  name: string;
+}

@@ -8,11 +8,11 @@
     >
     <form [formGroup]="appointmentForm" (ngSubmit)="createAppointment()">
       <div class="flex align-items-center gap-3 mb-5" *ngIf="students.length">
-        <label for="email" class="font-semibold w-6rem">Students</label>
+        <label for="email" class="font-semibold w-6rem">Estudiantes</label>
         <app-drop-down [optionLabel]="'name'" [options]="studentsToShow" (emitData)="user.setValue($event.id)" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">Description</label>
+        <label for="email" class="font-semibold w-6rem">Descripción</label>
         <textarea
           class="flex-auto"
           rows="5"
@@ -22,23 +22,23 @@
         </textarea>
       </div>
       <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">Date</label>
+        <label for="email" class="font-semibold w-6rem">Fecha</label>
         <app-input-calender (dateSelected)="filterSchedule($event)" [minDate]="today"></app-input-calender>
       </div>
       <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">Schedules</label>
+        <label for="email" class="font-semibold w-6rem">Calendarios</label>
         <app-drop-down [optionLabel]="'name'" [options]="schedulesToShow" (emitData)="schedule.setValue($event.id)" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">psychologist</label>
+        <label for="email" class="font-semibold w-6rem">Psicóloga</label>
         <app-drop-down [optionLabel]="'name'" [options]="psychologists" (emitData)="psychologist.setValue($event.id)" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">reason</label>
+        <label for="email" class="font-semibold w-6rem">Razon</label>
         <app-drop-down [options]="reasons" [optionLabel]="'name'" (emitData)="filterCauses($event)" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">cause</label>
+        <label for="email" class="font-semibold w-6rem">Causa</label>
         <app-drop-down [options]="causes" [optionLabel]="'name'" id="email"  (emitData)="cause.setValue($event.id || '')" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex justify-content-end gap-2">

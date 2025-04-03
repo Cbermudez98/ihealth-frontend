@@ -1,45 +1,96 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LoginService } from '../../../shared/services/auth/login.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/User';
 import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
-import { idText } from 'typescript';
-
+import { HttpService } from '../../../shared/services/HTTP/http.service';
+import { environment } from '../../../environments/enviroments';
+import { LoaderService } from '../../../shared/services/loader/loader.service';
+import { IDocument } from '../../../interfaces/IUser';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   items: MenuItem[] = [];
   activeIndex: number = 0;
-  private Loginservice = inject(LoginService);
-  private router = inject(Router);
-  public formBuild = inject(FormBuilder);
 
-  //Options of gender dropDown
+  docOptions: IDocument[] = [];
+
   genderOptions = [
     { name: 'Hombre', code: 'H' },
     { name: 'Mujer', code: 'M' },
   ];
 
-  carreerOptions = [
-    { name: 'Licenciatura En Bilinguismo', id: '1' },
-    { name: 'Contaduria Publica', id: '2' },
-    { name: 'Administracion De Empresas', id: '3' },
-    { name: 'Derecho', id: '4' },
-    { name: 'Ingenieria Industrial', id: '5' },
-    { name: 'Ingenieria De Sistemas', id: '6' },
-    { name: 'Administracion De Empresas Turisticas y Hoteleras', id: '7' },
-    { name: 'Tecnologia En Desarrollo De Sistemas De Informacion', id: '8' },
-    { name: 'Tecnologia En Sistemas De Gestion De Calidad', id: '9' },
-    {
-      name: 'Tecnologia En Gestion De Servicios Turisticos y Hoteleros',
-      id: '10',
-    },
-  ];
+  careerOptions: { id: number; name: string }[] = [];
+
+  constructor(
+    private toastService: ToastService,
+    private readonly loadingSrv: LoaderService,
+    private readonly Loginservice: LoginService,
+    private readonly router: Router,
+    private formBuild: FormBuilder,
+    private httpService: HttpService
+  ) {}
+
+  async ngOnInit() {
+    this.items = [
+      { label: 'Correo electronico' },
+      { label: 'Información personal' },
+      { label: 'Dirección' },
+      { label: 'Contraseña' },
+    ];
+
+    this.loadCareers();
+    const documents = await this.httpService.request<IDocument[]>(
+      `${environment.apiUrl}user/documents`,
+      'GET'
+    );
+    this.docOptions = documents.data;
+  }
+
+  updateForm(event: number) {
+    const idControl = this.personalForm.get('document_number');
+
+    if (event) {
+      const doc: IDocument | undefined = this.docOptions.find(
+        (doc) => doc.id === event
+      );
+      console.log(doc);
+
+      idControl?.setValidators([
+        Validators.required,
+        Validators.pattern(/^\d+$/),
+      ]);
+      idControl?.enable();
+
+      if (!doc) {
+        idControl?.disable();
+        idControl?.clearValidators();
+      } else if (doc?.name === 'PA') {
+        idControl?.setValidators([
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z0-9]+$/),
+        ]);
+      }
+    }
+
+    idControl?.updateValueAndValidity();
+  }
+
+  loadCareers(): void {
+    const url = `${environment.apiUrl}career`;
+    this.httpService
+      .request<{ id: number; name: string }[]>(url, 'GET')
+      .then((response) => {
+        if (response && Array.isArray(response.data)) {
+          this.careerOptions = response.data;
+        }
+      });
+  }
 
   semesterOptions = [
     { name: '1', id: '1' },
@@ -62,6 +113,9 @@ export class RegisterComponent implements OnInit {
     name: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
     age: ['', [Validators.required]],
+    id: [{ value: '', disabled: true }, [Validators.required]],
+    document: ['', [Validators.required]],
+    document_number: ['', [Validators.required]],
     gender: ['', [Validators.required]],
     code: ['', [Validators.required]],
     carreer: ['', [Validators.required]],
@@ -78,17 +132,6 @@ export class RegisterComponent implements OnInit {
   public passwordForm: FormGroup = this.formBuild.group({
     password: ['', [Validators.required]],
   });
-
-  constructor(private toastService: ToastService) {}
-
-  ngOnInit(): void {
-    this.items = [
-      { label: 'Email' },
-      { label: 'Personal' },
-      { label: 'Direction' },
-      { label: 'Password' },
-    ];
-  }
 
   next() {
     const forms = [
@@ -116,44 +159,58 @@ export class RegisterComponent implements OnInit {
   }
 
   async register() {
-    if (this.passwordForm.invalid) return;
+    try {
+      if (this.passwordForm.invalid) return;
+      this.loadingSrv.show();
 
-    const object: User = {
-      name: this.personalForm.value.name,
-      auth: {
-        email: this.emailForm.value.email,
-        password: this.passwordForm.value.password,
-      },
-      last_name: this.personalForm.value.lastname,
-      age: 18,
-      code: this.personalForm.value.code,
-      gender: this.personalForm.value.gender,
-      direction: {
-        neighborhood: this.directionForm.value.neighborhood,
-        street: this.directionForm.value.street,
-        number: this.directionForm.value.number,
-        aditional_information: this.directionForm.value.aditional,
-      },
-
-      student_detail: {
-        career: {
-          id:this.personalForm.value.carreer,
+      const object: User = {
+        name: this.personalForm.value.name,
+        auth: {
+          email: this.emailForm.value.email,
+          password: this.passwordForm.value.password,
         },
-        semester: this.personalForm.value.semester,
-      },
-      role: {
-        id: 1,
-      },
-    };
+        last_name: this.personalForm.value.lastname,
+        document: {
+          id: this.personalForm.value.document,
+        },
+        document_number: this.personalForm.value.document_number,
+        age: 18,
+        code: this.personalForm.value.code,
+        gender: this.personalForm.value.gender,
+        direction: {
+          neighborhood: this.directionForm.value.neighborhood,
+          street: this.directionForm.value.street,
+          number: this.directionForm.value.number,
+          aditional_information: this.directionForm.value.aditional,
+        },
+        student_detail: {
+          career: {
+            id: this.personalForm.value.carreer,
+          },
+          semester: this.personalForm.value.semester,
+        },
+        role: {
+          id: 1,
+        },
+      };
 
-    const data = await this.Loginservice.register(object);
-    console.log(object);
-    this.router.navigate(['auth/login']);
-    this.toastService.show({
-      severity: 'success',
-      detail: 'Success at login',
-      sumary: '',
-    });
+      const data = await this.Loginservice.register(object);
+      console.log(object);
+      this.router.navigate(['auth/login']);
+      this.toastService.show({
+        severity: 'success',
+        detail: 'Registro realizado con exito',
+        sumary: 'Exito',
+      });
+      this.loadingSrv.hide();
+    } catch (error) {
+      this.loadingSrv.hide();
+      this.toastService.show({
+        severity: 'error',
+        sumary: 'Error',
+        detail: 'No se pudo guardar',
+      });
+    }
   }
 
   login() {
