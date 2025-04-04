@@ -7,12 +7,9 @@ import { ToastService } from '../../../shared/services/Toast/toast.service';
 import { MenuItem } from 'primeng/api';
 import { HttpService } from '../../../shared/services/HTTP/http.service';
 import { environment } from '../../../environments/enviroments';
-<<<<<<< Updated upstream
 import { LoaderService } from '../../../shared/services/loader/loader.service';
 import { IDocument } from '../../../interfaces/IUser';
-=======
 
->>>>>>> Stashed changes
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -21,20 +18,6 @@ import { IDocument } from '../../../interfaces/IUser';
 export class RegisterComponent implements OnInit {
   items: MenuItem[] = [];
   activeIndex: number = 0;
-<<<<<<< Updated upstream
-=======
-  private loginService = inject(LoginService);
-  private router = inject(Router);
-  public formBuild = inject(FormBuilder);
-  public httpService = inject(HttpService);
-
-  docOptions = [
-    { name: 'C.C', id: 'CC' },
-    { name: 'T.I', id: 'TI' },
-    { name: 'C.E', id: 'CE' },
-    { name: 'P.A', id: 'PA' },
-  ];
->>>>>>> Stashed changes
 
   docOptions: IDocument[] = [];
 
@@ -44,7 +27,6 @@ export class RegisterComponent implements OnInit {
   ];
 
   careerOptions: { id: number; name: string }[] = [];
-<<<<<<< Updated upstream
 
   constructor(
     private toastService: ToastService,
@@ -70,6 +52,12 @@ export class RegisterComponent implements OnInit {
     );
     this.docOptions = documents.data;
   }
+
+  // calcularEdad(age: number): void {
+  //   console.log("Enter", age)
+  //   this.personalForm.get('age')?.setValue(age);
+  //   console.log(this.personalForm.get("age")?.value)
+  // }
 
   updateForm(event: number) {
     const idControl = this.personalForm.get('document_number');
@@ -124,14 +112,6 @@ export class RegisterComponent implements OnInit {
     { name: '10', id: '10' },
   ];
 
-=======
-
-  semesterOptions = Array.from({ length: 10 }, (_, i) => ({
-    name: `${i + 1}`,
-    id: `${i + 1}`,
-  }));
-
->>>>>>> Stashed changes
   public emailForm: FormGroup = this.formBuild.group({
     email: ['', [Validators.required, Validators.email]],
   });
@@ -139,9 +119,9 @@ export class RegisterComponent implements OnInit {
   public personalForm: FormGroup = this.formBuild.group({
     name: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
-    birthdate: ['', [Validators.required]],
-    age: [{ value: '', disabled: true }], // Se calcula automáticamente
-    id: ['', [Validators.required]], // Se habilita/deshabilita dinámicamente
+    // birthdate: ['', [Validators.required]],
+    age: ['', [Validators.required]], // Se calcula automáticamente
+    // id: ['', [Validators.required]], // Se habilita/deshabilita dinámicamente
     document: ['', [Validators.required]],
     document_number: ['', [Validators.required]],
     gender: ['', [Validators.required]],
@@ -161,86 +141,6 @@ export class RegisterComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-<<<<<<< Updated upstream
-=======
-  constructor(private toastService: ToastService) {}
-
-  ngOnInit(): void {
-    this.items = [
-      { label: 'Correo electrónico' },
-      { label: 'Información personal' },
-      { label: 'Dirección' },
-      { label: 'Contraseña' },
-    ];
-
-    this.loadCareers();
-
-    this.personalForm.get('document')?.valueChanges.subscribe((value) => {
-      const idControl = this.personalForm.get('id');
-
-      if (value) {
-
-        idControl?.enable();
-
-
-        if (['CC', 'TI', 'CE'].includes(value)) {
-          idControl?.setValidators([
-            Validators.required,
-            Validators.pattern(/^\d+$/),
-          ]);
-        } else if (value === 'PA') {
-          idControl?.setValidators([
-            Validators.required,
-            Validators.pattern(/^[a-zA-Z0-9]+$/),
-          ]);
-        }
-      } else {
-
-        idControl?.disable();
-        idControl?.clearValidators();
-      }
-
-
-      idControl?.updateValueAndValidity();
-    });
-  }
-
-  loadCareers(): void {
-    const url = `${environment.apiUrl}/career`;
-    this.httpService
-      .request<{ id: number; name: string }[]>(url, 'GET')
-      .then((response) => {
-        if (response && Array.isArray(response.data)) {
-          this.careerOptions = response.data;
-        }
-      })
-      .catch((error) => console.error('Error loading careers:', error));
-  }
-
-  calcularEdad(event: Event): void {
-    const inputElement = event.target as HTMLInputElement; // Conversión explícita
-
-    if (!inputElement || !inputElement.value) return; // Manejo de null/undefined
-
-    const birthdate = inputElement.value;
-    const fechaNac = new Date(birthdate);
-    if (isNaN(fechaNac.getTime())) return;
-
-    const hoy = new Date();
-    let edad = hoy.getFullYear() - fechaNac.getFullYear();
-    const mesActual = hoy.getMonth();
-    const diaActual = hoy.getDate();
-    const mesNacimiento = fechaNac.getMonth();
-    const diaNacimiento = fechaNac.getDate();
-
-    if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
-      edad--;
-    }
-
-    this.personalForm.get('age')?.setValue(edad);
-  }
-
->>>>>>> Stashed changes
   next() {
     const forms = [
       this.emailForm,
@@ -266,57 +166,35 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  calculateAge(birthDate: Date): number {
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    console.log(age)
+    return age;
+  }
+
   async register() {
     try {
       if (this.passwordForm.invalid) return;
       this.loadingSrv.show();
 
-<<<<<<< Updated upstream
       const object: User = {
         name: this.personalForm.value.name,
         auth: {
           email: this.emailForm.value.email,
           password: this.passwordForm.value.password,
-=======
-    const birthdate = this.personalForm.value.birthdate;
-    if (!birthdate) {
-      this.toastService.show({
-        severity: 'error',
-        detail: 'Fecha de nacimiento es obligatoria',
-        sumary: 'Error',
-      });
-      return;
-    }
-
-    const age = this.personalForm.value.age; // Ya se calculó automáticamente
-
-    const object: User = {
-      name: this.personalForm.value.name,
-      auth: {
-        email: this.emailForm.value.email,
-        password: this.passwordForm.value.password,
-      },
-      last_name: this.personalForm.value.lastname,
-      age: age, // Ahora es un número válido
-      code: this.personalForm.value.code,
-      gender: this.personalForm.value.gender,
-      direction: {
-        neighborhood: this.directionForm.value.neighborhood,
-        street: this.directionForm.value.street,
-        number: this.directionForm.value.number,
-        aditional_information: this.directionForm.value.aditional,
-      },
-      student_detail: {
-        career: {
-          id: this.personalForm.value.carreer,
->>>>>>> Stashed changes
         },
         last_name: this.personalForm.value.lastname,
         document: {
           id: this.personalForm.value.document,
         },
         document_number: this.personalForm.value.document_number,
-        age: 18,
+        age: this.calculateAge(this.personalForm.value.age),
         code: this.personalForm.value.code,
         gender: this.personalForm.value.gender,
         direction: {
@@ -336,7 +214,6 @@ export class RegisterComponent implements OnInit {
         },
       };
 
-<<<<<<< Updated upstream
       const data = await this.Loginservice.register(object);
       console.log(object);
       this.router.navigate(['auth/login']);
@@ -352,22 +229,6 @@ export class RegisterComponent implements OnInit {
         severity: 'error',
         sumary: 'Error',
         detail: 'No se pudo guardar',
-=======
-    try {
-      await this.loginService.register(object);
-      this.router.navigate(['auth/login']);
-      this.toastService.show({
-        severity: 'success',
-        detail: 'Registro exitoso',
-        sumary: 'Éxito',
-      });
-    } catch (error) {
-      console.error('Error en el registro:', error);
-      this.toastService.show({
-        severity: 'error',
-        detail: 'Hubo un error en el registro',
-        sumary: 'Error',
->>>>>>> Stashed changes
       });
     }
   }

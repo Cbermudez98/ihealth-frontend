@@ -45,8 +45,15 @@
       >
       </app-input>
 
-
-<div class="field">
+      <app-input-calender
+      name="age"
+      label="Fecha de nacimiento"
+      placeholder="Fecha de nacimiento"
+      id="age"
+      formControlName="age"
+    >
+    </app-input-calender>
+<!-- <div class="field">
   <label for="birthdate">Fecha de Nacimiento</label>
   <input
     type="date"
@@ -54,22 +61,7 @@
     formControlName="birthdate"
     (change)="calcularEdad($event)"
   />
-</div>
-
-
-
-<app-input
-  name="age"
-  label="Edad"
-  placeholder="Edad"
-  id="age"
-  formControlName="age"
-  [disabled]="true"
->
-</app-input>
-
-
-
+</div> -->
       <app-input
         name="code"
         label="Codigo"
@@ -80,7 +72,6 @@
       </app-input>
 
       <app-drop-down
-<<<<<<< Updated upstream
       formControlName="document"
       [options]="docOptions"
       placeholder="Selecciona tu tipo de documento"
@@ -96,22 +87,6 @@
       id="id"
       formControlName="document_number"
     ></app-input>
-=======
-        formControlName="document"
-        [options]="docOptions"
-        placeholder="Selecciona tu tipo de documento"
-        [optionLabel]="'name'"
-        [optionValue]="'id'"
-      ></app-drop-down>
-
-      <app-input
-        name="id"
-        label="Documento"
-        placeholder="1234567890"
-        id="id"
-        formControlName="id"
-      ></app-input>
->>>>>>> Stashed changes
 
       <app-drop-down
         formControlName="gender"
