@@ -46,14 +46,22 @@
       </app-input>
 
       <app-input-calender
-        name="age"
-        label="Edad"
-        placeholder="Age"
-        id="age"
-        formControlName="age"
-      >
-      </app-input-calender>
-
+      name="age"
+      label="Fecha de nacimiento"
+      placeholder="Fecha de nacimiento"
+      id="age"
+      formControlName="age"
+    >
+    </app-input-calender>
+<!-- <div class="field">
+  <label for="birthdate">Fecha de Nacimiento</label>
+  <input
+    type="date"
+    id="birthdate"
+    formControlName="birthdate"
+    (change)="calcularEdad($event)"
+  />
+</div> -->
       <app-input
         name="code"
         label="Codigo"
@@ -169,7 +177,7 @@
 
       <div class="control">
         <button class="back" (click)="previous()">Regresar</button>
-        <button class="next" type="submit" (click)="register()">Registrarme</button>
+        <button class="next" type="button" (click)="register()">Registrarme</button>
       </div>
     </div>
   </form>
@@ -177,5 +185,5 @@
 
 <div class="Signup" style="margin-top: 1 rem">
   <label for="">¿Ya tienes cuenta?&nbsp;</label>
-  <a class="Signup-a" (click)="login()">Inicia sesion aqui.</a>
+  <a class="Signup-a" (click)="login()">Inicia sesión aquí.</a>
 </div>

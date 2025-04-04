@@ -9,6 +9,7 @@ import { HttpService } from '../../../shared/services/HTTP/http.service';
 import { environment } from '../../../environments/enviroments';
 import { LoaderService } from '../../../shared/services/loader/loader.service';
 import { IDocument } from '../../../interfaces/IUser';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -51,6 +52,12 @@ export class RegisterComponent implements OnInit {
     );
     this.docOptions = documents.data;
   }
+
+  // calcularEdad(age: number): void {
+  //   console.log("Enter", age)
+  //   this.personalForm.get('age')?.setValue(age);
+  //   console.log(this.personalForm.get("age")?.value)
+  // }
 
   updateForm(event: number) {
     const idControl = this.personalForm.get('document_number');
@@ -112,8 +119,9 @@ export class RegisterComponent implements OnInit {
   public personalForm: FormGroup = this.formBuild.group({
     name: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
-    age: ['', [Validators.required]],
-    id: [{ value: '', disabled: true }, [Validators.required]],
+    // birthdate: ['', [Validators.required]],
+    age: ['', [Validators.required]], // Se calcula automáticamente
+    // id: ['', [Validators.required]], // Se habilita/deshabilita dinámicamente
     document: ['', [Validators.required]],
     document_number: ['', [Validators.required]],
     gender: ['', [Validators.required]],
@@ -126,11 +134,11 @@ export class RegisterComponent implements OnInit {
     neighborhood: ['', [Validators.required]],
     street: ['', [Validators.required]],
     number: ['', [Validators.required]],
-    aditional: ['', [Validators.required]],
+    aditional: [''],
   });
 
   public passwordForm: FormGroup = this.formBuild.group({
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   next() {
@@ -158,6 +166,18 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  calculateAge(birthDate: Date): number {
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    console.log(age)
+    return age;
+  }
+
   async register() {
     try {
       if (this.passwordForm.invalid) return;
@@ -174,7 +194,7 @@ export class RegisterComponent implements OnInit {
           id: this.personalForm.value.document,
         },
         document_number: this.personalForm.value.document_number,
-        age: 18,
+        age: this.calculateAge(this.personalForm.value.age),
         code: this.personalForm.value.code,
         gender: this.personalForm.value.gender,
         direction: {
