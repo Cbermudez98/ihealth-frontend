@@ -1,4 +1,5 @@
 export interface IReason {
-  id:   number;
+  id: number;
   name: string;
+  parentId?: number;
 }

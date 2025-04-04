@@ -3,7 +3,7 @@
         <p-calendar
             [formControl]="control"
             [(ngModel)]="date"
-            (ngModelChange)="calculateAge($event)"
+            (onSelect)="calculateAge($event)"
             inputId="birth_date"
             [inline]="false"
             class="w-full"

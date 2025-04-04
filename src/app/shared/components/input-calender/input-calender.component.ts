@@ -43,6 +43,7 @@ export class InputCalenderComponent <T>extends ControlValueAccessorDirective<T> 
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
+    console.log(age)
     return age;
   }
 }
