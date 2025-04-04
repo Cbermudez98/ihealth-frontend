@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
 
 <p-table
   [value]="headers.data"
@@ -12,16 +12,22 @@
     <tr>
       <th *ngFor="let col of headers.columns" [pSortableColumn]="col.field">
         <span>{{ col.header }}</span>
-        
+
         <ng-container *ngIf="headers.actions?.sort">
           <button (click)="sortData(col.field, true)" pTooltip="Ordenar Ascendente">↑</button>
           <button (click)="sortData(col.field, false)" pTooltip="Ordenar Descendente">↓</button>
         </ng-container>
-        
+
         <ng-container *ngIf="headers.actions?.filter">
-          <input type="text" (input)="onFilter($event, col.field)" placeholder="Filtrar..." />
+          <input
+            type="text"
+            (click)="$event.stopPropagation()"
+            (input)="onFilter($event, col.field)"
+            placeholder="Buscar..."
+          />
         </ng-container>
       </th>
+
       <th *ngIf="headers.actions?.update || headers.actions?.delete">Acciones</th>
     </tr>
   </ng-template>
@@ -30,22 +36,29 @@
     <tr>
       <td *ngFor="let col of headers.columns">
         <ng-container *ngIf="editingRow && editingRow['id'] === row['id']; else viewMode">
-          <input *ngIf="editingRow && editingRow['id'] === row['id']" type="text" [(ngModel)]="editingRow[col.field]" />
-        </ng-container>        
+          <input type="text" [(ngModel)]="editingRow[col.field]" />
+        </ng-container>
 
         <ng-template #viewMode>
           <ng-container [ngSwitch]="col.type">
-            <span *ngSwitchCase="'Text'">{{ row[col.field] }}</span>
-            <i *ngSwitchCase="'Icon'" [class]="row[col.field]"></i>
+            <span *ngSwitchCase="'Text'">
+              {{ col.format ? col.format(row[col.field]) : row[col.field] }}
+            </span>
+            <i
+              *ngSwitchCase="'Icon'"
+              [ngClass]="row[col.field]"
+              style="font-size: 1.2rem; margin-right: 4px;"
+            ></i>
             <span *ngSwitchCase="'Number'">{{ row[col.field] }}</span>
             <span *ngSwitchCase="'Date'">{{ row[col.field] | date }}</span>
             <span *ngSwitchCase="'Array'">{{ row[col.field] | json }}</span>
             <ng-container *ngSwitchDefault>
-              {{ row[col.field] }}
+              {{ col.format ? col.format(row[col.field]) : row[col.field] }}
             </ng-container>
           </ng-container>
         </ng-template>
       </td>
+
       <td>
         <ng-container *ngIf="editingRow && editingRow['id'] === row['id']; else actionButtons">
           <p-button icon="pi pi-check" (click)="saveEdit()" label="Guardar"></p-button>

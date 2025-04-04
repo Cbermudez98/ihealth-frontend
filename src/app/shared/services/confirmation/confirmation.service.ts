@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
+interface IConfirm {
+  message : string;
+  header : string;
+  icon? : string;
+  accept : Function;
+  data? : any;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -10,17 +17,16 @@ export class ConfirmDialogService {
     private messageService: MessageService
   ) {}
 
-  confirm(message: string, onAccept: () => void): void {
+  confirm(payload: IConfirm): void {
     this.confirmationService.confirm({
-      message: message,
-      header: 'Confirmar Eliminación',
-      icon: 'pi pi-exclamation-triangle',
+      message: payload.message,
+      header: payload.header,
+      icon: payload?.icon || '',
       accept: () => {
-        onAccept();
-        this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'Registro eliminado correctamente' });
+        payload.accept(payload.data);
       },
       reject: () => {
-        this.messageService.add({ severity: 'info', summary: 'Cancelado', detail: 'Eliminación cancelada' });
+        
       }
     });
   }

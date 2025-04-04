@@ -19,10 +19,12 @@ export class UserComponent implements OnInit {
     ],
     data: [],
     actions: {
-      update: (row) => this.onUpdate(row),
-      delete: (row) => this.onDelete(row),
+      sort: true,
+      filter: true,
     }
   };
+
+  
   loading: boolean = true;
 
   constructor(private readonly httpService: HttpService) {}
@@ -53,3 +55,4 @@ export class UserComponent implements OnInit {
     console.log("Eliminar usuario:", user);
   }
 }
+

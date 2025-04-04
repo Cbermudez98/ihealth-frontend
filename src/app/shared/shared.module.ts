@@ -43,8 +43,9 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastComponent } from './components/toast/toast.component';
 import { jwtDecode } from 'jwt-decode';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
+import { ConfirmDialogService } from './services/confirmation/confirmation.service';
+import { ConfirmDialogModule,ConfirmDialog} from "primeng/confirmdialog";
 
 const COMPONENTS = [
   // LoginComponent,
@@ -98,7 +99,7 @@ const IMPORTS = [
 
 const PIPES = [DatePipe];
 
-const PROVIDERS = [MessageService, HttpService, LoaderService,ConfirmationService];
+const PROVIDERS = [MessageService, HttpService, LoaderService,ConfirmationService,ConfirmDialogService];
 
 @NgModule({
   declarations: [...COMPONENTS],
