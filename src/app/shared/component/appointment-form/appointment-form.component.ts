@@ -26,7 +26,7 @@ const DAYS = [
 @Component({
   selector: 'app-appointment-form',
   templateUrl: './appointment-form.component.html',
-  styleUrl: './appointment-form.component.scss',
+  styleUrls: ['./appointment-form.component.scss'],
 })
 export class AppointmentFormComponent implements OnInit {
   userStorage!: IUserStorage;
@@ -80,11 +80,11 @@ export class AppointmentFormComponent implements OnInit {
       }));
     }
     console.log(
-      '🚀  ~ AppointmentFormComponent ~ ngOnInit ~ resp:',
+      '🚀 ~ AppointmentFormComponent ~ ngOnInit ~ resp:',
       this.students
     );
     console.log(
-      '🚀  ~ AppointmentFormComponent ~ ngOnInit ~ userStorage:',
+      '🚀 ~ AppointmentFormComponent ~ ngOnInit ~ userStorage:',
       userStorage
     );
     this.psychologists = (
@@ -104,7 +104,7 @@ export class AppointmentFormComponent implements OnInit {
       )
     ).data;
     console.log(
-      '🚀  ~ AppointmentFormComponent ~ ngOnInit ~ reason:',
+      '🚀 ~ AppointmentFormComponent ~ ngOnInit ~ reason:',
       this.reasons
     );
   }
@@ -117,7 +117,7 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   print(event: any) {
-    console.log('🚀  ~ AppointmentFormComponent ~ print ~ event:', event);
+    console.log('🚀 ~ AppointmentFormComponent ~ print ~ event:', event);
   }
 
   public async filterCauses(event: IReason) {
@@ -129,7 +129,7 @@ export class AppointmentFormComponent implements OnInit {
       )
     ).data;
     console.log(
-      '🚀  ~ AppointmentFormComponent ~ filterCauses ~ causes:',
+      '🚀 ~ AppointmentFormComponent ~ filterCauses ~ causes:',
       this.causes
     );
   }
@@ -182,17 +182,13 @@ export class AppointmentFormComponent implements OnInit {
         detail: 'Cannot set sunday',
       });
     }
-    const date = `${event.getFullYear()}-${event.getMonth() + 1}-${
-      event.getDate() < 10 ? '0' + event.getDate() : event.getDate()
-    }`;
+    const date = `${event.getFullYear()}-${(event.getMonth() + 1).toString().padStart(2, '0')}-${event.getDate().toString().padStart(2, '0')}`;
     console.log(new Date().toISOString());
     console.log('Day', DAYS[event.getDay()], date);
     this.date.setValue(event.toISOString());
     this.schedules = (
       await this.httpService.request<ISchedule[]>(
-        `${environment.apiUrl}schedule?day=${
-          DAYS[event.getDay()]
-        }&date=${date}`,
+        `${environment.apiUrl}schedule?day=${DAYS[event.getDay()]}&date=${date}`,
         'GET'
       )
     ).data;
@@ -204,7 +200,7 @@ export class AppointmentFormComponent implements OnInit {
       name: `${sche.day} ${sche.start_time} - ${sche.end_time}`,
     }));
     console.log(
-      '🚀  ~ AppointmentFormComponent ~ filterSchedule ~ schedules:',
+      '🚀 ~ AppointmentFormComponent ~ filterSchedule ~ schedules:',
       this.schedules
     );
   }
