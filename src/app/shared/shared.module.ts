@@ -28,7 +28,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { SidebarBtnComponent } from './components/sidebar-btn/sidebar-btn.component';
@@ -43,6 +43,9 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastComponent } from './components/toast/toast.component';
 import { jwtDecode } from 'jwt-decode';
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
+import { ConfirmDialogService } from './services/confirmation/confirmation.service';
+import { ConfirmDialogModule,ConfirmDialog} from "primeng/confirmdialog";
 
 const COMPONENTS = [
   // LoginComponent,
@@ -62,6 +65,7 @@ const COMPONENTS = [
   NotificationComponent,
   CalendarComponent,
   ToastComponent,
+  DynamicTableComponent
 ];
 
 const IMPORTS = [
@@ -84,6 +88,7 @@ const IMPORTS = [
   DropdownModule,
   TableModule,
   ButtonModule,
+  ConfirmDialogModule,
   FullCalendarModule,
   InputTextareaModule,
   PanelMenuModule,
@@ -94,7 +99,7 @@ const IMPORTS = [
 
 const PIPES = [DatePipe];
 
-const PROVIDERS = [MessageService, HttpService, LoaderService];
+const PROVIDERS = [MessageService, HttpService, LoaderService,ConfirmationService,ConfirmDialogService];
 
 @NgModule({
   declarations: [...COMPONENTS],

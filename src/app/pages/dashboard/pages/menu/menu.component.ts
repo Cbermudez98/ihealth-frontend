@@ -6,6 +6,7 @@ import { HttpService } from '../../../../shared/services/HTTP/http.service';
 import { environment } from '../../../../environments/enviroments';
 import { ToastService } from '../../../../shared/services/Toast/toast.service';
 import { LoaderService } from '../../../../shared/services/loader/loader.service';
+import { IHeaders } from '../../../../shared/interfaces/ITable';
 
 @Component({
   selector: 'app-menu',
@@ -13,20 +14,41 @@ import { LoaderService } from '../../../../shared/services/loader/loader.service
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  menuItems: IRoute[] = [];
   careerRoles: { id: number; name: string }[] = [];
+
   public name!: FormControl;
   public icon!: FormControl;
   public route!: FormControl;
   public roles!: FormControl;
   public id!: FormControl;
-
   public addForm!: FormGroup;
-
-  newItem: IRoute = { id: 0, name: '', icon: '', route: '', roles: [] };
-  rolesControl = new FormControl<number[]>([]); // Control de roles
   isEditing = false;
 
+  tableHeaders: IHeaders = {
+    columns: [
+      { field: 'name', header: 'Nombre', type: 'Text' },
+      { field: 'icon', header: 'Ícono', type: 'Text' },
+      { field: 'route', header: 'Ruta', type: 'Text' },
+      {
+        field: 'roles',
+        header: 'Roles',
+        type: 'Text',
+        format: (roles: { id: number; name?: string }[]) => this.getRolesAsString(roles),
+      },
+    ],
+    data: [],
+    actions: {
+      update: (row: IRoute): void => {
+        this.onEdit(row);
+      },
+      delete: async (row: IRoute): Promise<void> => {
+        await this.onDelete(row.id);
+      },
+      sort: true,
+      filter: true,
+    },
+  };
+  
   constructor(
     private menuService: MenuService,
     private messageService: ToastService,
@@ -46,12 +68,25 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  private initForm() {
+    this.name = new FormControl('', [Validators.required]);
+    this.route = new FormControl('', [Validators.required]);
+    this.icon = new FormControl('', [Validators.required]);
+    this.roles = new FormControl([], [Validators.required]);
+    this.id = new FormControl(null);
+
+    this.addForm = new FormGroup({
+      name: this.name,
+      route: this.route,
+      icon: this.icon,
+      roles: this.roles,
+    });
+  }
+
   async loadRoles(): Promise<void> {
     try {
       const url = `${environment.apiUrl}roles`;
-      const response = await this.httpService.request<
-        { id: number; name: string }[]
-      >(url, 'GET');
+      const response = await this.httpService.request<{ id: number; name: string }[]>(url, 'GET');
       this.careerRoles = response.data;
     } catch (error) {
       this.messageService.show({
@@ -64,7 +99,8 @@ export class MenuComponent implements OnInit {
 
   private async loadMenuItems(): Promise<void> {
     try {
-      this.menuItems = await this.menuService.getMenuItems();
+      const menuItems = await this.menuService.getMenuItems();
+      this.tableHeaders.data = menuItems;
     } catch (error) {
       console.error('Error cargando el menú:', error);
       this.messageService.show({
@@ -82,9 +118,7 @@ export class MenuComponent implements OnInit {
       const rolesIds = (this.roles.value || []).map((i: any) => ({ id: i.id }));
 
       if (this.isEditing && this.id.value) {
-        const menuId = this.id.value;
-
-        await this.menuService.updateMenu(menuId, {
+        await this.menuService.updateMenu(this.id.value, {
           name: this.name.value,
           icon: this.icon.value,
           route: this.route.value,
@@ -121,26 +155,23 @@ export class MenuComponent implements OnInit {
       });
     } finally {
       this.loaderService.hide();
-      await this.ngOnInit();
     }
   }
 
-  editMenuItem(menu: IRoute): void {
-    console.log('Editando menú:', menu);
-    this.id = new FormControl(menu.id, [Validators.required]);
+  onEdit(menu: IRoute): void {
+    this.id.setValue(menu.id);
     this.name.setValue(menu.name);
     this.icon.setValue(menu.icon);
     this.route.setValue(menu.route);
     this.roles.setValue(menu.roles);
-
     this.isEditing = true;
   }
 
-  async deleteMenuItem(id: number): Promise<void> {
+  async onDelete(id: number): Promise<void> {
     this.loaderService.show();
 
     try {
-      await this.menuService.deleteMenu(Number(id));
+      await this.menuService.deleteMenu(id);
       this.messageService.show({
         severity: 'success',
         sumary: 'Menú eliminado',
@@ -163,15 +194,11 @@ export class MenuComponent implements OnInit {
     if (!Array.isArray(roles) || roles.length === 0) {
       return 'N/A';
     }
-    return roles
-      .map((role) => (role?.name ? role.name : 'Desconocido'))
-      .join(', ');
+    return roles.map((role) => role?.name || 'Desconocido').join(', ');
   }
 
   resetForm(): void {
-    if(this.id) {
-      this.id.setValue('');
-    }
+    this.id.setValue(null);
     this.name.setValue('');
     this.icon.setValue('');
     this.route.setValue('');
@@ -181,28 +208,5 @@ export class MenuComponent implements OnInit {
 
   updateRoles(selectedRoles: number[]): void {
     this.roles.setValue(selectedRoles.map((id) => ({ id })));
-  }
-
-  isFormValid(): boolean {
-    return (
-      this.newItem.name.trim() !== '' &&
-      this.newItem.icon.trim() !== '' &&
-      this.newItem.route.trim() !== '' &&
-      (this.rolesControl.value || []).length > 0
-    );
-  }
-
-  private initForm() {
-    this.name = new FormControl('', [Validators.required]);
-    this.route = new FormControl('', [Validators.required]);
-    this.icon = new FormControl('', [Validators.required]);
-    this.roles = new FormControl([], [Validators.required]);
-
-    this.addForm = new FormGroup({
-      name: this.name,
-      route: this.route,
-      icon: this.icon,
-      roles: this.roles,
-    });
   }
 }

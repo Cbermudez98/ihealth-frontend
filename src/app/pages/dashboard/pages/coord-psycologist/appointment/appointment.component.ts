@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Table } from 'primeng/table';
-import { ResponseAppointments } from '../../../../../shared/interfaces/ResponseAppointment';
 import { HttpService } from '../../../../../shared/services/HTTP/http.service';
 import { environment } from '../../../../../environments/enviroments';
-import { IAppointment } from '../../../../../interfaces/IAppointments';
 import { IAllAppointment } from '../../../../../interfaces/IAllAppointments';
+import { IHeaders } from '../../../../../shared/interfaces/ITable'; 
 
 @Component({
   selector: 'app-appointment',
@@ -13,51 +11,41 @@ import { IAllAppointment } from '../../../../../interfaces/IAllAppointments';
 })
 export class AppointmentComponent implements OnInit {
   appointments: IAllAppointment[] = [];
-  loading: boolean = true;
-  searchValue: string = '';
-  appointmentsToShow: {
-    name: string;
-    dni: string;
-    date: string;
-    hour: string;
-    status: string;
-  }[] = [];
+  loading = true;
+  headers!: IHeaders;
 
   constructor(private readonly httpService: HttpService) {}
 
   async ngOnInit() {
-    const Url = environment.apiUrl;
-    const getAppointments = Url + 'appointment/history/all';
+    const url = environment.apiUrl + 'appointment/history/all';
 
     this.appointments = (
-      await this.httpService.request<IAllAppointment[]>(getAppointments, 'GET')
+      await this.httpService.request<IAllAppointment[]>(url, 'GET')
     ).data;
-    console.log(
-      '🚀  ~ AppointmentComponent ~ ngOnInit ~ appointments:',
-      this.appointments
-    );
-    this.appointmentsToShow = this.appointments.map((appointment) => ({
+
+    const appointmentsToShow = this.appointments.map((appointment) => ({
       name: `${appointment.user.name} ${appointment?.user?.last_name || ''}`,
       dni: appointment.user.code,
-      date: new Date(appointment.date).toISOString(),
-      hour: appointment.schedule.start_time.toString(),
+      date: appointment.date,
+      hour: appointment.schedule.start_time,
       status: appointment.status.name,
     }));
-    console.log(
-      '🚀  ~ AppointmentComponent ~ filters ~ filters:',
-      this.appointmentsToShow
-    );
+
+    this.headers = {
+      columns: [
+        { field: 'name', header: 'Nombre', type: 'Text' },
+        { field: 'dni', header: 'Documento de Identidad', type: 'Text' },
+        { field: 'date', header: 'Fecha', type: 'Date' },
+        { field: 'hour', header: 'Hora', type: 'Text' },
+        { field: 'status', header: 'Estado', type: 'Text' },
+      ],
+      data: appointmentsToShow,
+      actions: {
+        sort: true,
+        filter: true,
+      },
+    };
+
     this.loading = false;
-  }
-
-  clearFilters(table: Table) {
-    table.clear();
-  }
-
-  applyGlobalFilter(event: Event, table: Table) {
-    const input = event.target as HTMLInputElement;
-    if (input && input.value !== null) {
-      table.filterGlobal(input.value, 'contains');
-    }
   }
 }
