@@ -44,8 +44,8 @@ export class MenuComponent implements OnInit {
       delete: async (row: IRoute): Promise<void> => {
         await this.onDelete(row.id);
       },
-      sort: true,
-      filter: true,
+      sort: false,
+      filter: false,
     },
   };
   

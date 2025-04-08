@@ -11,11 +11,11 @@ import { IHeaders } from '../../../../../shared/interfaces/ITable';
 export class UserComponent implements OnInit {
   headers: IHeaders = {
     columns: [
-      { field: 'name', header: 'Name', type: 'Text' },
-      { field: 'last_name', header: 'Last Name', type: 'Text' },
-      { field: 'code', header: 'Code', type: 'Text' },
+      { field: 'name', header: 'Nombe', type: 'Text' },
+      { field: 'last_name', header: 'Apellido', type: 'Text' },
+      { field: 'code', header: 'Codigo', type: 'Text' },
       { field: 'email', header: 'Email', type: 'Text' },
-      { field: 'faculty', header: 'Faculty', type: 'Text' },
+      { field: 'faculty', header: 'Facultad', type: 'Text' },
     ],
     data: [],
     actions: {
