@@ -11,21 +11,24 @@
   <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let col of headers.columns" [pSortableColumn]="col.field">
-        <span>{{ col.header }}</span>
+        <div class="header-cell-compact">
+          <span class="header-title">{{ col.header }}</span>
 
-        <ng-container *ngIf="headers.actions?.sort">
-          <button (click)="sortData(col.field, true)" pTooltip="Ordenar Ascendente">↑</button>
-          <button (click)="sortData(col.field, false)" pTooltip="Ordenar Descendente">↓</button>
-        </ng-container>
+          <ng-container *ngIf="headers.actions?.sort">
+            <button (click)="sortData(col.field, true)" pTooltip="Asc" class="icon-btn">↑</button>
+            <button (click)="sortData(col.field, false)" pTooltip="Desc" class="icon-btn">↓</button>
+          </ng-container>
 
-        <ng-container *ngIf="headers.actions?.filter">
-          <input
-            type="text"
-            (click)="$event.stopPropagation()"
-            (input)="onFilter($event, col.field)"
-            placeholder="Buscar..."
-          />
-        </ng-container>
+          <ng-container *ngIf="headers.actions?.filter">
+            <input
+              type="text"
+              (click)="$event.stopPropagation()"
+              (input)="onFilter($event, col.field)"
+              placeholder="Buscar..."
+              class="filter-input"
+            />
+          </ng-container>
+        </div>
       </th>
 
       <th *ngIf="headers.actions?.update || headers.actions?.delete">Acciones</th>
@@ -61,13 +64,13 @@
 
       <td>
         <ng-container *ngIf="editingRow && editingRow['id'] === row['id']; else actionButtons">
-          <p-button icon="pi pi-check" (click)="saveEdit()" label="Guardar"></p-button>
-          <p-button icon="pi pi-times" (click)="cancelEdit()" severity="secondary" label="Cancelar"></p-button>
+          <p-button icon="pi pi-check" (click)="saveEdit()" label="Guardar" size="small"></p-button>
+          <p-button icon="pi pi-times" (click)="cancelEdit()" severity="secondary" label="Cancelar" size="small"></p-button>
         </ng-container>
 
         <ng-template #actionButtons>
-          <p-button *ngIf="headers.actions?.update" icon="pi pi-pencil" (click)="onUpdate(row)" pTooltip="Editar"></p-button>
-          <p-button *ngIf="headers.actions?.delete" icon="pi pi-trash" severity="danger" (click)="onDelete(row)" pTooltip="Eliminar"></p-button>
+          <p-button *ngIf="headers.actions?.update" icon="pi pi-pencil" (click)="onUpdate(row)" pTooltip="Editar" size="small"></p-button>
+          <p-button *ngIf="headers.actions?.delete" icon="pi pi-trash" severity="danger" (click)="onDelete(row)" pTooltip="Eliminar" size="small"></p-button>
         </ng-template>
       </td>
     </tr>
