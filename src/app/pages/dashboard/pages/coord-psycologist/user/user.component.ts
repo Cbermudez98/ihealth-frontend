@@ -11,7 +11,7 @@ import { IHeaders } from '../../../../../shared/interfaces/ITable';
 export class UserComponent implements OnInit {
   headers: IHeaders = {
     columns: [
-      { field: 'name', header: 'Nombe', type: 'Text' },
+      { field: 'name', header: 'Nombre', type: 'Text' },
       { field: 'last_name', header: 'Apellido', type: 'Text' },
       { field: 'code', header: 'Codigo', type: 'Text' },
       { field: 'email', header: 'Email', type: 'Text' },
