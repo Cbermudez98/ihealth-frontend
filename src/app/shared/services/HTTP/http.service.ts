@@ -1,6 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/enviroments';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -26,16 +25,25 @@ export class HttpService {
     body?: Record<string, any>
   ): Promise<IHttpResponse<T>> {
     return new Promise((resolve, reject) => {
+      // Obtener token del localStorage
+      const token = localStorage.getItem('token');
+
+      // Agregar headers con token si existe
+      const headers = new HttpHeaders({
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      });
+
       this.httpClient
         .request<IHttpResponse<T>>(method, url, {
           body,
+          headers, // <-- Aquí se agregan los headers
         })
         .subscribe({
           next(value) {
             resolve(value);
           },
           error(err) {
-            console.log(err);
+            console.error('Error HTTP:', err);
             reject(err);
           },
         });

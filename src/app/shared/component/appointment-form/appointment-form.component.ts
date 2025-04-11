@@ -182,7 +182,7 @@ export class AppointmentFormComponent implements OnInit {
         detail: 'Cannot set sunday',
       });
     }
-    const date = `${event.getFullYear()}-${(event.getMonth() + 1).toString().padStart(2, '0')}-${event.getDate().toString().padStart(2, '0')}`;
+    ñ = `${event.getFullYear()}-${(event.getMonth() + 1).toString().padStart(2, '0')}-${event.getDate().toString().padStart(2, '0')}`;
     console.log(new Date().toISOString());
     console.log('Day', DAYS[event.getDay()], date);
     this.date.setValue(event.toISOString());
