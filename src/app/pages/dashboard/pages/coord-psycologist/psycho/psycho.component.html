@@ -1,0 +1,146 @@
+<div class="card">
+  <h2 class="title">Registrar Psicólogo</h2>
+
+  <form [formGroup]="addForm" (ngSubmit)="savePsychologist()" class="form">
+    <div class="grid">
+      <div class="col-6">
+        <div class="grid">
+          <div class="col-6">
+            <app-input
+              label="Nombre"
+              [value]="addForm.get('name')?.value"
+              (input)="addForm.get('name')?.setValue($event?.target?.value || '')"
+              name="name"
+            ></app-input>
+          </div>
+          <div class="col-6">
+            <app-input
+              label="Apellido"
+              [value]="addForm.get('last_name')?.value"
+              (input)="addForm.get('last_name')?.setValue($event?.target?.value || '')"
+              name="last_name"
+            ></app-input>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-6">
+            <app-input
+              label="Edad"
+              type="number"
+              [value]="addForm.get('age')?.value"
+              (input)="addForm.get('age')?.setValue($event?.target?.value || '')"
+              name="age"
+            ></app-input>
+          </div>
+          <div class="col-6">
+            <app-input
+              label="Código"
+              type="number"
+              [value]="addForm.get('code')?.value"
+              (input)="addForm.get('code')?.setValue($event?.target?.value || '')"
+              name="code"
+            ></app-input>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-6">
+            <app-drop-down
+              [options]="genderOptions"
+              [optionLabel]="'label'"
+              [optionValue]="'value'"
+              placeholder="Seleccione género"
+              name="gender"
+              [selected]="[addForm.get('gender')?.value]"
+              (emitData)="addForm.get('gender')?.setValue($event?.value)"
+            ></app-drop-down>
+          </div>
+          <div class="col-6">
+            <app-input
+              label="Correo"
+              type="email"
+              [value]="addForm.get('email')?.value"
+              (input)="addForm.get('email')?.setValue($event?.target?.value || '')"
+              name="email"
+            ></app-input>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-6">
+            <app-input
+              label="Contraseña"
+              type="password"
+              [value]="addForm.get('password')?.value"
+              (input)="addForm.get('password')?.setValue($event?.target?.value || '')"
+              name="password"
+            ></app-input>
+          </div>
+          <div class="col-6">
+            <app-input
+              label="Barrio"
+              [value]="addForm.get('neighborhood')?.value"
+              (input)="addForm.get('neighborhood')?.setValue($event?.target?.value || '')"
+              name="neighborhood"
+            ></app-input>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-6">
+            <app-input
+              label="Calle"
+              [value]="addForm.get('street')?.value"
+              (input)="addForm.get('street')?.setValue($event?.target?.value || '')"
+              name="street"
+            ></app-input>
+          </div>
+          <div class="col-6">
+            <app-input
+              label="Número"
+              [value]="addForm.get('number')?.value"
+              (input)="addForm.get('number')?.setValue($event?.target?.value || '')"
+              name="number"
+            ></app-input>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-12">
+            <app-input
+              label="Información adicional"
+              [value]="addForm.get('aditional_information')?.value"
+              (input)="addForm.get('aditional_information')?.setValue($event?.target?.value || '')"
+              name="aditional_information"
+            ></app-input>
+          </div>
+        </div>
+
+        <div class="form-buttons" style="margin-top: 1rem;">
+          <button
+            pButton
+            type="submit"
+            [label]="isEditing ? 'Actualizar' : 'Registrar'"
+            icon="pi pi-save"
+            [disabled]="addForm.invalid"
+          ></button>
+          <button
+            pButton
+            type="button"
+            label="Cancelar"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="resetForm()"
+            *ngIf="isEditing"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<div class="card table-container">
+  <app-dynamic-table [headers]="tableHeaders"></app-dynamic-table>
+</div>

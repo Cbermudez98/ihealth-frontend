@@ -46,6 +46,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'dashboard/psycho',
+        loadChildren: () =>
+          import('./pages/coord-psycologist/psycho/psycho.module').then(
+            (m) => m.CoordPsycologistModule
+          ),
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full',

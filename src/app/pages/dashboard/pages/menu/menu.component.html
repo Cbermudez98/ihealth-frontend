@@ -72,5 +72,8 @@
 
 
 <div class="table">
-  <app-dynamic-table [headers]="tableHeaders"></app-dynamic-table>
+  <app-dynamic-table
+  [headers]="tableHeaders"
+  (editRow)="onEdit($event)"
+></app-dynamic-table>
 </div>

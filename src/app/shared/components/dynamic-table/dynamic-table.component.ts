@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { IHeaders } from '../../interfaces/ITable';
 import { ConfirmDialogService } from '../../services/confirmation/confirmation.service';
 
@@ -9,6 +9,7 @@ import { ConfirmDialogService } from '../../services/confirmation/confirmation.s
 })
 export class DynamicTableComponent implements OnInit, OnChanges {
   @Input() headers!: IHeaders;
+  @Output() editRow = new EventEmitter<any>(); 
 
   private originalData: Record<string, any>[] = [];
   editingRow: Record<string, any> | null = null;
@@ -33,9 +34,10 @@ export class DynamicTableComponent implements OnInit, OnChanges {
   }
 
   onUpdate(row: Record<string, any>) {
-    this.editingRow = row;
-    this.originalRow = { ...row };
-    this.headers.actions?.update?.(row);
+    // this.editingRow = row;
+    // this.originalRow = { ...row };
+    // this.editRow.emit(row); 
+    this.headers.actions?.update?.(row); 
   }
 
   saveEdit() {
