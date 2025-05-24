@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://ihealth-backend-production.up.railway.app/',
+  apiUrl: 'http://172.18.64.1:3000/',
 };

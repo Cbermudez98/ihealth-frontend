@@ -9,9 +9,10 @@ import { ConfirmDialogService } from '../../services/confirmation/confirmation.s
 })
 export class DynamicTableComponent implements OnInit, OnChanges {
   @Input() headers!: IHeaders;
-  @Output() editRow = new EventEmitter<any>(); 
+  @Output() editRow = new EventEmitter<any>();
 
   private originalData: Record<string, any>[] = [];
+
   editingRow: Record<string, any> | null = null;
   originalRow: Record<string, any> | null = null;
 
@@ -30,14 +31,12 @@ export class DynamicTableComponent implements OnInit, OnChanges {
   private setOriginalData() {
     if (this.headers?.data) {
       this.originalData = [...this.headers.data];
+      this.headers.data = [...this.originalData]; 
     }
   }
 
   onUpdate(row: Record<string, any>) {
-    // this.editingRow = row;
-    // this.originalRow = { ...row };
-    // this.editRow.emit(row); 
-    this.headers.actions?.update?.(row); 
+    this.editRow.emit(row);
   }
 
   saveEdit() {
@@ -60,8 +59,8 @@ export class DynamicTableComponent implements OnInit, OnChanges {
         header: 'Peligro',
         accept: async () => {
           await this.headers.actions!.delete!(row);
-          this.headers.data = this.headers.data.filter(r => r['id'] !== row['id']);
-          this.originalData = [...this.headers.data];
+          this.originalData = this.originalData.filter(r => r['id'] !== row['id']);
+          this.headers.data = [...this.originalData]; 
         },
         data: row
       });
@@ -69,9 +68,11 @@ export class DynamicTableComponent implements OnInit, OnChanges {
   }
 
   sortData(column: string, ascending: boolean): void {
-    this.headers.data = [...this.headers.data.sort((a, b) =>
-      a[column] < b[column] ? (ascending ? -1 : 1) : a[column] > b[column] ? 1 : -1
-    )];
+    this.headers.data = [...this.headers.data.sort((a, b) => {
+      if (a[column] < b[column]) return ascending ? -1 : 1;
+      if (a[column] > b[column]) return ascending ? 1 : -1;
+      return 0;
+    })];
   }
 
   onFilter(event: Event, column: string): void {

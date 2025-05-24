@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CalendarComponent } from './calendar.component';
+import { SharedModule } from '../../shared.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -8,7 +10,8 @@ describe('CalendarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CalendarComponent]
+      declarations: [CalendarComponent],
+      imports: [SharedModule,HttpClientTestingModule,NoopAnimationsModule]
     })
     .compileComponents();
 

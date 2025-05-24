@@ -1,5 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastService } from '../../../shared/services/Toast/toast.service';
+import { SharedModule } from '../../../shared/shared.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
@@ -8,10 +11,17 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent]
-    })
-    .compileComponents();
-    
+      declarations: [LoginComponent],
+      imports: [
+        SharedModule,
+        HttpClientTestingModule,
+        ToastrModule.forRoot()
+      ],
+      providers: [
+        ToastService
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

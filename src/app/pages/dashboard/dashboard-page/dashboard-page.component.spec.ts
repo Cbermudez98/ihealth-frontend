@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DashboardPageComponent} from './dashboard-page.component';
+import { DashboardPageComponent } from './dashboard-page.component';
+import { SharedModule } from '../../../shared/shared.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('DashboardPageComponent', () => {
   let component: DashboardPageComponent;
@@ -8,9 +9,12 @@ describe('DashboardPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardPageComponent]
-    })
-    .compileComponents();
+      declarations: [DashboardPageComponent],
+      imports: [
+        SharedModule,
+        HttpClientTestingModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardPageComponent);
     component = fixture.componentInstance;

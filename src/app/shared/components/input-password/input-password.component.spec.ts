@@ -1,13 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputPasswordComponent } from './input-password.component';
+import { SharedModule } from '../../shared.module';
 
 describe('InputPasswordComponent', () => {
-  let component: InputPasswordComponent;
-  let fixture: ComponentFixture<InputPasswordComponent>;
+  let component: InputPasswordComponent<any>;
+  let fixture: ComponentFixture<InputPasswordComponent<any>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InputPasswordComponent]
+      declarations: [InputPasswordComponent],
+      imports: [SharedModule]
+
     })
     .compileComponents();
 

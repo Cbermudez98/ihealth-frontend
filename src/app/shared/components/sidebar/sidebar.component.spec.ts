@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SidebarComponent } from './sidebar.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SharedModule } from '../../shared.module';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -8,7 +9,8 @@ describe('SidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SidebarComponent]
+      declarations: [SidebarComponent],
+      imports: [SharedModule,HttpClientTestingModule] 
     })
     .compileComponents();
 

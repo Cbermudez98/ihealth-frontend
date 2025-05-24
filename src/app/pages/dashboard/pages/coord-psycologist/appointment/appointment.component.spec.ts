@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AppointmentComponent } from './appointment.component';
+import { SharedModule } from '../../../../../shared/shared.module';
 
 describe('AppointmentComponent', () => {
   let component: AppointmentComponent;
@@ -8,7 +10,8 @@ describe('AppointmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppointmentComponent]
+      declarations: [AppointmentComponent],
+      imports: [HttpClientTestingModule,SharedModule]
     })
     .compileComponents();
 
