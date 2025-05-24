@@ -5,6 +5,7 @@ import { ToastService } from '../../../../../shared/services/Toast/toast.service
 import { LoaderService } from '../../../../../shared/services/loader/loader.service';
 import { environment } from '../../../../../environments/enviroments';
 import { IHeaders } from '../../../../../shared/interfaces/ITable';
+import { IDocument } from '../../../../../interfaces/IUser';
 
 @Component({
   selector: 'app-psycho',
@@ -24,6 +25,8 @@ export class PsychoComponent implements OnInit {
   public street!: FormControl;
   public number!: FormControl;
   public aditional_information!: FormControl;
+  public document_number!: FormControl;
+  public document!: FormControl;
 
   public addForm!: FormGroup;
   public isEditing = false;
@@ -32,7 +35,7 @@ export class PsychoComponent implements OnInit {
     { label: 'Masculino', value: 'M' },
     { label: 'Femenino', value: 'F' },
   ];
-  
+
   tableHeaders: IHeaders = {
     columns: [
       { field: 'name', header: 'Nombre', type: 'Text' },
@@ -42,11 +45,14 @@ export class PsychoComponent implements OnInit {
     data: [],
     actions: {
       update: (row: any) => this.onEdit(row),
-      delete: async (row: any) => await this.onDelete(row.id),
+      // delete: async (row: any) => await this.onDelete(row.id),
       sort: false,
       filter: false,
     },
   };
+
+    docOptions: IDocument[] = [];
+
 
   constructor(
     private httpService: HttpService,
@@ -56,8 +62,46 @@ export class PsychoComponent implements OnInit {
     this.initForm();
   }
 
-  ngOnInit(): void {
+  setDataGender(value: string) {
+    this.gender.setValue(value);
+  }
+
+  async ngOnInit() {
+    const documents = await this.httpService.request<IDocument[]>(
+      `${environment.apiUrl}user/documents`,
+      'GET'
+    );
+    this.docOptions = documents.data;
     this.loadPsychologists();
+  }
+
+    updateForm(event: number) {
+    const idControl = this.addForm.get('document_number');
+
+    if (event) {
+      const doc: IDocument | undefined = this.docOptions.find(
+        (doc) => doc.id === event
+      );
+      console.log(doc);
+
+      idControl?.setValidators([
+        Validators.required,
+        Validators.pattern(/^\d+$/),
+      ]);
+      idControl?.enable();
+
+      if (!doc) {
+        idControl?.disable();
+        idControl?.clearValidators();
+      } else if (doc?.name === 'PA') {
+        idControl?.setValidators([
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z0-9]+$/),
+        ]);
+      }
+    }
+
+    idControl?.updateValueAndValidity();
   }
 
   private initForm(): void {
@@ -73,6 +117,8 @@ export class PsychoComponent implements OnInit {
     this.street = new FormControl('', Validators.required);
     this.number = new FormControl('', Validators.required);
     this.aditional_information = new FormControl('');
+    this.document_number = new FormControl('');
+    this.document = new FormControl('');
 
     this.addForm = new FormGroup({
       name: this.name,
@@ -86,14 +132,17 @@ export class PsychoComponent implements OnInit {
       street: this.street,
       number: this.number,
       aditional_information: this.aditional_information,
+      document_number: this.document_number,
+      document: this.document
     });
   }
 
   async loadPsychologists(): Promise<void> {
     this.loaderService.show();
     try {
-      const url = `${environment.apiUrl}users?role_id=3`;
+      const url = `${environment.apiUrl}user/psychologist`;
       const response = await this.httpService.request<any[]>(url, 'GET');
+      console.log(response);
       this.tableHeaders.data = response.data;
     } catch (error) {
       this.messageService.show({
@@ -114,7 +163,7 @@ export class PsychoComponent implements OnInit {
       name: this.name.value,
       last_name: this.last_name.value,
       age: this.age.value,
-      code: this.code.value,
+      code: Number(this.code.value),
       gender: this.gender.value,
       auth: {
         email: this.email.value,
@@ -126,21 +175,27 @@ export class PsychoComponent implements OnInit {
         number: this.number.value,
         aditional_information: this.aditional_information.value,
       },
-      role: {
-        id: 3, 
-      },
+      document_number: this.document_number.value,
+      document: {
+        id: this.document.value
+      }
+      // role: {
+      //   id: 3,
+      // },
     };
+
+    console.log(body);
 
     try {
       if (this.isEditing && this.id.value) {
-        await this.httpService.request(`${environment.apiUrl}users/${this.id.value}`, 'PUT', body);
+        await this.httpService.request(`${environment.apiUrl}user/psychologists/${this.id.value}`, 'PATCH', body);
         this.messageService.show({
           severity: 'success',
           sumary: 'Psicólogo actualizado',
           detail: 'El psicólogo se actualizó correctamente',
         });
       } else {
-        await this.httpService.request(`${environment.apiUrl}users`, 'POST', body);
+        await this.httpService.request(`${environment.apiUrl}user/psychologists`, 'POST', body);
         this.messageService.show({
           severity: 'success',
           sumary: 'Psicólogo creado',
@@ -151,6 +206,7 @@ export class PsychoComponent implements OnInit {
       this.resetForm();
       await this.loadPsychologists();
     } catch (error) {
+      console.error(error)
       this.messageService.show({
         severity: 'error',
         sumary: 'Error',
@@ -162,6 +218,9 @@ export class PsychoComponent implements OnInit {
   }
 
   onEdit(data: any): void {
+    console.log(data);
+    const psyco = this.tableHeaders.data.find((p: any) => p.id === data.id)
+    console.log(psyco)
     this.id.setValue(data.id);
     this.name.setValue(data.name);
     this.last_name.setValue(data.last_name);
@@ -169,12 +228,13 @@ export class PsychoComponent implements OnInit {
     this.code.setValue(data.code);
     this.gender.setValue(data.gender);
     this.email.setValue(data.auth?.email || '');
-    this.password.setValue(''); 
+    this.password.setValue('');
     this.neighborhood.setValue(data.direction?.neighborhood || '');
     this.street.setValue(data.direction?.street || '');
     this.number.setValue(data.direction?.number || '');
     this.aditional_information.setValue(data.direction?.aditional_information || '');
     this.isEditing = true;
+    this.document_number.setValue(data.document_number || '')
   }
 
   async onDelete(id: number): Promise<void> {

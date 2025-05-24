@@ -46,7 +46,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'dashboard/psycho',
+        path: 'psycho',
         loadChildren: () =>
           import('./pages/coord-psycologist/psycho/psycho.module').then(
             (m) => m.CoordPsycologistModule

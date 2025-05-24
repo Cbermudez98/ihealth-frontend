@@ -21,8 +21,8 @@ export class RegisterComponent implements OnInit {
   docOptions: IDocument[] = [];
 
   genderOptions = [
-    { name: 'Hombre', code: 'H' },
-    { name: 'Mujer', code: 'M' },
+    { name: 'Masculino', code: 'M' },
+    { name: 'Femenino', code: 'F' },
   ];
 
   careerOptions: { id: number; name: string }[] = [];
