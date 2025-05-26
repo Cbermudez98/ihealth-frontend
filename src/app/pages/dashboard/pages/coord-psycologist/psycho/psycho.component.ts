@@ -45,14 +45,12 @@ export class PsychoComponent implements OnInit {
     data: [],
     actions: {
       update: (row: any) => this.onEdit(row),
-      // delete: async (row: any) => await this.onDelete(row.id),
       sort: false,
       filter: false,
     },
   };
 
-    docOptions: IDocument[] = [];
-
+  docOptions: IDocument[] = [];
 
   constructor(
     private httpService: HttpService,
@@ -67,22 +65,25 @@ export class PsychoComponent implements OnInit {
   }
 
   async ngOnInit() {
+    console.log('[PsychoComponent] ngOnInit - Cargando documentos...');
     const documents = await this.httpService.request<IDocument[]>(
       `${environment.apiUrl}user/documents`,
       'GET'
     );
     this.docOptions = documents.data;
+    console.log('[PsychoComponent] Documentos cargados:', this.docOptions);
     this.loadPsychologists();
   }
 
-    updateForm(event: number) {
+  updateForm(event: number) {
+    console.log('[PsychoComponent] updateForm - Documento seleccionado:', event);
     const idControl = this.addForm.get('document_number');
 
     if (event) {
       const doc: IDocument | undefined = this.docOptions.find(
         (doc) => doc.id === event
       );
-      console.log(doc);
+      console.log('[PsychoComponent] Documento encontrado:', doc);
 
       idControl?.setValidators([
         Validators.required,
@@ -91,6 +92,7 @@ export class PsychoComponent implements OnInit {
       idControl?.enable();
 
       if (!doc) {
+        console.warn('[PsychoComponent] Documento no encontrado, deshabilitando control');
         idControl?.disable();
         idControl?.clearValidators();
       } else if (doc?.name === 'PA') {
@@ -106,13 +108,16 @@ export class PsychoComponent implements OnInit {
 
   private initForm(): void {
     this.id = new FormControl(null);
+
     this.name = new FormControl('', Validators.required);
     this.last_name = new FormControl('', Validators.required);
     this.age = new FormControl(null, Validators.required);
     this.code = new FormControl(null, Validators.required);
     this.gender = new FormControl('', Validators.required);
-    this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.password = new FormControl('', Validators.required);
+
+    this.email = new FormControl('', []);
+    this.password = new FormControl('', []);
+
     this.neighborhood = new FormControl('', Validators.required);
     this.street = new FormControl('', Validators.required);
     this.number = new FormControl('', Validators.required);
@@ -138,13 +143,15 @@ export class PsychoComponent implements OnInit {
   }
 
   async loadPsychologists(): Promise<void> {
+    console.log('[PsychoComponent] Cargando psicólogos...');
     this.loaderService.show();
     try {
       const url = `${environment.apiUrl}user/psychologist`;
       const response = await this.httpService.request<any[]>(url, 'GET');
-      console.log(response);
       this.tableHeaders.data = response.data;
+      console.log('[PsychoComponent] Psicólogos cargados:', this.tableHeaders.data);
     } catch (error) {
+      console.error('[PsychoComponent] Error al cargar psicólogos:', error);
       this.messageService.show({
         severity: 'error',
         sumary: 'Error',
@@ -156,19 +163,29 @@ export class PsychoComponent implements OnInit {
   }
 
   async savePsychologist(): Promise<void> {
-    if (this.addForm.invalid) return;
+
+    if (!this.isEditing) {
+      this.email.setValidators([Validators.required, Validators.email]);
+      this.password.setValidators([Validators.required]);
+    } else {
+      this.email.clearValidators();
+      this.password.clearValidators();
+    }
+    this.email.updateValueAndValidity();
+    this.password.updateValueAndValidity();
+
+    if (this.addForm.invalid) {
+      console.warn('[PsychoComponent] Formulario inválido, no se puede guardar');
+      return;
+    }
     this.loaderService.show();
 
-    const body = {
+    const body: any = {
       name: this.name.value,
       last_name: this.last_name.value,
       age: this.age.value,
       code: Number(this.code.value),
       gender: this.gender.value,
-      auth: {
-        email: this.email.value,
-        password: this.password.value,
-      },
       direction: {
         neighborhood: this.neighborhood.value,
         street: this.street.value,
@@ -177,17 +194,26 @@ export class PsychoComponent implements OnInit {
       },
       document_number: this.document_number.value,
       document: {
-        id: this.document.value
+        id: this.document.value,
+      },
+      role: {
+        id: 3,
       }
-      // role: {
-      //   id: 3,
-      // },
     };
 
-    console.log(body);
+
+    if (!this.isEditing) {
+      body.auth = {
+        email: this.email.value,
+        password: this.password.value,
+      };
+    }
+
+    console.log('[PsychoComponent] Enviando datos del psicólogo:', body);
 
     try {
       if (this.isEditing && this.id.value) {
+        console.log('[PsychoComponent] Actualizando psicólogo con ID:', this.id.value);
         await this.httpService.request(`${environment.apiUrl}user/psychologists/${this.id.value}`, 'PATCH', body);
         this.messageService.show({
           severity: 'success',
@@ -195,6 +221,7 @@ export class PsychoComponent implements OnInit {
           detail: 'El psicólogo se actualizó correctamente',
         });
       } else {
+        console.log('[PsychoComponent] Creando nuevo psicólogo');
         await this.httpService.request(`${environment.apiUrl}user/psychologists`, 'POST', body);
         this.messageService.show({
           severity: 'success',
@@ -206,7 +233,7 @@ export class PsychoComponent implements OnInit {
       this.resetForm();
       await this.loadPsychologists();
     } catch (error) {
-      console.error(error)
+      console.error('[PsychoComponent] Error al guardar psicólogo:', error);
       this.messageService.show({
         severity: 'error',
         sumary: 'Error',
@@ -218,9 +245,8 @@ export class PsychoComponent implements OnInit {
   }
 
   onEdit(data: any): void {
-    console.log(data);
-    const psyco = this.tableHeaders.data.find((p: any) => p.id === data.id)
-    console.log(psyco)
+    console.log('[PsychoComponent] Editando psicólogo:', data);
+
     this.id.setValue(data.id);
     this.name.setValue(data.name);
     this.last_name.setValue(data.last_name);
@@ -233,11 +259,13 @@ export class PsychoComponent implements OnInit {
     this.street.setValue(data.direction?.street || '');
     this.number.setValue(data.direction?.number || '');
     this.aditional_information.setValue(data.direction?.aditional_information || '');
+    this.document.setValue(data.document?.id || '');
+    this.document_number.setValue(data.document_number || '');
     this.isEditing = true;
-    this.document_number.setValue(data.document_number || '')
   }
 
   async onDelete(id: number): Promise<void> {
+    console.log('[PsychoComponent] Eliminando psicólogo con ID:', id);
     this.loaderService.show();
     try {
       await this.httpService.request(`${environment.apiUrl}users/${id}`, 'DELETE');
@@ -248,6 +276,7 @@ export class PsychoComponent implements OnInit {
       });
       await this.loadPsychologists();
     } catch (error) {
+      console.error('[PsychoComponent] Error al eliminar psicólogo:', error);
       this.messageService.show({
         severity: 'error',
         sumary: 'Error',
@@ -259,6 +288,7 @@ export class PsychoComponent implements OnInit {
   }
 
   resetForm(): void {
+    console.log('[PsychoComponent] Reseteando formulario');
     this.addForm.reset();
     this.id.setValue(null);
     this.isEditing = false;

@@ -56,7 +56,7 @@
               (emitData)="setDataGender($event)"
             ></app-drop-down>
           </div>
-          <div class="col-6">
+          <div class="col-6" *ngIf="!isEditing">
             <app-input
               label="Correo"
               type="email"
@@ -68,7 +68,7 @@
         </div>
 
         <div class="grid">
-          <div class="col-6">
+          <div class="col-6" *ngIf="!isEditing">
             <app-input
               label="Contraseña"
               type="password"
@@ -79,16 +79,17 @@
           </div>
           <div class="col-6">
             <app-input
-              label="Numero de documento"
+              label="Número de documento"
               [value]="addForm.get('document_number')?.value"
               (input)="addForm.get('document_number')?.setValue($event?.target?.value || '')"
               name="document_number"
             ></app-input>
           </div>
         </div>
+
         <div class="grid">
           <div class="col-6">
-              <app-drop-down
+            <app-drop-down
               formControlName="document"
               [options]="docOptions"
               placeholder="Selecciona tu tipo de documento"
@@ -98,7 +99,9 @@
             ></app-drop-down>
           </div>
         </div>
-        <br/>
+
+        <br />
+
         <div class="grid">
           <div class="col">
             <app-input
@@ -163,7 +166,9 @@
   </form>
 </div>
 
-
 <div class="card table-container">
-  <app-dynamic-table [headers]="tableHeaders" (editRow)="onEdit($event)"></app-dynamic-table>
+  <app-dynamic-table
+    [headers]="tableHeaders"
+    (editRow)="onEdit($event)"
+  ></app-dynamic-table>
 </div>
